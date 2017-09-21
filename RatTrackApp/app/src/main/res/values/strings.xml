@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RatTrackApp</string>
+    <string name="login_button_label">LOGIN</string>
+    <string name="register_button_label">REGISTER</string>
+    <string name="welcome_button_label">WELCOME TO OUR APP</string>
+
 </resources>
