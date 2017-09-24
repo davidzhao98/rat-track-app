@@ -19,7 +19,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //Text fields for username and password
 
-
         //Buttons for login, set OnClickListener
         Button login = (Button) findViewById(R.id.loginButton2);
         login.setOnClickListener(new View.OnClickListener() {
