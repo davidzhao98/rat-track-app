@@ -38,13 +38,15 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     System.out.println("Fail");
-                    Toast.makeText(view.getContext(), "Incorrect login information!", Toast.LENGTH_LONG);
+                    Toast.makeText(view.getContext(), "Incorrect login information!",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
     private boolean loginVerification() {
-        return usernameField.getText().equals("KanyeWest") && passwordField.getText().equals("2020");
+        return usernameField.getText().toString().equals("KanyeWest")
+                && passwordField.getText().toString().equals("2020");
     }
 }
