@@ -29,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //sets OnClickListener for register button so it will do things
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(view.getContext(), RegisterActivity.class);
+                startActivity(intent);
             }
         });
+
 
     }
 }
