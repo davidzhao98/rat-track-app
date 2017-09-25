@@ -45,6 +45,20 @@
         android:hint="Enter a Password"
         android:inputType="textPassword" />
 
+    <TextView
+        android:id="@+id/confirmPassView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password" />
+
+    <EditText
+        android:id="@+id/confirmPassEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPersonName" />
+
     <Button
         android:id="@+id/registerButton2"
         android:layout_width="match_parent"
