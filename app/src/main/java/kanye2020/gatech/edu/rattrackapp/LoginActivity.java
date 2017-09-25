@@ -51,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
      * @return true if user and password correct
      */
     private boolean loginVerification() {
-        return usernameField.getText().toString().equals("KanyeWest")
-                && passwordField.getText().toString().equals("2020");
+        return usernameField.getText().toString().equals("user")
+                && passwordField.getText().toString().equals("pass");
     }
 
     /**
