@@ -34,19 +34,32 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (loginVerification()) {
                     System.out.println("Logging in");
+                    resetLogin();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
                 } else {
                     System.out.println("Fail");
                     Toast.makeText(view.getContext(), "Incorrect login information!",
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
+    /**
+     * verifies that user input the correct username and password
+     * @return true if user and password correct
+     */
     private boolean loginVerification() {
         return usernameField.getText().toString().equals("KanyeWest")
                 && passwordField.getText().toString().equals("2020");
+    }
+
+    /**
+     * resets login information so user has to re-login every time, for safety
+     */
+    public void resetLogin() {
+        usernameField.setText("");
+        passwordField.setText("");
     }
 }

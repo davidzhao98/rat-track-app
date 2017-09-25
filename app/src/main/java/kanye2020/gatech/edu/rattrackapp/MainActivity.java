@@ -8,14 +8,17 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button login;
+    Button register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //Buttons for login screen
-        Button login = (Button) findViewById(R.id.loginButton);
-        Button register = (Button) findViewById(R.id.registerButton);
+        login = (Button) findViewById(R.id.loginButton);
+        register = (Button) findViewById(R.id.registerButton);
 
         //sets OnClickListeners for login so it will do things when clicked
         login.setOnClickListener(new View.OnClickListener() {
