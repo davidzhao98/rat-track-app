@@ -16,7 +16,7 @@
         tools:layout_conversion_absoluteX="0dp"
         tools:layout_conversion_absoluteY="0dp"
         tools:layout_editor_absoluteX="10dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toTopOf="@+id/userNameText" />
 
     <EditText
@@ -73,7 +73,7 @@
         android:id="@+id/loginButton2"
         android:layout_width="338dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="75dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="8dp"
         android:onClick="loginButton2Clicked"

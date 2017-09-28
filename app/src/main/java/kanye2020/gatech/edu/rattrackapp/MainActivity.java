@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //sets OnClickListeners for register so it will do things when clicked
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

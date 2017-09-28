@@ -46,6 +46,7 @@
         android:inputType="textPassword" />
 
     <TextView
+<<<<<<< HEAD
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Account Type" />
@@ -54,6 +55,20 @@
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+=======
+        android:id="@+id/confirmPassView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword" />
+>>>>>>> c8bd1f1df0042ece2e5cabab5d3b906abbdf5a52
 
     <Button
         android:id="@+id/registerButton2"
