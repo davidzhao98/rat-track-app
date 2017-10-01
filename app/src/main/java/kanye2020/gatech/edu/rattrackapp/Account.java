@@ -9,7 +9,16 @@ public class Account {
     String password;
     String email;
 
-    public Account (String username, String password, String email) {
 
+    public Account() {
+        this.username = null;
+        this.password = null;
+        this.email = null;
+    }
+
+    public Account (String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 }

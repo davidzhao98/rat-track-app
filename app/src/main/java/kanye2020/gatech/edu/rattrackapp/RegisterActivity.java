@@ -42,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
                     //add account to "database"?????
                     //firebase?
                     //switch to new screen/application screen
+                    Account newRatTracker = new Account(usernameET.getText().toString(), passwordET.getText().toString(), emailET.getText().toString());
+
                 }
             }
         });
