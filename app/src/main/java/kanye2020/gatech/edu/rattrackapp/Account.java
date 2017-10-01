@@ -8,18 +8,21 @@ public class Account {
     String username;
     String password;
     String email;
+    boolean admin;
 
 
     public Account() {
         this.username = null;
         this.password = null;
         this.email = null;
+        this.admin = false;
     }
 
-    public Account (String username, String password, String email) {
+    public Account (String username, String password, String email, boolean admin) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.admin = admin;
     }
 
     public String getUsername() {
@@ -32,5 +35,9 @@ public class Account {
 
     public String getEmail() {
         return email;
+    }
+
+    public Boolean isAdmin() {
+        return admin;
     }
 }
