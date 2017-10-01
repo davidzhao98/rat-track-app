@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         accountTypeSpinner.setAdapter(adapter);
 
         //Button for cancel, OnClickListener has been set to point to mainActivity
-        Button cancel = (Button) findViewById(R.id.cancelAcctButton);
+        //Button cancel = (Button) findViewById(R.id.cancelAcctButton);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
