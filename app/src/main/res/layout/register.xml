@@ -45,33 +45,32 @@
         android:hint="Enter a Password"
         android:inputType="textPassword" />
 
-    <TextView
-<<<<<<< HEAD
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Account Type" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-=======
-        android:id="@+id/confirmPassView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirm Password" />
-
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/confirmPasswordET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword" />
->>>>>>> c8bd1f1df0042ece2e5cabab5d3b906abbdf5a52
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Account Type" />
+
+    <Spinner
+        android:id="@+id/accountTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" /><![CDATA[
+        android:id="@+id/confirmPassView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password" />
+
+    ]]>
 
     <Button
-        android:id="@+id/registerButton2"
+        android:id="@+id/createAcctButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register" />
