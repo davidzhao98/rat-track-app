@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "50223675985",
+    "firebase_url": "https://rat-track-app.firebaseio.com",
+    "project_id": "rat-track-app",
+    "storage_bucket": "rat-track-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50223675985:android:e33570f19a6738c6",
+        "android_client_info": {
+          "package_name": "kanye2020.gatech.edu.rattrackapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50223675985-ocsg5ass2kbcs8p6ij7c306fkoct62k9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kanye2020.gatech.edu.rattrackapp",
+            "certificate_hash": "2f04fcc3c1c6635c0071640f81a87dac258e1663"
+          }
+        },
+        {
+          "client_id": "50223675985-v16lh1b1au0g6vuk7vsjaocgnbbfdl96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXoZHO3GcJPN_3go95iwMpUyb7zEfinz4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50223675985-v16lh1b1au0g6vuk7vsjaocgnbbfdl96.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
