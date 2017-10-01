@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                    accountList.add(newAccount);
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("users");
-                    myRef.child("001").setValue("sa;ldkfjsadlkfj");
+                    myRef.child(newAccount.getEmail()).setValue(newAccount);
 //                    myRef.setValue(accountList);
                     /*myRef.addValueEventListener(new ValueEventListener() {
                         @Override
