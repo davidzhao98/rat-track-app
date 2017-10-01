@@ -1,5 +1,8 @@
 package kanye2020.gatech.edu.rattrackapp;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by David Zhao on 10/1/2017.
  */
@@ -9,6 +12,8 @@ public class Account {
     String password;
     String email;
     boolean admin;
+
+    public static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
 
 
     public Account() {

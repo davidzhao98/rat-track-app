@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static android.R.attr.accountType;
 import static android.R.attr.value;
 
 /**
@@ -52,6 +54,10 @@ public class RegisterActivity extends AppCompatActivity {
         accountTypeSpinner = (Spinner) findViewById(R.id.accountTypeSpinner);
         registerAcct = (Button) findViewById(R.id.createAcctButton);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, Account.accountTypes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        accountTypeSpinner.setAdapter(adapter);
+
         registerAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                     //firebase?
                     //switch to new screen/application screen
 //                    accountList = new ArrayList<>();
-                    final Account newAccount = new Account(usernameET.getText().toString(), passwordET.getText().toString(), emailET.getText().toString());
+                    final Account newAccount = new Account(usernameET.getText().toString(), passwordET.getText().toString(), emailET.getText().toString(), accountTypeSpinner.getSelectedItem().equals("ADMIN"));
 //                    accountList.add(newAccount);
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("users");
