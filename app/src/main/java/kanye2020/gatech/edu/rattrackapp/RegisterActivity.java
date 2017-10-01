@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accountTypeSpinner.setAdapter(adapter);
 
-        //Buttons for register, set OnClickListener
+        //Button for cancel, OnClickListener has been set to point to mainActivity
         Button cancel = (Button) findViewById(R.id.cancelAcctButton);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
