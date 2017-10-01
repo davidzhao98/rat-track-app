@@ -27,6 +27,7 @@ import static android.R.attr.value;
 
 /**
  * Created by pulakazad on 9/24/17.
+ * Updated by Carissa 10/1/17
  */
 
 public class RegisterActivity extends AppCompatActivity {
@@ -37,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText confirmPwET;
     private Spinner accountTypeSpinner;
     private Button registerAcct;
-    private Button cancelAcct;
     private ArrayList<Account> accountList;
     private static final String TAG = "RegisterActivity";
     private List<Account> realAccountList;
@@ -55,14 +55,14 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPwET = (EditText) findViewById(R.id.confirmPasswordET);
         accountTypeSpinner = (Spinner) findViewById(R.id.accountTypeSpinner);
         registerAcct = (Button) findViewById(R.id.createAcctButton);
-        cancelAcct = (Button) findViewById(R.id.cancelAcctButton);
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, Account.accountTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accountTypeSpinner.setAdapter(adapter);
 
         //Button for cancel, OnClickListener has been set to point to mainActivity
-        cancelAcct.setOnClickListener(new View.OnClickListener() {
+        Button cancel = (Button) findViewById(R.id.cancelAcctButton);
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
@@ -101,6 +101,9 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
                     myRef.setValue(realAccountList);*/
+
+                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
             }
         });

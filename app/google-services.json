@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "50223675985-kitkf81jcbfujdn1bksetrnrjau8sg28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kanye2020.gatech.edu.rattrackapp",
+            "certificate_hash": "b70b729ee4dad23706d364b2a458fe87bf4dbaee"
+          }
+        },
+        {
           "client_id": "50223675985-l1lklr3jantvd9dq17b2aba81css9c7u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
