@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "50223675985-l1lklr3jantvd9dq17b2aba81css9c7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kanye2020.gatech.edu.rattrackapp",
+            "certificate_hash": "80c85d9ded01da17f717f6af3d8b7383dd4d4fbb"
+          }
+        },
+        {
+          "client_id": "50223675985-jdu5i379jmbr3ops16pr8amo5iuqj4sr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kanye2020.gatech.edu.rattrackapp",
+            "certificate_hash": "75d788973f1d311d89e3a737d2bbf619829f824d"
+          }
+        },
+        {
           "client_id": "50223675985-ocsg5ass2kbcs8p6ij7c306fkoct62k9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

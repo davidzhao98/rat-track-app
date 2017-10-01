@@ -64,8 +64,9 @@ public class RegisterActivity extends AppCompatActivity {
 //                    accountList.add(newAccount);
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("users");
+                    myRef.child("001").setValue("sa;ldkfjsadlkfj");
 //                    myRef.setValue(accountList);
-                    myRef.addValueEventListener(new ValueEventListener() {
+                    /*myRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             // This method is called once with the initial value and again
@@ -81,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.w(TAG, "Failed to read value.", error.toException());
                         }
                     });
-                    myRef.setValue(realAccountList);
+                    myRef.setValue(realAccountList);*/
                 }
             }
         });
