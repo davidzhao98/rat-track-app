@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by pulakazad on 9/24/17.
  */
@@ -43,7 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
                     //firebase?
                     //switch to new screen/application screen
                     Account newRatTracker = new Account(usernameET.getText().toString(), passwordET.getText().toString(), emailET.getText().toString());
-
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("message");
+                    myRef.setValue("Hello, World");
                 }
             }
         });
