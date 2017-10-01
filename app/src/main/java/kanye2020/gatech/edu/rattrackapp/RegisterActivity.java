@@ -45,10 +45,10 @@ public class RegisterActivity extends AppCompatActivity {
                     //add account to "database"?????
                     //firebase?
                     //switch to new screen/application screen
-                    Account newRatTracker = new Account(usernameET.getText().toString(), passwordET.getText().toString(), emailET.getText().toString());
+                    Account newAccount = new Account(usernameET.getText().toString(), passwordET.getText().toString(), emailET.getText().toString());
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference("message");
-                    myRef.setValue("Hello, World");
+                    DatabaseReference myRef = database.getReference("users/" + emailET.getText().toString());
+                    myRef.setValue(newAccount);
                 }
             }
         });
