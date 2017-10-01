@@ -100,6 +100,9 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
                     myRef.setValue(realAccountList);*/
+
+                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
             }
         });
