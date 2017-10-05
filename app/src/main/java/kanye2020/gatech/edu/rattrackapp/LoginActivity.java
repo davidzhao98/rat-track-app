@@ -1,5 +1,6 @@
 package kanye2020.gatech.edu.rattrackapp;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginVerification()) {
                     System.out.println("Logging in");
                     resetLogin();
-                    Intent intent = new Intent(view.getContext(), MainActivity.class);
+                    Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
                 } else {
                     System.out.println("Fail");
