@@ -1,17 +1,13 @@
 package kanye2020.gatech.edu.rattrackapp;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
-/**
- * Created by pulakazad on 10/5/17.
- */
+import android.os.Bundle;
 
 public class SingleRatInfoActivity extends AppCompatActivity {
 
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_single_rat_info);
     }
 }
