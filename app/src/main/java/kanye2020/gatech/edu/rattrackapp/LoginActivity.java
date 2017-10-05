@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginVerification()) {
                     System.out.println("Logging in");
                     resetLogin();
-                    Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
+                    Intent intent = new Intent(view.getContext(), MainActivity.class);
                     startActivity(intent);
                 } else {
                     System.out.println("Fail");
