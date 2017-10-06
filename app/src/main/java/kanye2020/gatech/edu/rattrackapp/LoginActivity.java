@@ -11,14 +11,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * Created by juliachen on 9/24/17.
  */
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText usernameField;
-    EditText passwordField;
+    private EditText usernameField;
+    private EditText passwordField;
+    private ArrayList<Account> entries = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         //Text fields for username and password
         usernameField = (EditText) findViewById(R.id.userNameText);
         passwordField = (EditText) findViewById(R.id.passwordEditText2);
+
+        //Populates the array of Accounts
+        getUsers();
 
         //Buttons for login, set OnClickListener
         Button login = (Button) findViewById(R.id.loginButton2);
@@ -55,8 +68,12 @@ public class LoginActivity extends AppCompatActivity {
      * @return true if user and password correct
      */
     private boolean loginVerification() {
-        return usernameField.getText().toString().equals("user")
-                && passwordField.getText().toString().equals("pass");
+        for (Account entry : entries) {
+            if (usernameField.getText().toString().equals(entry.getUsername()) && passwordField.getText().toString().equals(entry.getPassword())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -65,5 +82,38 @@ public class LoginActivity extends AppCompatActivity {
     public void resetLogin() {
         usernameField.setText("");
         passwordField.setText("");
+    }
+
+    /**
+     * populates the ArrayList with all Accounts stored in the database
+     */
+    private void getUsers() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
+                Toast.makeText(LoginActivity.this, "Total Users: " + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
+                entries.clear();
+                while (items.hasNext()) {
+                    DataSnapshot item = items.next();
+
+                    String username, password, email;
+                    boolean admin;
+                    username = item.child("username").getValue().toString();
+                    password = item.child("password").getValue().toString();
+                    email = item.child("email").getValue().toString();
+                    admin = item.child("admin").getValue().toString().equals("true");
+                    Account entry = new Account(username, password, email, admin);
+                    entries.add(entry);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
