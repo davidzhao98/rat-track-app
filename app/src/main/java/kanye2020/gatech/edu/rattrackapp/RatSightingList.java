@@ -21,11 +21,11 @@ public class RatSightingList {
     }
 
     private RatSightingList() {
-        getRats();
-    }
-
-    private void getRats() {
         //TODO
         //ADAPT GETUSERS() FROM LOGINACTIVITY.JAVA TO GET RATS INSTEAD
+    }
+
+    public ArrayList<RatSighting> getRats() {
+        return rats;
     }
 }
