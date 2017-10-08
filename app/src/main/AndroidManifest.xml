@@ -21,6 +21,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".SingleRatInfoActivity"></activity>
+        <activity android:name=".SearchResultsListView"></activity>
     </application>
 
 </manifest>

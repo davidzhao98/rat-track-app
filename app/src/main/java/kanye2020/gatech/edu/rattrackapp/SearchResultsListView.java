@@ -7,12 +7,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
+ * Structures the search results for ALL RAT data
+ * May be adapted to use different adapters to show different search results,
+ * this way we don't have to make a new class for every different kind of search results,
+ * in other words, just changing the data the Adapter gets will allow us to use this search results
+ * for different kinds of searches
  * Created by juliachen on 10/5/17.
  */
 
 public class SearchResultsListView extends AppCompatActivity {
 
     private ListView searchResultsLV;
+    //different adapters for different search results
+    private ArrayAdapter<String> adapter;
+
+//    /**
+//     * constructor that has an adapter passed in from subclass that tells us what type of list we
+//     * are getting
+//     * @param adapter
+//     */
+//    public SearchResultsListView(ArrayAdapter<String> adapter) {
+//        this.adapter = adapter;
+//    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +37,7 @@ public class SearchResultsListView extends AppCompatActivity {
 
         searchResultsLV = (ListView) findViewById(R.id.searchResultsListView);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, RatSightingList.getInstance().getRats());
+        adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, RatSightingList.getInstance().getRats());
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         searchResultsLV.setAdapter(adapter);
         //use unique keys for rat list display
@@ -31,4 +47,6 @@ public class SearchResultsListView extends AppCompatActivity {
         //https://www.youtube.com/watch?v=2pOCfKYO5Ao
 
     }
+
+
 }

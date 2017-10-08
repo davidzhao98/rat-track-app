@@ -10,11 +10,15 @@ public class MainActivity extends AppCompatActivity {
 
     Button login;
     Button register;
+    RatSightingList ratDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Is this where we should get all the rat data as well?
+        //getRats();
 
         //Buttons for login screen
         login = (Button) findViewById(R.id.loginButton);
