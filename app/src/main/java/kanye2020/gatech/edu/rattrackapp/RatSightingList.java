@@ -32,7 +32,7 @@ public class RatSightingList {
     /**
      * on start-up, gets all the rat data and store it into the phone
      */
-    public RatSightingList() {
+    private RatSightingList() {
         //TODO
         //ADAPT GETUSERS() FROM LOGINACTIVITY.JAVA TO GET RATS INSTEAD
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -45,7 +45,7 @@ public class RatSightingList {
                 //Toast.makeText(RatSightingList.this, "Rats: " + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
 
                 //apparently rats is null
-                rats.clear();
+                rats = new ArrayList<RatSighting>();
                 while (items.hasNext()) {
                     DataSnapshot item = items.next();
                     String borough, city, createdDate, incidentAddress, incidentZip, latitude,
