@@ -3,6 +3,7 @@ package kanye2020.gatech.edu.rattrackapp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
@@ -19,6 +20,10 @@ public class SearchResultsListView extends AppCompatActivity {
         setContentView(R.layout.search_results);
 
         searchResultsLV = (ListView) findViewById(R.id.searchResultsListView);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, RatSightingList.getInstance().getRats());
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        searchResultsLV.setAdapter(adapter);
         //use unique keys for rat list display
         //i think we need a list view adapter that adapts the data from the database to the format that we need
         //make sure that when we click on a rat it will take us to a new page that has more details about the rat
