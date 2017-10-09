@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 /**
  * Created by neonw on 10/9/2017.
+ * i totally copied and pasted this from androids website so gl
  */
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
