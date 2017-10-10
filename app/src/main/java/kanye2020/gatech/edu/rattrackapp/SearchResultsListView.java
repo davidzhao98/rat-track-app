@@ -5,8 +5,12 @@ import android.support.annotation.Nullable;
 //import android.support.v7.app.AlertController;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -56,6 +60,18 @@ public class SearchResultsListView extends AppCompatActivity {
         searchResultsLV = (ListView) findViewById(R.id.searchResultsListView);
         ArrayAdapter<RatSighting> demoAdapter = new ArrayAdapter(this,android.R.layout.simple_selectable_list_item, demoArrayList);
         demoAdapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
+        searchResultsLV.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        searchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                // TODO Auto-generated method stub
+
+
+                Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
+            }
+
+        });
         searchResultsLV.setAdapter(demoAdapter);
         //use unique keys for rat list display
         //i think we need a list view adapter that adapts the data from the database to the format that we need
