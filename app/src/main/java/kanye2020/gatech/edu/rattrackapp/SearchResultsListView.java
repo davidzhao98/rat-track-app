@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 /**
  * Structures the search results for ALL RAT data
  * May be adapted to use different adapters to show different search results,
@@ -20,8 +22,11 @@ import android.widget.ListView;
 public class SearchResultsListView extends AppCompatActivity {
 
     private RecyclerView searchResultsRV;
+    private ListView searchResultsLV;
+    private ArrayList<RatSighting> demoArrayList;
     //different adapters for different search results
     private RecyclerView.Adapter adapter;
+    private ArrayAdapter demoAdapter;
 
 //    /**
 //     * constructor that has an adapter passed in from subclass that tells us what type of list we
@@ -37,12 +42,21 @@ public class SearchResultsListView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_results);
 
+        /**
+         * this shit is too much work so we can leave it for later
         searchResultsRV = (RecyclerView) findViewById(R.id.searchResultsRecyclerView);
 
         adapter = new RVAdapter(RatSightingList.getInstance().getRats());
         //adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         searchResultsRV.setAdapter(adapter);
+        */
 
+        //demo view
+        demoArrayList = RatSightingList.getInstance().getSample();
+        searchResultsLV = (ListView) findViewById(R.id.searchResultsListView);
+        ArrayAdapter<RatSighting> demoAdapter = new ArrayAdapter(this,android.R.layout.simple_selectable_list_item, demoArrayList);
+        demoAdapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
+        searchResultsLV.setAdapter(demoAdapter);
         //use unique keys for rat list display
         //i think we need a list view adapter that adapts the data from the database to the format that we need
         //make sure that when we click on a rat it will take us to a new page that has more details about the rat

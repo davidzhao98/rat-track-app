@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 public class RatSightingList {
     private ArrayList<RatSighting> rats;
+    private ArrayList<RatSighting> sample;
     private static RatSightingList instance;
 
     public static RatSightingList getInstance() {
@@ -63,6 +64,9 @@ public class RatSightingList {
                             incidentZip, locationType, createdDate, latitude, longitude, uniqueKey);
                     rats.add(entry);
                 }
+                for (int i = 0; i < 10; i++) {
+                    sample.add(rats.get(i));
+                }
             }
 
             @Override
@@ -75,4 +79,6 @@ public class RatSightingList {
     public ArrayList<RatSighting> getRats() {
         return rats;
     }
+
+    public ArrayList<RatSighting> getSample() { return sample;}
 }
