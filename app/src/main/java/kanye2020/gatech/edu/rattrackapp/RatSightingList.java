@@ -64,6 +64,7 @@ public class RatSightingList {
                             incidentZip, locationType, createdDate, latitude, longitude, uniqueKey);
                     rats.add(entry);
                 }
+                sample = new ArrayList<RatSighting>();
                 for (int i = 0; i < 10; i++) {
                     sample.add(rats.get(i));
                 }
