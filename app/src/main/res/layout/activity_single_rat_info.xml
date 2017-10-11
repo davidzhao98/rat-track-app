@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kanye2020.gatech.edu.rattrackapp.SingleRatInfoActivity">
+    tools:context="kanye2020.gatech.edu.rattrackapp.SingleRatInfoActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
 
 </android.support.constraint.ConstraintLayout>

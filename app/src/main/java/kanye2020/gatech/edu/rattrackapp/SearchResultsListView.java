@@ -1,5 +1,8 @@
 package kanye2020.gatech.edu.rattrackapp;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 //import android.support.v7.app.AlertController;
@@ -25,11 +28,11 @@ import java.util.ArrayList;
 
 public class SearchResultsListView extends AppCompatActivity {
 
-    private RecyclerView searchResultsRV;
+    //private RecyclerView searchResultsRV;
     private ListView searchResultsLV;
     private ArrayList<RatSighting> demoArrayList;
     //different adapters for different search results
-    private RecyclerView.Adapter adapter;
+    //private RecyclerView.Adapter adapter;
     private ArrayAdapter demoAdapter;
 
 //    /**
@@ -54,21 +57,24 @@ public class SearchResultsListView extends AppCompatActivity {
         //adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         searchResultsRV.setAdapter(adapter);
         */
+        //fragment stuff
+
 
         //demo view
         demoArrayList = RatSightingList.getInstance().getSample();
         searchResultsLV = (ListView) findViewById(R.id.searchResultsListView);
-        ArrayAdapter<RatSighting> demoAdapter = new ArrayAdapter(this,android.R.layout.simple_selectable_list_item, demoArrayList);
+        demoAdapter = new ArrayAdapter(this,android.R.layout.simple_selectable_list_item, demoArrayList);
         demoAdapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
         searchResultsLV.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         searchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                // TODO Auto-generated method stub
 
-
-                Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), SingleRatInfoActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+                //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
             }
 
         });
