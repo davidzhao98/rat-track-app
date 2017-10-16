@@ -20,8 +20,9 @@
         <activity android:name=".ApplicationActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".SingleRatInfoActivity"></activity>
-        <activity android:name=".SearchResultsListView"></activity>
+        <activity android:name=".SingleRatInfoActivity" />
+        <activity android:name=".SearchResultsListView" />
+        <activity android:name=".ReportRatActivity"></activity>
     </application>
 
 </manifest>
