@@ -50,6 +50,7 @@ public class ReportRatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //user has to fill out the entire form
                 //yo we are missing borough in the .xml
+                //when add button is clicked, new RatSighting created and added to db!
                 if (!(borough.isEmpty() && zipcode.isEmpty() && address.isEmpty() && city.isEmpty())) {
                     RatSighting newEntry = new RatSighting(borough, city, address, zipcode, "locationtype", "datetime", "lat", "long", "key");
                 } else {
@@ -58,6 +59,7 @@ public class ReportRatActivity extends AppCompatActivity {
             }
         });
 
+        //cancelling makes the app go back to previous screen which is the homescreen AppActivity
         cancelRSButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
