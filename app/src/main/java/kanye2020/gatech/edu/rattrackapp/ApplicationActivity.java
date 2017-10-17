@@ -50,5 +50,13 @@ public class ApplicationActivity extends AppCompatActivity {
             }
         });
 
+        reportNewRat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ReportRatActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
