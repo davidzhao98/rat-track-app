@@ -10,7 +10,7 @@
         android:id="@+id/boroughText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="388dp"
+        android:layout_marginBottom="399dp"
         android:ems="10"
         android:hint="Enter Borough"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,34 +19,37 @@
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
-        tools:layout_conversion_absoluteY="16dp" />
+        tools:layout_conversion_absoluteY="16dp"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
+        android:id="@+id/locationTextView"
         android:layout_width="96dp"
         android:layout_height="21dp"
-        android:text="Location Type"
+        android:text="  Location Type"
         app:layout_constraintRight_toLeftOf="@+id/boroughText"
         app:layout_constraintLeft_toRightOf="@+id/boroughText"
         app:layout_constraintBottom_toTopOf="@+id/locationTypeSpinner"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.8" />
 
     <Spinner
         android:id="@+id/locationTypeSpinner"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        tools:layout_editor_absoluteY="29dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginRight="0dp">
+        app:layout_constraintBottom_toTopOf="@+id/locationTextView"
+        android:layout_marginBottom="-63dp">
     </Spinner>
 
     <EditText
         android:id="@+id/zipcodeText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="339dp"
+        android:layout_marginBottom="347dp"
         android:ems="10"
         android:hint="Enter Zip Code"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,13 +58,14 @@
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
-        tools:layout_conversion_absoluteY="16dp" />
+        tools:layout_conversion_absoluteY="16dp"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
         android:id="@+id/addressText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="288dp"
+        android:layout_marginBottom="298dp"
         android:ems="10"
         android:hint="Enter Address"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,13 +74,14 @@
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
-        tools:layout_conversion_absoluteY="16dp" />
+        tools:layout_conversion_absoluteY="16dp"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="235dp"
+        android:layout_marginBottom="247dp"
         android:ems="10"
         android:hint="Enter City"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +90,8 @@
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
-        tools:layout_conversion_absoluteY="16dp" />
+        tools:layout_conversion_absoluteY="16dp"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <Button
         android:id="@+id/addRSButton"
@@ -104,25 +110,69 @@
         android:layout_height="48dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addRSButton"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline2"
         app:layout_constraintGuide_begin="20dp"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline3"
         app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline4"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline5"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline6"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.052083332"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        app:layout_constraintGuide_begin="20dp"
         android:orientation="vertical" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline7"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="364dp" />
 
 
 </android.support.constraint.ConstraintLayout>
