@@ -41,8 +41,8 @@ public class ReportRatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_rat);
 
         //initialize all of the content on the .xml file
-        boroughSpinner = (Spinner) findViewById(R.id.boroughSpinner);
         locationTypeSpinner = (Spinner) findViewById(R.id.locationTypeSpinner);
+        boroughSpinner = (Spinner) findViewById(R.id.boroughSpinner);
         zipcodeText = (EditText) findViewById(R.id.zipcodeText);
         addressText = (EditText) findViewById(R.id.addressText);
         cityText = (EditText) findViewById(R.id.cityText);
