@@ -4,128 +4,158 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kanye2020.gatech.edu.rattrackapp.ReportRatActivity">
-
-    <TextView
-        android:id="@+id/boroughTextView"
-        android:text="Borough"
-        app:layout_constraintTop_toBottomOf="@+id/locationTypeSpinner"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_marginRight="284dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="-10dp"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline7" />
-
-    <Spinner
-        android:id="@+id/boroughSpinner"
-        android:layout_width="384dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="387dp"
-        android:ems="10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_conversion_absoluteHeight="42dp"
-        tools:layout_conversion_absoluteWidth="384dp"
-        tools:layout_conversion_absoluteX="0dp"
-        tools:layout_conversion_absoluteY="16dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+    tools:context="kanye2020.gatech.edu.rattrackapp.ReportRatActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
         android:id="@+id/locationTextView"
         android:layout_width="96dp"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:text="  Location Type"
-        app:layout_constraintRight_toLeftOf="@+id/boroughSpinner"
-        app:layout_constraintLeft_toRightOf="@+id/boroughSpinner"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/locationTypeSpinner"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintHorizontal_bias="0.8" />
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Spinner
         android:id="@+id/locationTypeSpinner"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationTextView"
+        app:layout_constraintBottom_toTopOf="@+id/boroughTextView"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@+id/locationTextView">
+        tools:layout_editor_absoluteX="0dp">
     </Spinner>
+
+    <TextView
+        android:id="@+id/boroughTextView"
+        android:text="Borough"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="66dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="+@id/locationTypeSpinner"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp" />
+
+    <Spinner
+        android:id="@+id/boroughSpinner"
+        android:layout_width="384dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        app:layout_constraintBottom_toTopOf="@+id/zipcodeText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_conversion_absoluteHeight="42dp"
+        tools:layout_conversion_absoluteWidth="384dp"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="16dp"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/zipcodeText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="345dp"
         android:ems="10"
         android:hint="Enter Zip Code"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/addressText"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
         tools:layout_conversion_absoluteY="16dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        tools:layout_editor_absoluteY="127dp"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/addressText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="294dp"
         android:ems="10"
         android:hint="Enter Address"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cityText"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
         tools:layout_conversion_absoluteY="16dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        tools:layout_editor_absoluteY="169dp"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/cityText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="244dp"
         android:ems="10"
         android:hint="Enter City"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="+@id/dateTextView"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         tools:layout_conversion_absoluteHeight="42dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"
         tools:layout_conversion_absoluteY="16dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        tools:layout_editor_absoluteY="211dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:text=" Enter date in format MM/DD/YYYY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cityText"
+        app:layout_constraintBottom_toTopOf="@+id/monthSpinner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Spinner
+        android:id="@+id/monthSpinner"
+        android:layout_width="100dp"
+        android:layout_height="42dp"
+        app:layout_constraintTop_toBottomOf="+@id/dateTextView"
+        app:layout_constraintRight_toLeftOf="@+id/daySpinner"
+        tools:layout_editor_absoluteY="284dp"
+        tools:layout_editor_absoluteX="0dp">
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/daySpinner"
+        android:layout_width="100dp"
+        android:layout_height="42dp"
+        app:layout_constraintTop_toBottomOf="+@id/dateTextView"
+        app:layout_constraintLeft_toRightOf="@+id/monthSpinner"
+        tools:layout_editor_absoluteY="284dp"
+        tools:layout_editor_absoluteX="100dp">
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/yearSpinner"
+        android:layout_width="100dp"
+        android:layout_height="42dp"
+        app:layout_constraintTop_toBottomOf="+@id/dateTextView"
+        app:layout_constraintLeft_toRightOf="@+id/daySpinner"
+        tools:layout_editor_absoluteY="284dp"
+        tools:layout_editor_absoluteX="200dp">
+    </Spinner>
 
     <Button
         android:id="@+id/addRSButton"
         android:layout_width="368dp"
         android:layout_height="48dp"
         android:text="Add Rat Sighting"
+        tools:layout_editor_absoluteY="407dp"
+        app:layout_constraintBottom_toTopOf="+@id/cancelRSButton"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/cancelRSButton"
         android:layout_width="368dp"
         android:layout_height="48dp"
         android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="455dp"
         app:layout_constraintTop_toBottomOf="@+id/addRSButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -186,14 +216,54 @@
         android:layout_height="wrap_content"
         android:id="@+id/guideline7"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="368dp" />
+        app:layout_constraintGuide_end="368dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="16dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline8"
         app:layout_constraintGuide_begin="20dp"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="20dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline10"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="20dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline11"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline14"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="20dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline15"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="20dp"
+        tools:layout_editor_absoluteX="0dp" />
 
 
 </android.support.constraint.ConstraintLayout>
