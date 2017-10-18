@@ -52,6 +52,7 @@ public class ReportRatActivity extends AppCompatActivity {
         addRSButton = (Button) findViewById(R.id.addRSButton);
         cancelRSButton = (Button) findViewById(R.id.cancelRSButton);
 
+        //Creates lists for boroughs, location types, months, days, and years
         List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS", "BROOKLYN", "BRONX");
         List<String> locationTypes = Arrays.asList("1-2 Family Dwelling", "3+ Family Apt. Building",
                 "3+ Family Mixed Use Building", "Commercial Building", "Vacant Lot", "Construction Site",
@@ -62,42 +63,55 @@ public class ReportRatActivity extends AppCompatActivity {
                 "28", "29", "30", "31");
         List<String> years = Arrays.asList("2015", "2016", "2017", "2018", "2019", "2020");
 
+        //Adapter for borough Spinner
         ArrayAdapter<String> boroughAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
         boroughAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boroughSpinner.setAdapter(boroughAdapter);
 
+        //Adapter for locationType spinner
         ArrayAdapter<String> locationTypeAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationTypes);
         locationTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationTypeSpinner.setAdapter(locationTypeAdapter);
 
+        //Adapter for Month Spinner
         ArrayAdapter<String> monthAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, months);
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         monthSpinner.setAdapter(monthAdapter);
 
+        //Adapter for day Spinner
         ArrayAdapter<String> dayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, days);
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
 
+        //Adapter for year Spinner
         ArrayAdapter<String> yearAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, years);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(yearAdapter);
 
 
+        //gets the data from the user
         locationType = (String) locationTypeSpinner.getSelectedItem();
         borough = (String) boroughSpinner.getSelectedItem();
+        month = (String) monthSpinner.getSelectedItem();
+        day = (String) daySpinner.getSelectedItem();
+        year = (String) yearSpinner.getSelectedItem();
         zipcode = zipcodeText.getText().toString();
         address = addressText.getText().toString();
         city = cityText.getText().toString();
 
-
+        //add ratsighting button and makes sure entire form is complete
         addRSButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //user has to fill out the entire form
                 //yo we are missing borough in the .xml
                 //when add button is clicked, new RatSighting created and added to db!
-                if (!(borough.isEmpty() && zipcode.isEmpty() && address.isEmpty() && city.isEmpty() && locationType.isEmpty())) {
+                if (!(borough.isEmpty() && zipcode.isEmpty() && address.isEmpty() && city.isEmpty() && locationType.isEmpty() && month.isEmpty() && day.isEmpty() && year.isEmpty())) {
                     RatSighting newEntry = new RatSighting(borough, city, address, zipcode, "locationtype", "datetime", "lat", "long", "key");
+                    Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
+                    startActivity(intent);
+
                 } else {
                     Toast.makeText(view.getContext(), "One or more fields are empty", Toast.LENGTH_SHORT).show();
                 }
