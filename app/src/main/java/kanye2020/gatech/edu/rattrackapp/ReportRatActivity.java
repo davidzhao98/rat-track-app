@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import java.util.List;
-import java.util.ArrayList;
 import android.widget.ArrayAdapter;
 import java.util.Arrays;
 
@@ -27,6 +26,7 @@ public class ReportRatActivity extends AppCompatActivity {
     private String zipcode;
     private String address;
     private String city;
+    private String locationType;
 
     public ReportRatActivity() {
     }
@@ -57,9 +57,12 @@ public class ReportRatActivity extends AppCompatActivity {
         locationTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationTypeSpinner.setAdapter(locationTypeAdapter);
 
+        locationType = (String) locationTypeSpinner.getSelectedItem();
+        borough = (String) boroughSpinner.getSelectedItem();
         zipcode = zipcodeText.getText().toString();
         address = addressText.getText().toString();
         city = cityText.getText().toString();
+
 
         addRSButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +70,10 @@ public class ReportRatActivity extends AppCompatActivity {
                 //user has to fill out the entire form
                 //yo we are missing borough in the .xml
                 //when add button is clicked, new RatSighting created and added to db!
-                if (!(borough.isEmpty() && zipcode.isEmpty() && address.isEmpty() && city.isEmpty())) {
+                if (!(borough.isEmpty() && zipcode.isEmpty() && address.isEmpty() && city.isEmpty() && locationType.isEmpty())) {
                     RatSighting newEntry = new RatSighting(borough, city, address, zipcode, "locationtype", "datetime", "lat", "long", "key");
                 } else {
-                    Toast.makeText(view.getContext(), "You have to fill out everything", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "One or more fields are empty", Toast.LENGTH_SHORT).show();
                 }
             }
         });
