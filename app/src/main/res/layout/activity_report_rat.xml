@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     tools:context="kanye2020.gatech.edu.rattrackapp.ReportRatActivity">
 
-    <EditText
-        android:id="@+id/boroughText"
+    <TextView
+        android:id="@+id/boroughTextView"
+        android:text="Borough"
+        app:layout_constraintTop_toBottomOf="@+id/locationTypeSpinner"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginRight="284dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="-10dp"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline7" />
+
+    <Spinner
+        android:id="@+id/boroughSpinner"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="399dp"
+        android:layout_marginBottom="387dp"
         android:ems="10"
-        android:hint="Enter Borough"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -27,8 +38,8 @@
         android:layout_width="96dp"
         android:layout_height="21dp"
         android:text="  Location Type"
-        app:layout_constraintRight_toLeftOf="@+id/boroughText"
-        app:layout_constraintLeft_toRightOf="@+id/boroughText"
+        app:layout_constraintRight_toLeftOf="@+id/boroughSpinner"
+        app:layout_constraintLeft_toRightOf="@+id/boroughSpinner"
         app:layout_constraintBottom_toTopOf="@+id/locationTypeSpinner"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -41,15 +52,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toBottomOf="@+id/locationTextView"
-        android:layout_marginBottom="-75dp">
+        app:layout_constraintTop_toBottomOf="@+id/locationTextView">
     </Spinner>
 
     <EditText
         android:id="@+id/zipcodeText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="347dp"
+        android:layout_marginBottom="345dp"
         android:ems="10"
         android:hint="Enter Zip Code"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +75,7 @@
         android:id="@+id/addressText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="298dp"
+        android:layout_marginBottom="294dp"
         android:ems="10"
         android:hint="Enter Address"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,10 +88,10 @@
         app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/cityText"
         android:layout_width="384dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="247dp"
+        android:layout_marginBottom="244dp"
         android:ems="10"
         android:hint="Enter City"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,7 +112,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879" />
+        app:layout_constraintVertical_bias="0.879"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <Button
         android:id="@+id/cancelRSButton"
@@ -165,14 +177,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/guideline"
         app:layout_constraintGuide_begin="20dp"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="20dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline7"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="364dp" />
+        app:layout_constraintGuide_end="368dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline8"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="horizontal" />
 
 
 </android.support.constraint.ConstraintLayout>

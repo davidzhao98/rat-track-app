@@ -8,11 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import java.util.List;
+import java.util.ArrayList;
+import android.widget.ArrayAdapter;
+import java.util.Arrays;
 
 public class ReportRatActivity extends AppCompatActivity {
 
     private Spinner locationTypeSpinner;
-    private EditText boroughText;
+    private Spinner boroughSpinner;
     private EditText zipcodeText;
     private EditText addressText;
     private EditText cityText;
@@ -33,14 +37,26 @@ public class ReportRatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_rat);
 
         //initialize all of the content on the .xml file
-        boroughText = (EditText) findViewById(R.id.boroughText);
+        boroughSpinner = (Spinner) findViewById(R.id.boroughSpinner);
         zipcodeText = (EditText) findViewById(R.id.zipcodeText);
         addressText = (EditText) findViewById(R.id.addressText);
         cityText = (EditText) findViewById(R.id.cityText);
         addRSButton = (Button) findViewById(R.id.addRSButton);
         cancelRSButton = (Button) findViewById(R.id.cancelRSButton);
 
-        borough = boroughText.getText().toString();
+        List<String> boroughs = Arrays.asList("Manhattan", "Staten Island", "Queens", "Brooklyn", "Bronx");
+        List<String> locationTypes = Arrays.asList("1-2 Family Dwelling", "3+ Family Apt. Building",
+                "3+ Family Mixed Use Building", "Commercial Building", "Vacant Lot", "Construction Site",
+                "Hospital", "Catch Basin/Sewer");
+
+        ArrayAdapter<String> boroughAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
+        boroughAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        boroughSpinner.setAdapter(boroughAdapter);
+
+        ArrayAdapter<String> locationTypeAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationTypes);
+        locationTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationTypeSpinner.setAdapter(locationTypeAdapter);
+
         zipcode = zipcodeText.getText().toString();
         address = addressText.getText().toString();
         city = cityText.getText().toString();
