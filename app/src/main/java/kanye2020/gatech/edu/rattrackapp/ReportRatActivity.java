@@ -38,6 +38,7 @@ public class ReportRatActivity extends AppCompatActivity {
 
         //initialize all of the content on the .xml file
         boroughSpinner = (Spinner) findViewById(R.id.boroughSpinner);
+        locationTypeSpinner = (Spinner) findViewById(R.id.locationTypeSpinner);
         zipcodeText = (EditText) findViewById(R.id.zipcodeText);
         addressText = (EditText) findViewById(R.id.addressText);
         cityText = (EditText) findViewById(R.id.cityText);
