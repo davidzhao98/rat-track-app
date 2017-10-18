@@ -52,7 +52,7 @@ public class ReportRatActivity extends AppCompatActivity {
         addRSButton = (Button) findViewById(R.id.addRSButton);
         cancelRSButton = (Button) findViewById(R.id.cancelRSButton);
 
-        List<String> boroughs = Arrays.asList("Manhattan", "Staten Island", "Queens", "Brooklyn", "Bronx");
+        List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS", "BROOKLYN", "BRONX");
         List<String> locationTypes = Arrays.asList("1-2 Family Dwelling", "3+ Family Apt. Building",
                 "3+ Family Mixed Use Building", "Commercial Building", "Vacant Lot", "Construction Site",
                 "Hospital", "Catch Basin/Sewer");
