@@ -22,6 +22,7 @@ public class ReportRatActivity extends AppCompatActivity {
     private EditText zipcodeText;
     private EditText addressText;
     private EditText cityText;
+
     private Button addRSButton;
     private Button cancelRSButton;
 
@@ -106,8 +107,8 @@ public class ReportRatActivity extends AppCompatActivity {
                 //user has to fill out the entire form
                 //yo we are missing borough in the .xml
                 //when add button is clicked, new RatSighting created and added to db!
-                if (!(borough.isEmpty() && zipcode.isEmpty() && address.isEmpty() && city.isEmpty() && locationType.isEmpty() && month.isEmpty() && day.isEmpty() && year.isEmpty())) {
-                    RatSighting newEntry = new RatSighting(borough, city, address, zipcode, "locationtype", "datetime", "lat", "long", "key");
+                if (!zipcode.isEmpty() && !address.isEmpty() && !city.isEmpty()) {
+                    RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year), "lat", "long", "key");
                     Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
