@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.List;
 import android.widget.ArrayAdapter;
 import java.util.Arrays;
@@ -90,15 +92,7 @@ public class ReportRatActivity extends AppCompatActivity {
         yearSpinner.setAdapter(yearAdapter);
 
 
-        //gets the data from the user
-        locationType = (String) locationTypeSpinner.getSelectedItem();
-        borough = (String) boroughSpinner.getSelectedItem();
-        month = (String) monthSpinner.getSelectedItem();
-        day = (String) daySpinner.getSelectedItem();
-        year = (String) yearSpinner.getSelectedItem();
-        zipcode = zipcodeText.getText().toString();
-        address = addressText.getText().toString();
-        city = cityText.getText().toString();
+
 
         //add ratsighting button and makes sure entire form is complete
         addRSButton.setOnClickListener(new View.OnClickListener() {
@@ -107,8 +101,19 @@ public class ReportRatActivity extends AppCompatActivity {
                 //user has to fill out the entire form
                 //yo we are missing borough in the .xml
                 //when add button is clicked, new RatSighting created and added to db!
+                //gets the data from the user
+                locationType = (String) locationTypeSpinner.getSelectedItem();
+                borough = (String) boroughSpinner.getSelectedItem();
+                month = (String) monthSpinner.getSelectedItem();
+                day = (String) daySpinner.getSelectedItem();
+                year = (String) yearSpinner.getSelectedItem();
+                zipcode = zipcodeText.getText().toString();
+                address = addressText.getText().toString();
+                city = cityText.getText().toString();
                 if (!(zipcodeText.getText().toString().equals("")) && !(addressText.getText().toString().equals("")) && !(cityText.getText().toString().equals(""))) {
                     RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year), "lat", "long", "key");
+                    ArrayList<RatSighting> sampleList = RatSightingList.getInstance().getSample();
+                    sampleList.add(newEntry);
                     Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
