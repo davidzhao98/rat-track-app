@@ -58,5 +58,13 @@ public class ApplicationActivity extends AppCompatActivity {
             }
         });
 
+        viewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
