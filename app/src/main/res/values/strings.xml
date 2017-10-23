@@ -3,5 +3,6 @@
     <string name="login_button_label">LOGIN</string>
     <string name="register_button_label">REGISTER</string>
     <string name="welcome_button_label">WELCOME TO OUR APP</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
