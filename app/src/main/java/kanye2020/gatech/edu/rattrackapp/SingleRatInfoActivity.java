@@ -16,11 +16,6 @@ public class SingleRatInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rat_sighting_info);
-
-        int pos = getIntent().getIntExtra("position", -1);
-        ArrayList<RatSighting> sightingList = RatSightingList.getInstance().getSample();
-        sighting = sightingList.get(pos);
-        System.out.print(sighting.toString());
         TextView uniqueKeyTV = (TextView) findViewById(R.id.UniqueKey);
         TextView createdDateTV = (TextView) findViewById(R.id.CreatedDate);
         TextView locationTypeTV = (TextView) findViewById(R.id.LocationType);
@@ -31,6 +26,20 @@ public class SingleRatInfoActivity extends AppCompatActivity {
         TextView longitudeTV = (TextView) findViewById(R.id.Longitude);
         TextView latitudeTV = (TextView) findViewById(R.id.Latitude);
 
+        try {
+            int pos = getIntent().getIntExtra("position", -1);
+            ArrayList<RatSighting> sightingList = RatSightingList.getInstance().getSample();
+            sighting = sightingList.get(pos);
+            System.out.print(sighting.toString());
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+
+        try {
+            sighting = (RatSighting) getIntent().getExtras().getParcelable("rat");
+        } catch(Exception e) {
+            System.out.print(e);
+        }
 
         uniqueKeyTV.setText(sighting.getUniqueKey());
         createdDateTV.setText(sighting.getDateTime());

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    ArrayList<RatSighting> searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
-        for(int i = 0; i < 300; i++) {
+        searchResults = new ArrayList<>();
+        for (int i = 0; i < 300; i++) {
             int j = (int) (Math.random() * 100000);
             RatSighting rat = rats.get(j);
+            searchResults.add(rat);
             String id = rat.getUniqueKey();
             String latitude = rat.getLatitude();
             String longitude = rat.getLongitude();
@@ -69,7 +72,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SingleRatInfoActivity.class);
+                String id = marker.getTitle().substring(14);
+                RatSighting clicked = null;
+                for (RatSighting rat : searchResults) {
+                    if (rat.getUniqueKey().equals(id)) {
+                        clicked = rat;
+                        break;
+                    }
+                }
+
+                intent.putExtra("rat", clicked);
+                startActivity(intent);
             }
         });
     }
