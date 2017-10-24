@@ -1,5 +1,6 @@
 package kanye2020.gatech.edu.rattrackapp;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -8,7 +9,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -39,8 +44,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
+        for(int i = 0; i < 300; i++) {
+            int j = (int) (Math.random() * 100000);
+            RatSighting rat = rats.get(j);
+            String id = rat.getUniqueKey();
+            String latitude = rat.getLatitude();
+            String longitude = rat.getLongitude();
+            try {
+                Double lat = Double.parseDouble(latitude);
+                Double lng = Double.parseDouble(longitude);
+                LatLng ratLocation = new LatLng(lat, lng);
+                mMap.addMarker(new MarkerOptions().position(ratLocation).title("Marker of Rat " + id));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ratLocation, 11));
+            } catch(Exception e) {
+                System.out.println("One of the rats can't be displayed");
+            }
+
+        }
+//        mMap.setMinZoomPreference((float) 11);
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+            }
+        });
     }
 }
