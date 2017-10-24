@@ -25,7 +25,7 @@ public class SearchActivity extends AppCompatActivity {
         dateRange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                Intent intent = new Intent(view.getContext(), DateRangeActivity.class);
                 startActivity(intent);
             }
         });
