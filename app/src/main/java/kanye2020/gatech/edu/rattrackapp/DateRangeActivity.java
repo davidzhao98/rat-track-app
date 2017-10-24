@@ -3,6 +3,7 @@ package kanye2020.gatech.edu.rattrackapp;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,13 +13,16 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.util.Date;
+
 /**
  * Created by Pulak Azad on 10/24/17.
  */
 public class DateRangeActivity extends AppCompatActivity {
 
 
-    //intializes buttons and textViews
+    //initializes buttons and textViews
     Button btn;
     Button btn2;
     Button btn3;
@@ -85,8 +89,23 @@ public class DateRangeActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MapsActivity.class);
-                startActivity(intent);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                try {
+                    Date startDate = dateFormat.parse((String) startDateView.getText());
+                    Date endDate = dateFormat.parse((String) endDateView.getText());
+                    if (startDate.compareTo(endDate) <= 0) {
+                        Intent intent = new Intent(view.getContext(), MapsActivity.class);
+                        intent.putExtra("startDate", (String) startDateView.getText());
+                        intent.putExtra("endDate", (String) endDateView.getText());
+                        intent.putExtra("from", "date");
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(DateRangeActivity.this, "Invalid Date Range", Toast.LENGTH_LONG).show();
+                    }
+                } catch (ParseException e) {
+                    System.out.println(e);
+                }
+
             }
         });
 
@@ -103,9 +122,21 @@ public class DateRangeActivity extends AppCompatActivity {
             monthStart = i1 + 1;
             dayStart = i2;
 
-            startDateView.setText(monthStart + "/" + dayStart + "/" + yearStart);
+            String month = "0";
+            String day = "0";
+            if (monthStart < 10) {
+                month += monthStart;
+            } else {
+                month = "" + monthStart;
+            }
+            if (dayStart < 10) {
+                day += dayStart;
+            } else {
+                day = "" + dayStart;
+            }
+            startDateView.setText(month + "/" + day + "/" + yearStart);
 
-            Toast.makeText(DateRangeActivity.this, monthStart + "/" + dayStart + "/" + yearStart, Toast.LENGTH_LONG).show();
+            Toast.makeText(DateRangeActivity.this, month + "/" + day + "/" + yearStart, Toast.LENGTH_LONG).show();
         }
     };
 
@@ -120,9 +151,21 @@ public class DateRangeActivity extends AppCompatActivity {
             monthEnd = i1 + 1;
             dayEnd = i2;
 
-            endDateView.setText(monthEnd + "/" + dayEnd + "/" + yearEnd);
+            String month = "0";
+            String day = "0";
+            if (monthEnd < 10) {
+                month += monthEnd;
+            } else {
+                month = "" + monthEnd;
+            }
+            if (dayEnd < 10) {
+                day += dayEnd;
+            } else {
+                day = "" + dayEnd;
+            }
+            endDateView.setText(month + "/" + day + "/" + yearEnd);
 
-            Toast.makeText(DateRangeActivity.this, monthEnd + "/" + dayEnd + "/" + yearEnd, Toast.LENGTH_LONG).show();
+            Toast.makeText(DateRangeActivity.this, month + "/" + day + "/" + yearEnd, Toast.LENGTH_LONG).show();
         }
     };
 

@@ -1,6 +1,7 @@
 package kanye2020.gatech.edu.rattrackapp;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -14,12 +15,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     ArrayList<RatSighting> searchResults;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,31 +45,58 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
         searchResults = new ArrayList<>();
-
-        for (int i = 0; i < 300; i++) {
-            int j = (int) (Math.random() * 100000);
-            RatSighting rat = rats.get(j);
-            searchResults.add(rat);
-            String id = rat.getUniqueKey();
-            String latitude = rat.getLatitude();
-            String longitude = rat.getLongitude();
+        String callingActivity = getIntent().getStringExtra("from");
+        if (callingActivity.equals("date")) {
             try {
-                Double lat = Double.parseDouble(latitude);
-                Double lng = Double.parseDouble(longitude);
-                LatLng ratLocation = new LatLng(lat, lng);
-                mMap.addMarker(new MarkerOptions().position(ratLocation).title("Marker of Rat " + id));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ratLocation, 11));
+                String startDateText = getIntent().getStringExtra("startDate");
+                String endDateText = getIntent().getStringExtra("endDate");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                Date startDate = dateFormat.parse(startDateText);
+                Date endDate = dateFormat.parse(endDateText);
+                for (int i = 0; i < 300; i++) {
+                    int j = (int) (Math.random() * 100000);
+                    RatSighting rat = rats.get(j);
+                    String ratDateText = rat.getDateTime().substring(0, 11);
+                    Date ratDate = dateFormat.parse(ratDateText);
+                    if (ratDate.compareTo(startDate) >= 0 && ratDate.compareTo(endDate) <= 0) {
+                        searchResults.add(rat);
+                        String id = rat.getUniqueKey();
+                        String latitude = rat.getLatitude();
+                        String longitude = rat.getLongitude();
+                        try {
+                            Double lat = Double.parseDouble(latitude);
+                            Double lng = Double.parseDouble(longitude);
+                            LatLng ratLocation = new LatLng(lat, lng);
+                            mMap.addMarker(new MarkerOptions().position(ratLocation).title("Marker of Rat " + id));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ratLocation, 11));
+                        } catch(Exception e) {
+                            System.out.println("One of the rats can't be displayed");
+                        }
+                    }
+                }
             } catch(Exception e) {
-                System.out.println("One of the rats can't be displayed");
+                System.out.println(e);
             }
-
+        } else if (callingActivity.equals("viewAllMap")) {
+            for (int i = 0; i < 300; i++) {
+                int j = (int) (Math.random() * 100000);
+                RatSighting rat = rats.get(j);
+                searchResults.add(rat);
+                String id = rat.getUniqueKey();
+                String latitude = rat.getLatitude();
+                String longitude = rat.getLongitude();
+                try {
+                    Double lat = Double.parseDouble(latitude);
+                    Double lng = Double.parseDouble(longitude);
+                    LatLng ratLocation = new LatLng(lat, lng);
+                    mMap.addMarker(new MarkerOptions().position(ratLocation).title("Marker of Rat " + id));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ratLocation, 11));
+                } catch(Exception e) {
+                    System.out.println("One of the rats can't be displayed");
+                }
+            }
         }
 //        mMap.setMinZoomPreference((float) 11);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
