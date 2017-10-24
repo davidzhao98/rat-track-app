@@ -20,6 +20,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     ArrayList<RatSighting> searchResults;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
         searchResults = new ArrayList<>();
+
         for (int i = 0; i < 300; i++) {
             int j = (int) (Math.random() * 100000);
             RatSighting rat = rats.get(j);

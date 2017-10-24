@@ -92,15 +92,11 @@ public class ReportRatActivity extends AppCompatActivity {
         yearSpinner.setAdapter(yearAdapter);
 
 
-
-
         //add ratsighting button and makes sure entire form is complete
         addRSButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //user has to fill out the entire form
-                //yo we are missing borough in the .xml
-                //when add button is clicked, new RatSighting created and added to db!
                 //gets the data from the user
                 locationType = (String) locationTypeSpinner.getSelectedItem();
                 borough = (String) boroughSpinner.getSelectedItem();
@@ -114,6 +110,9 @@ public class ReportRatActivity extends AppCompatActivity {
                     RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year), "lat", "long", "key");
                     ArrayList<RatSighting> sampleList = RatSightingList.getInstance().getSample();
                     sampleList.add(newEntry);
+
+                    addToFirebase(newEntry);
+
                     Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
@@ -133,4 +132,10 @@ public class ReportRatActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void addToFirebase(RatSighting newEntry) {
+
+    }
+
+
 }
