@@ -10,10 +10,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import android.widget.ArrayAdapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 
 public class ReportRatActivity extends AppCompatActivity {
@@ -27,14 +35,33 @@ public class ReportRatActivity extends AppCompatActivity {
     private EditText addressText;
     private EditText cityText;
 
+    @PropertyName("Longitude")
+    private String longitude;
+
+    @PropertyName("Latitude")
+    private String latitude;
+
+    @PropertyName("Created Date")
+    private String time;
+
     private Button addRSButton;
     private Button cancelRSButton;
 
+    @PropertyName("Borough")
     private String borough;
+
+    @PropertyName("Incident Zip")
     private String zipcode;
+
+    @PropertyName("Incident Address")
     private String address;
+
+    @PropertyName("City")
     private String city;
+
+    @PropertyName("Location Type")
     private String locationType;
+
     private String month, day, year;
 
     public ReportRatActivity() {
@@ -44,6 +71,19 @@ public class ReportRatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_rat);
+
+        //making new GPSGetter and getting long and lat
+        GetGPSLocationActivity GPS =  new GetGPSLocationActivity();
+        longitude = GPS.getLongitude();
+        latitude = GPS.getLatitude();
+
+        //getting current time
+        Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minutes = cal.get(Calendar.MINUTE);
+        String hr = Integer.toString(hour);
+        String min = Integer.toString(minutes);
+        time = hr + ":" + min;
 
         //initialize all of the content on the .xml file
         locationTypeSpinner = (Spinner) findViewById(R.id.locationTypeSpinner);
@@ -109,18 +149,42 @@ public class ReportRatActivity extends AppCompatActivity {
                 address = addressText.getText().toString();
                 city = cityText.getText().toString();
                 if (!(zipcodeText.getText().toString().equals("")) && !(addressText.getText().toString().equals("")) && !(cityText.getText().toString().equals(""))) {
-                    RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year), "lat", "long", "key");
-                    ArrayList<RatSighting> ratList = RatSightingList.getInstance().getRats();
-                    //ratList.add(newEntry);
+//                    RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year + " " + time), latitude, longitude, "key");
+//                    ArrayList<RatSighting> ratList = RatSightingList.getInstance().getRats();
+//                    ratList.add(newEntry);
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("ratdata");
-                    myRef.child(Integer.toString(ratList.size())).setValue(newEntry);
-                    //addToFirebase(newEntry);
+//                    ArrayList<String> list = new ArrayList<String>();
+//                    list.add("Borough");
+//                    list.add("City");
+//                    list.add("Created Date");
+//                    list.add("Incident Address");
+//                    list.add("Incident Zip");
+//                    list.add("Latitude");
+//                    list.add("Location Type");
+//                    list.add("Longitude");
+//                    list.add("Unique Key");
+//                    list.setTitle()
+                    int index = RatSightingList.getInstance().getRatsSize();
+                    System.out.println(index);
+                    String ind = "99100";
 
+                    myRef.child(ind).setValue(null);
+                    myRef.child(ind).child("Borough").setValue(borough);
+                    myRef.child(ind).child("City").setValue(city);
+                    myRef.child(ind).child("Created Date").setValue(month + "/" + day + "/" + year + " " + time);
+                    myRef.child(ind).child("Incident Address").setValue(address);
+                    myRef.child(ind).child("Incident Zip").setValue(zipcode);
+                    myRef.child(ind).child("Latitude").setValue(latitude);
+                    myRef.child(ind).child("Location Type").setValue(locationType);
+                    myRef.child(ind).child("Longitude").setValue(longitude);
+                    myRef.child(ind).child("Unique Key").setValue("key");
+
+                    System.out.println("RAT ADDED");
                     Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
+//                    startActivity(intent);
 
                 } else {
                     Toast.makeText(view.getContext(), "One or more fields are empty", Toast.LENGTH_SHORT).show();
@@ -137,10 +201,5 @@ public class ReportRatActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void addToFirebase(RatSighting newEntry) {
-
-    }
-
 
 }
