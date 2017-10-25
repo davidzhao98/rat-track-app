@@ -40,42 +40,81 @@ public class RatSighting implements Parcelable {
 //        String asdf = sdf.format(date);
     }
 
+    /**
+     *
+     * @return the borough
+     */
     public String getBorough() {
         return borough;
     }
 
+    /**
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     *
+     * @return the address
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     *
+     * @return locationType
+     */
     public String getLocationType() {
         return locationType;
     }
 
+    /**
+     *
+     * @return uniqueKey
+     */
     public String getUniqueKey() {
         return uniqueKey;
     }
 
+    /**
+     *
+     * @return the zipcode
+     */
     public String getZipcode() {
         return zipcode;
     }
 
+    /**
+     *
+     * @return the dateTime
+     */
     public String getDateTime() {
         return dateTime;
     }
 
+    /**
+     *
+     * @return latitude
+     */
     public String getLatitude() {
         return latitude;
     }
 
+    /**
+     *
+     * @return longitude
+     */
     public String getLongitude() {
         return longitude;
     }
 
+    /**
+     * allows the marker to be viewable
+     * @param in the parcel being passed in
+     */
     public RatSighting(Parcel in){
         String[] data = new String[9];
 

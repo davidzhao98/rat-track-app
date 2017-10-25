@@ -80,13 +80,24 @@ public class RatSightingList {
         });
     }
 
+    /**
+     * @return the arrayList of rats
+     */
     public ArrayList<RatSighting> getRats() {
         return rats;
     }
 
+    /**
+     *
+     * @return returns the size of the arrayList
+     */
     public int getRatsSize() {
         return rats.size();
     }
 
+    /**
+     *
+     * @return the sample arrayList
+     */
     public ArrayList<RatSighting> getSample() { return sample;}
 }
