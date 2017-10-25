@@ -73,6 +73,7 @@ public class SearchResultsListView extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(), SingleRatInfoActivity.class);
                 intent.putExtra("position", position);
+                intent.putExtra("caller", "SearchResultsListView");
                 startActivity(intent);
                 //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
             }

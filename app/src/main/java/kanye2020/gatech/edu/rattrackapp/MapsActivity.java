@@ -113,6 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
                 intent.putExtra("rat", clicked);
+                intent.putExtra("caller", "MapsActivity");
                 startActivity(intent);
             }
         });
