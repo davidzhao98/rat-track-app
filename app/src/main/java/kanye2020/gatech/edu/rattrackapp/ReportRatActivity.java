@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,10 +110,13 @@ public class ReportRatActivity extends AppCompatActivity {
                 city = cityText.getText().toString();
                 if (!(zipcodeText.getText().toString().equals("")) && !(addressText.getText().toString().equals("")) && !(cityText.getText().toString().equals(""))) {
                     RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year), "lat", "long", "key");
-                    ArrayList<RatSighting> sampleList = RatSightingList.getInstance().getSample();
-                    sampleList.add(newEntry);
+                    ArrayList<RatSighting> ratList = RatSightingList.getInstance().getRats();
+                    //ratList.add(newEntry);
 
-                    addToFirebase(newEntry);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("ratdata");
+                    myRef.child(Integer.toString(ratList.size())).setValue(newEntry);
+                    //addToFirebase(newEntry);
 
                     Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
