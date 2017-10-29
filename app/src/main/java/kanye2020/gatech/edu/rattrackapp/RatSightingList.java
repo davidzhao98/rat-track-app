@@ -93,11 +93,11 @@ public class RatSightingList {
      */
     public int getRatsSize() {
         return rats.size();
-    }
+        }
 
-    /**
-     *
-     * @return the sample arrayList
-     */
-    public ArrayList<RatSighting> getSample() { return sample;}
-}
+/**
+ *
+ * @return the sample arrayList
+ */
+public ArrayList<RatSighting> getSample() { return sample;}
+        }

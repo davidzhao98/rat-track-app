@@ -18,6 +18,7 @@ public class ApplicationActivity extends AppCompatActivity {
     Button reportNewRat;
     Button searchSightings;
     Button viewMap;
+    Button viewGraph;
 
 
 
@@ -31,6 +32,7 @@ public class ApplicationActivity extends AppCompatActivity {
         reportNewRat = (Button) findViewById(R.id.reportButton);
         searchSightings = (Button) findViewById(R.id.searchButton);
         viewMap = (Button) findViewById(R.id.viewMapButton);
+        viewGraph = (Button) findViewById(R.id.viewGraphButton);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +66,13 @@ public class ApplicationActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), MapsActivity.class);
                 intent.putExtra("from", "viewAllMap");
                 startActivity(intent);
+            }
+        });
+
+        viewGraph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
