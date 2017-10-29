@@ -1,7 +1,11 @@
 package kanye2020.gatech.edu.rattrackapp;
 
+import android.icu.text.SimpleDateFormat;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -9,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -95,9 +100,33 @@ public class RatSightingList {
         return rats.size();
         }
 
-/**
- *
- * @return the sample arrayList
- */
-public ArrayList<RatSighting> getSample() { return sample;}
+    /**
+     *
+     * @return the sample arrayList
+     */
+    public ArrayList<RatSighting> getSample() { return sample;}
+
+    public ArrayList<RatSighting> sortByDate(Date start, Date end) {
+        if (instance == null) {
+            getInstance();
+            return sortByDate(start, end);
+        } else{
+            ArrayList<RatSighting> searchResults = new ArrayList();
+            try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            for (int i = 0; i < 300; i++) {
+                int j = (int) (Math.random() * 100000);
+                RatSighting rat = rats.get(j);
+                String ratDateText = rat.getDateTime().substring(0, 11);
+                Date ratDate = dateFormat.parse(ratDateText);
+                if (ratDate.compareTo(start) >= 0 && ratDate.compareTo(end) <= 0) {
+                    searchResults.add(rat);
+                }
+            }
+            } catch(Exception e) {
+                System.out.println(e);
+            }
+            return searchResults;
+        }
+    }
         }
