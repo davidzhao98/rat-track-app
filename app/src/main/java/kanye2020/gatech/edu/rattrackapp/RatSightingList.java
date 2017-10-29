@@ -1,11 +1,7 @@
 package kanye2020.gatech.edu.rattrackapp;
 
 import android.icu.text.SimpleDateFormat;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -106,6 +102,12 @@ public class RatSightingList {
      */
     public ArrayList<RatSighting> getSample() { return sample;}
 
+    /**
+     *
+     * @param start the starting date for the query
+     * @param end the ending date for the query
+     * @return an ArrayList of RatSightings that were reported between Date @start and Date @end
+     */
     public ArrayList<RatSighting> sortByDate(Date start, Date end) {
         if (instance == null) {
             getInstance();
