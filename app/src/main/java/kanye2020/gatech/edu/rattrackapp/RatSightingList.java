@@ -108,11 +108,10 @@ public class RatSightingList {
      * @param end the ending date for the query
      * @return an ArrayList of RatSightings that were reported between Date @start and Date @end
      */
-    public ArrayList<RatSighting> sortByDate(Date start, Date end) {
-        if (instance == null) {
-            getInstance();
-            return sortByDate(start, end);
-        } else{
+    public ArrayList<RatSighting> sortByDate(Date start, Date end) throws IllegalArgumentException {
+        if (start.compareTo(end) > 0) {
+            throw new IllegalArgumentException("Start date cannot exceed end date.");
+        }
             ArrayList<RatSighting> searchResults = new ArrayList();
             try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -130,5 +129,5 @@ public class RatSightingList {
             }
             return searchResults;
         }
-    }
+
         }

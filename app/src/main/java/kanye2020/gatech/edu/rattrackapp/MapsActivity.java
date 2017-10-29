@@ -55,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 Date startDate = dateFormat.parse(startDateText);
                 Date endDate = dateFormat.parse(endDateText);
+                //searchResults = RatSightingList.getInstance().sortByDate(startDate, endDate);
                 for (int i = 0; i < 300; i++) {
                     int j = (int) (Math.random() * 100000);
                     RatSighting rat = rats.get(j);
