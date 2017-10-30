@@ -103,6 +103,8 @@ public class RatSightingList {
     public ArrayList<RatSighting> getSample() { return sample;}
 
     /**
+     * method for searching rats by date given a starting date and ending date
+     * right now it only searches 300 random rats
      *
      * @param start the starting date for the query
      * @param end the ending date for the query
