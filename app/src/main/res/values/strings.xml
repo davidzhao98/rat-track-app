@@ -4,6 +4,8 @@
     <string name="register_button_label">REGISTER</string>
     <string name="welcome_button_label">WELCOME TO OUR APP</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_borough">BoroughActivity</string>
+    <string name="title_activity_location_type">LocationTypeActivity</string>
 
 
 </resources>
