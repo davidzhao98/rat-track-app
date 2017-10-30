@@ -66,7 +66,7 @@ public class DateRangeActivity extends AppCompatActivity {
     public void showDialogOnButtonClick() {
         btn = (Button) findViewById(R.id.startDateButton);
         btn2 = (Button) findViewById(R.id.endDateButton);
-        btn3 = (Button) findViewById(R.id.viewMapRange);
+        btn3 = (Button) findViewById(R.id.viewMapButton);
         viewGraphButton = (Button) findViewById(R.id.viewGraph);
 
 

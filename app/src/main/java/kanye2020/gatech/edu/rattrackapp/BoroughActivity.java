@@ -47,6 +47,11 @@ public class BoroughActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Intent intent = new Intent(view.getContext(), MapsActivity.class);
 //                startActivity(intent);
+                borough = (String) boroughSpinner.getSelectedItem();
+                Intent intent = new Intent(view.getContext(), MapsActivity.class);
+                intent.putExtra("borough", borough);
+                intent.putExtra("from", "borough");
+                startActivity(intent);
             }
         });
 

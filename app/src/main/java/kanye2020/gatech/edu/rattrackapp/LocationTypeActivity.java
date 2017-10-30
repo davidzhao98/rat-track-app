@@ -50,6 +50,11 @@ public class LocationTypeActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Intent intent = new Intent(view.getContext(), MapsActivity.class);
 //                startActivity(intent);
+                location = (String) locationTypeSpinner.getSelectedItem();
+                Intent intent = new Intent(view.getContext(), MapsActivity.class);
+                intent.putExtra("locationType", location);
+                intent.putExtra("from", "locationType");
+                startActivity(intent);
             }
         });
 

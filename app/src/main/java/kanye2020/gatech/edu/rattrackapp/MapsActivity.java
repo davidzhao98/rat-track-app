@@ -77,6 +77,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 searchResults.add(rat);
                 displayRat(mMap, rat);
             }
+        } else if (callingActivity.equals("borough")) {
+            for (int i = 0; i < 300; i++) {
+                int j = (int) (Math.random() * 100000);
+                RatSighting rat = rats.get(j);
+                String borough = getIntent().getStringExtra("borough");
+                if (borough.equals(rat.getBorough())) {
+                    searchResults.add(rat);
+                    displayRat(mMap, rat);
+                }
+            }
+        } else if (callingActivity.equals("locationType")) {
+            for (int i = 0; i < 300; i++) {
+                int j = (int) (Math.random() * 100000);
+                RatSighting rat = rats.get(j);
+                String locationType = getIntent().getStringExtra("locationType");
+                if (locationType.equals(rat.getLocationType())) {
+                    searchResults.add(rat);
+                    displayRat(mMap, rat);
+                }
+            }
         }
 //        mMap.setMinZoomPreference((float) 11);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
