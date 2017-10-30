@@ -112,7 +112,7 @@ public class RatSightingList {
         if (start.compareTo(end) > 0) {
             throw new IllegalArgumentException("Start date cannot exceed end date.");
         }
-        ArrayList<RatSighting> searchResults = new ArrayList();
+        ArrayList<RatSighting> searchResults = new ArrayList<>();
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             for (int i = 0; i < 300; i++) {
@@ -127,6 +127,6 @@ public class RatSightingList {
         } catch(Exception e) {
             System.out.println(e);
         }
-            return searchResults;
+        return searchResults;
     }
 }
