@@ -25,7 +25,7 @@ import java.util.Map;
 public class GraphActivity extends AppCompatActivity {
 
     ArrayList<RatSighting> searchResults;
-    RatSightingList ratz;
+    RatSightingList ratz = RatSightingList.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +116,7 @@ public class GraphActivity extends AppCompatActivity {
         gridLabel.setVerticalAxisTitle("Number of Sightings");
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
+
 
     }
 }
