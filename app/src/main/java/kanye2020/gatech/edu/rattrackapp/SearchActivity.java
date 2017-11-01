@@ -33,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
         borough.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                Intent intent = new Intent(view.getContext(), BoroughActivity.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +41,7 @@ public class SearchActivity extends AppCompatActivity {
         locationType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                Intent intent = new Intent(view.getContext(), LocationTypeActivity.class);
                 startActivity(intent);
             }
         });

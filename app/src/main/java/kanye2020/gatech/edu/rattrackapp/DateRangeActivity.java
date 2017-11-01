@@ -26,7 +26,7 @@ public class DateRangeActivity extends AppCompatActivity {
     Button btn;
     Button btn2;
     Button btn3;
-    Button btn4;
+    Button viewGraphButton;
 
     TextView startDateView;
     TextView endDateView;
@@ -66,8 +66,8 @@ public class DateRangeActivity extends AppCompatActivity {
     public void showDialogOnButtonClick() {
         btn = (Button) findViewById(R.id.startDateButton);
         btn2 = (Button) findViewById(R.id.endDateButton);
-        btn3 = (Button) findViewById(R.id.viewMapRange);
-        btn4 = (Button) findViewById(R.id.viewGraphButton);
+        btn3 = (Button) findViewById(R.id.viewMapButton);
+        viewGraphButton = (Button) findViewById(R.id.viewGraph);
 
 
         btn.setOnClickListener(
@@ -111,7 +111,7 @@ public class DateRangeActivity extends AppCompatActivity {
             }
         });
 
-        btn4.setOnClickListener(new View.OnClickListener() {
+        viewGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -130,12 +130,8 @@ public class DateRangeActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     System.out.println(e);
                 }
-
             }
         });
-
-
-
     }
 
     /**

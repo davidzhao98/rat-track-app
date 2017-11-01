@@ -103,6 +103,7 @@ public class RatSightingList {
     public ArrayList<RatSighting> getSample() { return sample;}
 
     /**
+     * method for searching rats by date given a starting date and ending date
      *
      * @param start the starting date for the query
      * @param end the ending date for the query
@@ -112,8 +113,8 @@ public class RatSightingList {
         if (start.compareTo(end) > 0) {
             throw new IllegalArgumentException("Start date cannot exceed end date.");
         }
-            ArrayList<RatSighting> searchResults = new ArrayList();
-            try {
+        ArrayList<RatSighting> searchResults = new ArrayList<>();
+        try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             for (int i = 0; i < 300; i++) {
                 int j = (int) (Math.random() * 100000);
@@ -124,10 +125,9 @@ public class RatSightingList {
                     searchResults.add(rat);
                 }
             }
-            } catch(Exception e) {
-                System.out.println(e);
-            }
-            return searchResults;
+        } catch(Exception e) {
+            System.out.println(e);
         }
-
-        }
+        return searchResults;
+    }
+}

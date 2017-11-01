@@ -49,6 +49,8 @@
         <activity android:name=".DateRangeActivity"></activity>
         <activity android:name=".GetGPSLocationActivity"></activity>
         <activity android:name=".GraphActivity"></activity>
+        <activity android:name=".BoroughActivity" />
+        <activity android:name=".LocationTypeActivity"></activity>
     </application>
 
 </manifest>
