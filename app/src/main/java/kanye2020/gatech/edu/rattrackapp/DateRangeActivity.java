@@ -26,6 +26,7 @@ public class DateRangeActivity extends AppCompatActivity {
     Button btn;
     Button btn2;
     Button btn3;
+    Button btn4;
 
     TextView startDateView;
     TextView endDateView;
@@ -66,6 +67,7 @@ public class DateRangeActivity extends AppCompatActivity {
         btn = (Button) findViewById(R.id.startDateButton);
         btn2 = (Button) findViewById(R.id.endDateButton);
         btn3 = (Button) findViewById(R.id.viewMapRange);
+        btn4 = (Button) findViewById(R.id.viewGraphButton);
 
 
         btn.setOnClickListener(
@@ -108,6 +110,31 @@ public class DateRangeActivity extends AppCompatActivity {
 
             }
         });
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                try {
+                    Date startDate = dateFormat.parse((String) startDateView.getText());
+                    Date endDate = dateFormat.parse((String) endDateView.getText());
+                    if (startDate.compareTo(endDate) <= 0) {
+                        Intent intent = new Intent(view.getContext(), GraphActivity.class);
+                        intent.putExtra("startDate", (String) startDateView.getText());
+                        intent.putExtra("endDate", (String) endDateView.getText());
+                        intent.putExtra("from", "date");
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(DateRangeActivity.this, "Invalid Date Range", Toast.LENGTH_LONG).show();
+                    }
+                } catch (ParseException e) {
+                    System.out.println(e);
+                }
+
+            }
+        });
+
+
 
     }
 
