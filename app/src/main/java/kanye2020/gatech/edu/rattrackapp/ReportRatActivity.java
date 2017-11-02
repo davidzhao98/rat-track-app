@@ -138,7 +138,7 @@ public class ReportRatActivity extends AppCompatActivity {
         yearSpinner.setAdapter(yearAdapter);
 
 
-        //add ratsighting button and makes sure entire form is complete
+        //add rat sighting button and makes sure entire form is complete
         addRSButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,7 +188,7 @@ public class ReportRatActivity extends AppCompatActivity {
             }
         });
 
-        //cancelling makes the app go back to previous screen which is the homescreen AppActivity
+        //cancelling makes the app go back to previous screen which is the home screen AppActivity
         cancelRSButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

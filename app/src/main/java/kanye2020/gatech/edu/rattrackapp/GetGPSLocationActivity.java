@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.location.LocationListener;
-import android.widget.Toast;
 
 /**
  * Created by juliachen on 10/24/17.
@@ -19,7 +18,7 @@ import android.widget.Toast;
 public class GetGPSLocationActivity extends AppCompatActivity implements LocationListener {
 
     LocationManager locationManager;
-    String mprovider;
+    String mapProvider;
 
     double longitude;
     double latitude;
@@ -31,14 +30,14 @@ public class GetGPSLocationActivity extends AppCompatActivity implements Locatio
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
 
-        mprovider = locationManager.getBestProvider(criteria, false);
+        mapProvider = locationManager.getBestProvider(criteria, false);
 
-        if (mprovider != null && !mprovider.equals("")) {
+        if (mapProvider != null && !mapProvider.equals("")) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
-            Location location = locationManager.getLastKnownLocation(mprovider);
-            locationManager.requestLocationUpdates(mprovider, 15000, 1, this);
+            Location location = locationManager.getLastKnownLocation(mapProvider);
+            locationManager.requestLocationUpdates(mapProvider, 15000, 1, this);
 
             if (location != null)
                 onLocationChanged(location);

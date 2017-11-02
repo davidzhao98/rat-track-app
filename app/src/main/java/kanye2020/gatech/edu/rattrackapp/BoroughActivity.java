@@ -34,6 +34,10 @@ public class BoroughActivity extends AppCompatActivity {
         List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS", "BROOKLYN", "BRONX");
 
         ArrayAdapter<String> boroughAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
+        boroughAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        boroughSpinner.setAdapter(boroughAdapter);
+
+
         searchBoroughButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

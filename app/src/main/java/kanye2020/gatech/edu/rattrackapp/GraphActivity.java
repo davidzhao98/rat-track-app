@@ -7,20 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Created by Nick B on 10/29/2017.
@@ -29,7 +24,7 @@ import java.util.Map;
 public class GraphActivity extends AppCompatActivity {
 
     ArrayList<RatSighting> searchResults;
-    RatSightingList ratz = RatSightingList.getInstance();
+    RatSightingList ratList = RatSightingList.getInstance();
     int startYear;
 
     @Override
@@ -74,7 +69,7 @@ public class GraphActivity extends AppCompatActivity {
                     Double d = i + 0.0;
                     months.put(d, 0.0);
                 }
-                searchResults = ratz.sortByDate(startDate, endDate);
+                searchResults = ratList.sortByDate(startDate, endDate);
                 for (int i = 0; i < searchResults.size(); i++) {
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 

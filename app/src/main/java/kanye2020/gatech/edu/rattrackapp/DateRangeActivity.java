@@ -137,7 +137,7 @@ public class DateRangeActivity extends AppCompatActivity {
     /**
      * date picker for startDate
      */
-    private DatePickerDialog.OnDateSetListener dpickerListener
+    private DatePickerDialog.OnDateSetListener datePickerListener
             = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -166,7 +166,7 @@ public class DateRangeActivity extends AppCompatActivity {
     /**
      * date picker for endDate
      */
-    private DatePickerDialog.OnDateSetListener dpickerListener2
+    private DatePickerDialog.OnDateSetListener datePickerListener2
             = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -201,10 +201,10 @@ public class DateRangeActivity extends AppCompatActivity {
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_ID) {
-            return new DatePickerDialog(this, dpickerListener, yearStart, monthStart, dayStart);
+            return new DatePickerDialog(this, datePickerListener, yearStart, monthStart, dayStart);
         }
         if (id == DIALOG_ID2) {
-            return new DatePickerDialog(this, dpickerListener2, yearEnd, monthEnd, dayEnd);
+            return new DatePickerDialog(this, datePickerListener2, yearEnd, monthEnd, dayEnd);
 
         }
         return null;

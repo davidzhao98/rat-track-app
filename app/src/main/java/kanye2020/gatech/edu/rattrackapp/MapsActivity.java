@@ -82,9 +82,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 int j = (int) (Math.random() * 100000);
                 RatSighting rat = rats.get(j);
                 String borough = getIntent().getStringExtra("borough");
-                if (borough.equals(rat.getBorough())) {
-                    searchResults.add(rat);
-                    displayRat(mMap, rat);
+                if (rat.getBorough() != null) {
+                    if (borough.equals(rat.getBorough())) {
+                        searchResults.add(rat);
+                        displayRat(mMap, rat);
+                    }
                 }
             }
         } else if (callingActivity.equals("locationType")) {

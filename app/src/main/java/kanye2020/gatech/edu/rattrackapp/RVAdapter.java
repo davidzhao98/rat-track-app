@@ -25,8 +25,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         }
     }
 
-    public RVAdapter(ArrayList<RatSighting> myDataset) {
-        dataSet = myDataset;
+    public RVAdapter(ArrayList<RatSighting> myDataSet) {
+        dataSet = myDataSet;
     }
 
     // Create new views (invoked by the layout manager)
@@ -36,7 +36,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         // create a new view
         TextView v = (TextView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.my_text_view, parent, false);
-        // set the view's size, margins, paddings and layout parameters
+        // set the view's size, margins, padding and layout parameters
 
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -45,13 +45,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
+        // - get element from your data set at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(dataSet.get(position).toString());
 
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    // Return the size of your data set (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return dataSet.size();

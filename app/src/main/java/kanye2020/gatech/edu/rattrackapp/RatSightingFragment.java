@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by neonw on 10/10/2017.
+ * Created by Nick B. on 10/10/2017.
  */
 
 public class RatSightingFragment extends Fragment {
