@@ -34,6 +34,8 @@ public class ReportRatActivity extends AppCompatActivity {
     private EditText zipcodeText;
     private EditText addressText;
     private EditText cityText;
+    private EditText longitudeText;
+    private EditText latitudeText;
 
     @PropertyName("Longitude")
     private String longitude;
@@ -96,6 +98,8 @@ public class ReportRatActivity extends AppCompatActivity {
         yearSpinner = (Spinner) findViewById(R.id.yearSpinner);
         addRSButton = (Button) findViewById(R.id.addRSButton);
         cancelRSButton = (Button) findViewById(R.id.cancelRSButton);
+        longitudeText = (EditText) findViewById(R.id.longitudeText);
+        latitudeText = (EditText) findViewById(R.id.latitudeText);
 
         //Creates lists for boroughs, location types, months, days, and years
         List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS", "BROOKLYN", "BRONX");
@@ -148,24 +152,16 @@ public class ReportRatActivity extends AppCompatActivity {
                 zipcode = zipcodeText.getText().toString();
                 address = addressText.getText().toString();
                 city = cityText.getText().toString();
-                if (!(zipcodeText.getText().toString().equals("")) && !(addressText.getText().toString().equals("")) && !(cityText.getText().toString().equals(""))) {
-//                    RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year + " " + time), latitude, longitude, "key");
-//                    ArrayList<RatSighting> ratList = RatSightingList.getInstance().getRats();
-//                    ratList.add(newEntry);
+                longitude = longitudeText.getText().toString();
+                latitude = latitudeText.getText().toString();
+                if (!(zipcodeText.getText().toString().equals("")) && !(addressText.getText().toString().equals("")) && !(cityText.getText().toString().equals(""))
+                        && !(longitudeText.getText().toString().equals("")) && !(latitudeText.getText().toString().equals(""))) {
+                    RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year + " " + time), latitude, longitude, "key");
+                    ArrayList<RatSighting> ratList = RatSightingList.getInstance().getSample();
+                    ratList.add(newEntry);
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("ratdata");
-//                    ArrayList<String> list = new ArrayList<String>();
-//                    list.add("Borough");
-//                    list.add("City");
-//                    list.add("Created Date");
-//                    list.add("Incident Address");
-//                    list.add("Incident Zip");
-//                    list.add("Latitude");
-//                    list.add("Location Type");
-//                    list.add("Longitude");
-//                    list.add("Unique Key");
-//                    list.setTitle()
                     int index = RatSightingList.getInstance().getRatsSize();
                     System.out.println(index);
                     String ind = "99100";
@@ -183,8 +179,8 @@ public class ReportRatActivity extends AppCompatActivity {
 
                     System.out.println("RAT ADDED");
                     Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
+                    startActivity(intent);
 
                 } else {
                     Toast.makeText(view.getContext(), "One or more fields are empty", Toast.LENGTH_SHORT).show();
