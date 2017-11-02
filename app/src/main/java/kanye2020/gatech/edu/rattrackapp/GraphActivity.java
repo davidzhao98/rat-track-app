@@ -4,18 +4,22 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.lang.reflect.Array;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -26,6 +30,7 @@ public class GraphActivity extends AppCompatActivity {
 
     ArrayList<RatSighting> searchResults;
     RatSightingList ratz = RatSightingList.getInstance();
+    int startYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +42,17 @@ public class GraphActivity extends AppCompatActivity {
 
         GraphView graph = (GraphView) findViewById(R.id.graphView);
         HashMap<Double, Double> months = new HashMap<>();
+        int startMonth = 0;
+        int endMonth;
+        //startYear = 0;
+        int endYear;
 
 
         //
         ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
         searchResults = new ArrayList<>();
         String callingActivity = getIntent().getStringExtra("from");
+        //final int startYear =
         if (callingActivity.equals("date")) {
             try {
                 String startDateText = getIntent().getStringExtra("startDate");
@@ -53,14 +63,14 @@ public class GraphActivity extends AppCompatActivity {
 
                 Calendar calendar = new GregorianCalendar();
                 calendar.setTime(startDate);
-                int startMonth = calendar.get(Calendar.MONTH);
-                int startYear = calendar.get(Calendar.YEAR);
+                startMonth = calendar.get(Calendar.MONTH);
+                startYear = calendar.get(Calendar.YEAR);
                 calendar.setTime(endDate);
-                int endMonth = calendar.get(Calendar.MONTH);
-                int endYear = calendar.get(Calendar.YEAR);
+                endMonth = calendar.get(Calendar.MONTH);
+                endYear = calendar.get(Calendar.YEAR);
 
                 //ArrayList<Double> months = new ArrayList<>();
-                for (int i = 0; i < (endMonth - startMonth) + (endYear - startYear) * 12; i++) {
+                for (int i = startMonth; i < (endMonth) + (endYear - startYear) * 12; i++) {
                     Double d = i + 0.0;
                     months.put(d, 0.0);
                 }
@@ -74,7 +84,7 @@ public class GraphActivity extends AppCompatActivity {
                     calendar.setTime(checker);
                     int month = calendar.get(Calendar.MONTH);
                     int year = calendar.get(Calendar.YEAR);
-                    x = (month - startMonth) + (year - startYear) * 12;
+                    x = (month) + (year - startYear) * 12;
                     months.put(x, months.get(x) + 1.0);
                 }
             } catch(Exception e) {
@@ -104,7 +114,7 @@ public class GraphActivity extends AppCompatActivity {
 
         DataPoint[] dp = new DataPoint[months.size()];
         for (int i = 0; i < months.size(); i++) {
-            dp[i] = new DataPoint(i + 0.0, months.get(i + 0.0));
+            dp[i] = new DataPoint(i + startMonth + 0.0, months.get(i + startMonth + 0.0));
 //            series.appendData(dataPoint, false, months.size());
         }
 
@@ -112,10 +122,38 @@ public class GraphActivity extends AppCompatActivity {
         graph.addSeries(series);
 
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
-        gridLabel.setHorizontalAxisTitle("Month");
+        gridLabel.setLabelFormatter(new DefaultLabelFormatter() {
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX) {
+                    // show normal x values
+                    String startDateText = getIntent().getStringExtra("startDate");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    Date startDate = null;
+                    try {
+                        startDate = dateFormat.parse(startDateText);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(startDate);
+                    calendar.set(Calendar.MONTH, (int)value);
+                    String month = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.US);
+                    int year = calendar.get(Calendar.YEAR);
+                    return month + "/" + year;
+                } else {
+                    // show currency for y values
+                    return super.formatLabel(value, isValueX);
+                }
+            }
+        });
+        gridLabel.setHorizontalAxisTitle("Month/Year");
         gridLabel.setVerticalAxisTitle("Number of Sightings");
+        gridLabel.setHorizontalLabelsAngle(45);
+        graph.getGridLabelRenderer().setHumanRounding(false);
         graph.getViewport().setScalable(true);
-        graph.getViewport().setScalableY(true);
+        graph.getViewport().setScalableY(false);
 
 
     }
