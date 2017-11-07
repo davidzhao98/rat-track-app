@@ -47,6 +47,16 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String username = usernameField.getText().toString();
+                String password = passwordField.getText().toString();
+
+                if (username.isEmpty()) {
+                    usernameField.setError("Enter username!");
+                }
+                if (password.isEmpty()) {
+                    passwordField.setError("Enter password!");
+                }
+
                 if (loginVerification()) {
                     System.out.println("Logging in");
                     resetLogin();
