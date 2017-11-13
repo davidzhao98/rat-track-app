@@ -122,7 +122,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public boolean displayRat(GoogleMap mMap, RatSighting rat) {
-        System.out.print("HELLO???");
         String id = rat.getUniqueKey();
         String latitude = rat.getLatitude();
         String longitude = rat.getLongitude();
@@ -131,8 +130,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Double lat = Double.parseDouble(latitude);
             Double lng = Double.parseDouble(longitude);
             LatLng ratLocation = new LatLng(lat, lng);
+            System.out.println("BEFORE MAP");
             mMap.addMarker(new MarkerOptions().position(ratLocation).title("Marker of Rat " + id));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ratLocation, 11));
+            System.out.println("AFTER MAP");
         } catch(Exception e) {
             System.out.println("One of the rats can't be displayed");
             result = false;

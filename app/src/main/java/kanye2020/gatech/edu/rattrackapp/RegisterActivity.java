@@ -145,4 +145,17 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    /**
+     * method checks if user entered a valid email address
+     *
+     * @return true if email address is valid, false if not.
+     */
+    public boolean emailValidCheck(String email) {
+        if (!email.startsWith("@") && email.contains("@") && email.split("@")[1].contains(".")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
