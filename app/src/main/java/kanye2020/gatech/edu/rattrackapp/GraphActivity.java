@@ -1,5 +1,6 @@
 package kanye2020.gatech.edu.rattrackapp;
 
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,14 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.Series;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -23,17 +26,18 @@ import java.util.Locale;
 
 public class GraphActivity extends AppCompatActivity {
 
-    ArrayList<RatSighting> searchResults;
-    RatSightingList ratList = RatSightingList.getInstance();
-    int startYear;
+    private final RatSightingList ratList = RatSightingList.getInstance();
+    private static final int MONTHS_IN_YEAR = 12;
+    private static final int LABEL_ANGLE = 45;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        double x,y;
-        x = 0.0;
+        double x;
+        //double y;
+        //x = 0.0;
 
         GraphView graph = (GraphView) findViewById(R.id.graphView);
         HashMap<Double, Double> months = new HashMap<>();
@@ -44,14 +48,15 @@ public class GraphActivity extends AppCompatActivity {
 
 
         //
-        ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
-        searchResults = new ArrayList<>();
-        String callingActivity = getIntent().getStringExtra("from");
+        //List<RatSighting> rats = ratList.getRats();
+        List<RatSighting> searchResults;
+        Intent intent = getIntent();
+        String callingActivity = intent.getStringExtra("from");
         //final int startYear =
-        if (callingActivity.equals("date")) {
+        if ("date".equals(callingActivity)) {
             try {
-                String startDateText = getIntent().getStringExtra("startDate");
-                String endDateText = getIntent().getStringExtra("endDate");
+                String startDateText = intent.getStringExtra("startDate");
+                String endDateText = intent.getStringExtra("endDate");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 Date startDate = dateFormat.parse(startDateText);
                 Date endDate = dateFormat.parse(endDateText);
@@ -59,34 +64,35 @@ public class GraphActivity extends AppCompatActivity {
                 Calendar calendar = new GregorianCalendar();
                 calendar.setTime(startDate);
                 startMonth = calendar.get(Calendar.MONTH);
-                startYear = calendar.get(Calendar.YEAR);
+                int startYear = calendar.get(Calendar.YEAR);
                 calendar.setTime(endDate);
                 endMonth = calendar.get(Calendar.MONTH);
                 endYear = calendar.get(Calendar.YEAR);
 
                 //ArrayList<Double> months = new ArrayList<>();
-                for (int i = startMonth; i < (endMonth) + (endYear - startYear) * 12; i++) {
+                for (int i = startMonth; i <
+                        ((endMonth) + ((endYear - startYear) * MONTHS_IN_YEAR)); i++) {
                     Double d = i + 0.0;
                     months.put(d, 0.0);
                 }
                 searchResults = ratList.sortByDate(startDate, endDate);
                 for (int i = 0; i < searchResults.size(); i++) {
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
-
-                    Date checker = sdf.parse(searchResults.get(i).getDateTime());
+                    RatSighting result = searchResults.get(i);
+                    Date checker = sdf.parse(result.getDateTime());
                     calendar = new GregorianCalendar();
 
                     calendar.setTime(checker);
                     int month = calendar.get(Calendar.MONTH);
                     int year = calendar.get(Calendar.YEAR);
-                    x = (month) + (year - startYear) * 12;
+                    x = (month) + ((year - startYear) * MONTHS_IN_YEAR);
                     months.put(x, months.get(x) + 1.0);
                 }
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }
 
-            } else if (callingActivity.equals("viewAllMap")) {
+            } /*else if (callingActivity.equals("viewAllMap")) {
             //should never be called as of M9
             for (int i = 0; i < 300; i++) {
                 int j = (int) (Math.random() * 100000);
@@ -105,7 +111,7 @@ public class GraphActivity extends AppCompatActivity {
                     System.out.println("One of the rats can't be displayed");
                 }
             }
-        }
+        }*/
 
         DataPoint[] dp = new DataPoint[months.size()];
         for (int i = 0; i < months.size(); i++) {
@@ -113,7 +119,7 @@ public class GraphActivity extends AppCompatActivity {
 //            series.appendData(dataPoint, false, months.size());
         }
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp);
+        Series<DataPoint> series = new LineGraphSeries<>(dp);
         graph.addSeries(series);
 
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
@@ -122,7 +128,8 @@ public class GraphActivity extends AppCompatActivity {
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
                     // show normal x values
-                    String startDateText = getIntent().getStringExtra("startDate");
+                    Intent intent = getIntent();
+                    String startDateText = intent.getStringExtra("startDate");
                     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                     Date startDate = null;
                     try {
@@ -134,21 +141,23 @@ public class GraphActivity extends AppCompatActivity {
                     Calendar calendar = new GregorianCalendar();
                     calendar.setTime(startDate);
                     calendar.set(Calendar.MONTH, (int)value);
-                    String month = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.US);
+                    String month = calendar.getDisplayName(
+                            Calendar.MONTH, Calendar.SHORT, Locale.US);
                     int year = calendar.get(Calendar.YEAR);
                     return month + "/" + year;
                 } else {
                     // show currency for y values
-                    return super.formatLabel(value, isValueX);
+                    return super.formatLabel(value, false);
                 }
             }
         });
         gridLabel.setHorizontalAxisTitle("Month/Year");
         gridLabel.setVerticalAxisTitle("Number of Sightings");
-        gridLabel.setHorizontalLabelsAngle(45);
-        graph.getGridLabelRenderer().setHumanRounding(false);
-        graph.getViewport().setScalable(true);
-        graph.getViewport().setScalableY(false);
+        gridLabel.setHorizontalLabelsAngle(LABEL_ANGLE);
+        gridLabel.setHumanRounding(false);
+        Viewport viewport = graph.getViewport();
+        viewport.setScalable(true);
+        viewport.setScalableY(false);
 
 
     }
