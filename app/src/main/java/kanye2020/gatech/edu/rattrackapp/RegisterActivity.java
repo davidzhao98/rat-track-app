@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (confirmPassword() && fieldsNotEmpty()) {
+                if (confirmPassword(passwordET, confirmPwET) && fieldsNotEmpty()) {
                     //add account to "database"?????
                     //firebase?
                     //switch to new screen/application screen
@@ -124,7 +124,19 @@ public class RegisterActivity extends AppCompatActivity {
      * method checks if user entered the same password both times
      * @return true if passwords match
      */
-    private boolean confirmPassword() {
+    /*private boolean confirmPassword() {
         return passwordET.getText().toString().equals(confirmPwET.getText().toString());
+    }*/
+
+    /**
+     * method checks if user entered the same password both times
+     * @return true if passwords match
+     */
+    public boolean confirmPassword(EditText et1, EditText et2) {
+        if (et1.getText().equals(et2.getText())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

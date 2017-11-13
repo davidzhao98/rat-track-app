@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by David Zhao on 10/6/2017.
@@ -14,7 +15,7 @@ import java.util.Date;
 public class RatSighting implements Parcelable {
     private String borough, city, address, locationType, uniqueKey, zipcode, dateTime, latitude, longitude;
 //    Date date;
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
 
     public RatSighting(String borough, String city, String address, String zipcode, String locationType, String dateTime, String strLatitude, String strLongitude, String strKey) {
         this.borough = borough;
