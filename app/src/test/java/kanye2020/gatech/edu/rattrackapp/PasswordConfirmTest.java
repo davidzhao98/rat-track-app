@@ -1,14 +1,6 @@
 package kanye2020.gatech.edu.rattrackapp;
 
-import android.content.Context;
-import android.test.mock.MockContext;
-import android.widget.EditText;
-
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -17,7 +9,6 @@ import static org.junit.Assert.assertTrue;
  * Created by Nick B on 11/13/2017.
  */
 
-@RunWith(MockitoJUnitRunner.class)
 public class PasswordConfirmTest {
 
     RegisterActivity activity = new RegisterActivity();
@@ -25,10 +16,6 @@ public class PasswordConfirmTest {
     String string1;
     String string2;
 
-    @Before
-    public void setup() {
-
-    }
 
     @Test
     public void testConfirmPassSuccess() {
