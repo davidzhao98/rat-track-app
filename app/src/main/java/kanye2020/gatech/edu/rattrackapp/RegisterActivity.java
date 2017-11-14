@@ -177,10 +177,13 @@ public class RegisterActivity extends AppCompatActivity {
      * @return true if email address is valid, false if not.
      */
     public boolean emailValidCheck(String email) {
-        if (!email.startsWith("@") && email.contains("@") && email.split("@")[1].contains(".")) {
-            return true;
+        if (!email.startsWith("@")) {
+            if (email.contains("@") && email.split("@", 2)[1].contains(".")) {
+                return true;
+            }
         } else {
             return false;
         }
+        return false;
     }
 }
