@@ -75,7 +75,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String pwString = passwordET.getText().toString();
                 String confirmString = confirmPwET.getText().toString();
-                if (confirmPassword(pwString, confirmString) && fieldsNotEmpty()) {
+                String emailString = emailET.getText().toString();
+                String usernameString = usernameET.getText().toString();
+                if (confirmPassword(pwString, confirmString) && fieldsNotEmpty(emailString, usernameString, pwString)) {
                     //add account to "database"?????
                     //firebase?
                     //switch to new screen/application screen
@@ -116,10 +118,20 @@ public class RegisterActivity extends AppCompatActivity {
      * so it'll either be user or admin
      * @return true if all fields are filled
      */
-    private boolean fieldsNotEmpty() {
-        return !(emailET.getText().toString().isEmpty()
-                || usernameET.getText().toString().isEmpty()
-                || passwordET.getText().toString().isEmpty());
+    public boolean fieldsNotEmpty(String email, String username, String password) {
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+        if (username == null || username.isEmpty()) {
+            return false;
+        }
+        if (password == null || password.isEmpty()) {
+            return false;
+        }
+        return true;
+//        return !(emailET.getText().toString().isEmpty()
+//                || usernameET.getText().toString().isEmpty()
+//                || passwordET.getText().toString().isEmpty());
     }
 
     /**
