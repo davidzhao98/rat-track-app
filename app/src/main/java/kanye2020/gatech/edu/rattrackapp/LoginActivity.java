@@ -1,6 +1,5 @@
 package kanye2020.gatech.edu.rattrackapp;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,14 +20,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
+ *
  * Created by juliachen on 9/24/17.
  */
-
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameField;
     private EditText passwordField;
-    private ArrayList<Account> entries = new ArrayList<>();
+    private final ArrayList<Account> entries = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     passwordField.setError("Enter password!");
                 }
 
-                if (loginVerification()) {
+                if (loginVerification(username, password, entries)) {
                     System.out.println("Logging in");
                     resetLogin();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
@@ -77,9 +76,14 @@ public class LoginActivity extends AppCompatActivity {
      * verifies that user input the correct username and password
      * @return true if user and password correct
      */
-    private boolean loginVerification() {
+    public boolean loginVerification(String username, String password, ArrayList<Account> entries) {
+        if (username == null || password == null || entries == null) {
+            return false;
+        }
+
         for (Account entry : entries) {
-            if (usernameField.getText().toString().equals(entry.getUsername()) && passwordField.getText().toString().equals(entry.getPassword())) {
+            if (username.equals(entry.getUsername())
+                    && password.equals(entry.getPassword())) {
                 return true;
             }
         }
@@ -89,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * resets login information so user has to re-login every time, for safety
      */
-    public void resetLogin() {
+    private void resetLogin() {
         usernameField.setText("");
         passwordField.setText("");
     }
@@ -104,12 +108,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
-                Toast.makeText(LoginActivity.this, "Total Users: " + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Total Users: "
+                        + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
                 entries.clear();
                 while (items.hasNext()) {
                     DataSnapshot item = items.next();
 
-                    String username, password, email;
+                    String username;
+                    String password;
+                    String email;
+
                     boolean admin;
                     username = item.child("username").getValue().toString();
                     password = item.child("password").getValue().toString();
