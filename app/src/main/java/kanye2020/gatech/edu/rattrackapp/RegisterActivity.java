@@ -33,6 +33,7 @@ import static android.R.attr.value;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText emailET;
+    private EditText confirmEmailET;
     private EditText usernameET;
     private EditText passwordET;
     private EditText confirmPwET;
@@ -50,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         //initialize all of the text fields, spinner, and button on the register page
         //note: Register button on register.xml has id "createAcctButton"
         emailET = (EditText) findViewById(R.id.emailEditText);
+        confirmEmailET = (EditText) findViewById(R.id.emailConfirmEditText);
         usernameET = (EditText) findViewById(R.id.usernameEditText);
         passwordET = (EditText) findViewById(R.id.passwordEditText);
         confirmPwET = (EditText) findViewById(R.id.confirmPasswordET);
@@ -76,8 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
                 String pwString = passwordET.getText().toString();
                 String confirmString = confirmPwET.getText().toString();
                 String emailString = emailET.getText().toString();
+                String emailStringConfirm = confirmEmailET.getText().toString();
                 String usernameString = usernameET.getText().toString();
-                if (confirmPassword(pwString, confirmString) && fieldsNotEmpty(emailString, usernameString, pwString)) {
+                if (fieldsNotEmpty(emailString, usernameString, pwString) && confirmPassword(pwString, confirmString)
+                        && confirmEmail(emailString, emailStringConfirm)) {
                     //add account to "database"?????
                     //firebase?
                     //switch to new screen/application screen
@@ -149,6 +153,18 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean confirmPassword(String et1, String et2) {
         try {
             if (et1.equals(et2)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public boolean confirmEmail(String email1, String email2) {
+        try {
+            if (email1.equals(email2)) {
                 return true;
             } else {
                 return false;
