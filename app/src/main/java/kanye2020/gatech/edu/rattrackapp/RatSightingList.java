@@ -19,7 +19,7 @@ import java.util.Iterator;
  * Created by David Zhao on 10/6/2017.
  */
 
-public class RatSightingList {
+class RatSightingList {
     private ArrayList<RatSighting> rats;
     private ArrayList<RatSighting> sample;
     private static RatSightingList instance;
@@ -35,7 +35,6 @@ public class RatSightingList {
      * on start-up, gets all the rat data and store it into the phone
      */
     private RatSightingList() {
-        //TODO
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("ratdata");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -47,7 +46,7 @@ public class RatSightingList {
 
                 //apparently rats is null
                 if (rats == null) {
-                    rats = new ArrayList<RatSighting>();
+                    rats = new ArrayList<>();
                     while (items.hasNext()) {
                         DataSnapshot item = items.next();
                         String borough, city, createdDate, incidentAddress, incidentZip, latitude,
@@ -65,7 +64,7 @@ public class RatSightingList {
                                 incidentZip, locationType, createdDate, latitude, longitude, uniqueKey);
                         rats.add(entry);
                     }
-                    sample = new ArrayList<RatSighting>();
+                    sample = new ArrayList<>();
                     for (int i = 0; i < 10; i++) {
                         sample.add(rats.get(i));
                     }
@@ -84,7 +83,7 @@ public class RatSightingList {
     /**
      * @return the arrayList of rats
      */
-    public ArrayList<RatSighting> getRats() {
+    ArrayList<RatSighting> getRats() {
         return rats;
     }
 
@@ -92,7 +91,7 @@ public class RatSightingList {
      *
      * @return returns the size of the arrayList
      */
-    public int getRatsSize() {
+    int getRatsSize() {
         return rats.size();
         }
 
@@ -100,7 +99,7 @@ public class RatSightingList {
      *
      * @return the sample arrayList
      */
-    public ArrayList<RatSighting> getSample() { return sample;}
+    ArrayList<RatSighting> getSample() { return sample;}
 
     /**
      * method for searching rats by date given a starting date and ending date
@@ -109,7 +108,7 @@ public class RatSightingList {
      * @param end the ending date for the query
      * @return an ArrayList of RatSightings that were reported between Date @start and Date @end
      */
-    public ArrayList<RatSighting> sortByDate(Date start, Date end) throws IllegalArgumentException {
+    ArrayList<RatSighting> sortByDate(Date start, Date end) throws IllegalArgumentException {
         if (start.compareTo(end) > 0) {
             throw new IllegalArgumentException("Start date cannot exceed end date.");
         }
@@ -126,7 +125,7 @@ public class RatSightingList {
                 }
             }
         } catch(Exception e) {
-            System.out.println(e);
+//            System.out.println(e);
         }
         return searchResults;
     }

@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import android.widget.ArrayAdapter;
-
 import java.util.Arrays;
 
+/**
+ * Created by pulakazad on 11/12/17
+ */
 public class ReportRatActivity extends AppCompatActivity {
 
     private Spinner locationTypeSpinner;
@@ -61,6 +63,9 @@ public class ReportRatActivity extends AppCompatActivity {
 
     private String month, day, year;
 
+    /**
+     * empty constructor
+     */
     public ReportRatActivity() {
     }
 
@@ -92,38 +97,45 @@ public class ReportRatActivity extends AppCompatActivity {
         latitudeText = (EditText) findViewById(R.id.latitudeText);
 
         //Creates lists for boroughs, location types, months, days, and years
-        List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS", "BROOKLYN", "BRONX");
+        List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS",
+                "BROOKLYN", "BRONX");
         List<String> locationTypes = Arrays.asList("1-2 Family Dwelling", "3+ Family Apt. Building",
-                "3+ Family Mixed Use Building", "Commercial Building", "Vacant Lot", "Construction Site",
-                "Hospital", "Catch Basin/Sewer");
-        List<String> months = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
-        List<String> days = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12",
-                "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
-                "28", "29", "30", "31");
+                "3+ Family Mixed Use Building", "Commercial Building", "Vacant Lot",
+                "Construction Site", "Hospital", "Catch Basin/Sewer");
+        List<String> months = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09",
+                "10", "11", "12");
+        List<String> days = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09",
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
+                "24", "25", "26", "27", "28", "29", "30", "31");
         List<String> years = Arrays.asList("2015", "2016", "2017", "2018", "2019", "2020");
 
         //Adapter for borough Spinner
-        ArrayAdapter<String> boroughAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
+        ArrayAdapter<String> boroughAdapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
         boroughAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boroughSpinner.setAdapter(boroughAdapter);
 
         //Adapter for locationType spinner
-        ArrayAdapter<String> locationTypeAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationTypes);
+        ArrayAdapter<String> locationTypeAdapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationTypes);
         locationTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationTypeSpinner.setAdapter(locationTypeAdapter);
 
         //Adapter for Month Spinner
-        ArrayAdapter<String> monthAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, months);
+        ArrayAdapter<String> monthAdapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item, months);
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         monthSpinner.setAdapter(monthAdapter);
 
         //Adapter for day Spinner
-        ArrayAdapter<String> dayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, days);
+        ArrayAdapter<String> dayAdapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item, days);
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
 
         //Adapter for year Spinner
-        ArrayAdapter<String> yearAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, years);
+        ArrayAdapter<String> yearAdapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item, years);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(yearAdapter);
 
@@ -144,9 +156,15 @@ public class ReportRatActivity extends AppCompatActivity {
                 city = cityText.getText().toString();
                 longitude = longitudeText.getText().toString();
                 latitude = latitudeText.getText().toString();
-                if (!(zipcodeText.getText().toString().equals("")) && !(addressText.getText().toString().equals("")) && !(cityText.getText().toString().equals(""))
-                        && !(longitudeText.getText().toString().equals("")) && !(latitudeText.getText().toString().equals(""))) {
-                    RatSighting newEntry = new RatSighting(borough, city, address, zipcode, locationType, (month + "/" + day + "/" + year + " " + time), latitude, longitude, "key");
+                if (!(zipcodeText.getText().toString().equals(""))
+                        && !(addressText.getText().toString().equals(""))
+                        && !(cityText.getText().toString().equals(""))
+                        && !(longitudeText.getText().toString().equals(""))
+                        && !(latitudeText.getText().toString().equals(""))) {
+                    RatSighting newEntry =
+                            new RatSighting(borough, city, address, zipcode, locationType,
+                                    (month + "/" + day + "/" + year + " " + time),
+                                    latitude, longitude, "key");
                     ArrayList<RatSighting> ratList = RatSightingList.getInstance().getSample();
                     ratList.add(newEntry);
 
@@ -159,7 +177,8 @@ public class ReportRatActivity extends AppCompatActivity {
                     myRef.child(ind).setValue(null);
                     myRef.child(ind).child("Borough").setValue(borough);
                     myRef.child(ind).child("City").setValue(city);
-                    myRef.child(ind).child("Created Date").setValue(month + "/" + day + "/" + year + " " + time);
+                    myRef.child(ind).child("Created Date").setValue(month + "/" + day + "/" + year
+                            + " " + time);
                     myRef.child(ind).child("Incident Address").setValue(address);
                     myRef.child(ind).child("Incident Zip").setValue(zipcode);
                     myRef.child(ind).child("Latitude").setValue(latitude);
@@ -168,12 +187,14 @@ public class ReportRatActivity extends AppCompatActivity {
                     myRef.child(ind).child("Unique Key").setValue("key");
 
                     System.out.println("RAT ADDED");
-                    Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!",
+                            Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
 
                 } else {
-                    Toast.makeText(view.getContext(), "One or more fields are empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "One or more fields are empty",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });

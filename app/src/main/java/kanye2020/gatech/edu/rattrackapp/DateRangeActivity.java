@@ -17,25 +17,25 @@ import java.text.ParseException;
 import java.util.Date;
 
 /**
+ * Activity that sorts rats by date
+ *
  * Created by Pulak Azad on 10/24/17.
  */
 public class DateRangeActivity extends AppCompatActivity {
 
 
-    //initializes buttons and textViews
-    Button btn;
-    Button btn2;
-    Button btn3;
-    Button viewGraphButton;
+    private TextView startDateView;
+    private TextView endDateView;
 
-    TextView startDateView;
-    TextView endDateView;
+    private int monthStart;
+    private int dayStart;
+    private int yearStart;
+    private int monthEnd;
+    private int dayEnd;
+    private int yearEnd;
 
-    int monthStart, dayStart, yearStart;
-    int monthEnd, dayEnd, yearEnd;
-
-    static final int DIALOG_ID = 0;
-    static final int DIALOG_ID2 = 1;
+    private static final int DIALOG_ID = 0;
+    private static final int DIALOG_ID2 = 1;
 
 
 
@@ -63,11 +63,11 @@ public class DateRangeActivity extends AppCompatActivity {
     /**
      * shows what happens when you click on each button
      */
-    public void showDialogOnButtonClick() {
-        btn = (Button) findViewById(R.id.startDateButton);
-        btn2 = (Button) findViewById(R.id.endDateButton);
-        btn3 = (Button) findViewById(R.id.viewMapButton);
-        viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
+    private void showDialogOnButtonClick() {
+        Button btn = (Button) findViewById(R.id.startDateButton);
+        Button btn2 = (Button) findViewById(R.id.endDateButton);
+        Button btn3 = (Button) findViewById(R.id.viewMapButton);
+        Button viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
 
 
         btn.setOnClickListener(
@@ -105,7 +105,7 @@ public class DateRangeActivity extends AppCompatActivity {
                         Toast.makeText(DateRangeActivity.this, "Invalid Date Range", Toast.LENGTH_LONG).show();
                     }
                 } catch (ParseException e) {
-                    System.out.println(e);
+//                    System.out.println(e);
                 }
 
             }
@@ -128,7 +128,7 @@ public class DateRangeActivity extends AppCompatActivity {
                         Toast.makeText(DateRangeActivity.this, "Invalid Date Range", Toast.LENGTH_LONG).show();
                     }
                 } catch (ParseException e) {
-                    System.out.println(e);
+//                    System.out.println(e);
                 }
             }
         });
@@ -137,7 +137,7 @@ public class DateRangeActivity extends AppCompatActivity {
     /**
      * date picker for startDate
      */
-    private DatePickerDialog.OnDateSetListener datePickerListener
+    private final DatePickerDialog.OnDateSetListener datePickerListener
             = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -166,7 +166,7 @@ public class DateRangeActivity extends AppCompatActivity {
     /**
      * date picker for endDate
      */
-    private DatePickerDialog.OnDateSetListener datePickerListener2
+    private final DatePickerDialog.OnDateSetListener datePickerListener2
             = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {

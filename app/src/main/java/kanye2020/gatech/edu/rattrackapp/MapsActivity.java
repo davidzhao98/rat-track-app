@@ -19,8 +19,8 @@ import java.util.Date;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    ArrayList<RatSighting> searchResults;
+//    private GoogleMap mMap;
+    private ArrayList<RatSighting> searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,62 +43,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+    public void onMapReady(GoogleMap mMap) {
+//        GoogleMap mMap = googleMap;
         ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
         searchResults = new ArrayList<>();
         String callingActivity = getIntent().getStringExtra("from");
-        if (callingActivity.equals("date")) {
-            try {
-                String startDateText = getIntent().getStringExtra("startDate");
-                String endDateText = getIntent().getStringExtra("endDate");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-                Date startDate = dateFormat.parse(startDateText);
-                Date endDate = dateFormat.parse(endDateText);
-//                searchResults = RatSightingList.getInstance().sortByDate(startDate, endDate);
-//                displayMap(mMap, searchResults);
+        switch (callingActivity) {
+            case "date":
+//        if (callingActivity.equals("date")) {
+                try {
+                    String startDateText = getIntent().getStringExtra("startDate");
+                    String endDateText = getIntent().getStringExtra("endDate");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    Date startDate = dateFormat.parse(startDateText);
+                    Date endDate = dateFormat.parse(endDateText);
+    //                searchResults = RatSightingList.getInstance().sortByDate(startDate, endDate);
+    //                displayMap(mMap, searchResults);
+                    for (int i = 0; i < 300; i++) {
+                        int j = (int) (Math.random() * 100000);
+                        RatSighting rat = rats.get(j);
+                        String ratDateText = rat.getDateTime().substring(0, 11);
+                        Date ratDate = dateFormat.parse(ratDateText);
+                        if (ratDate.compareTo(startDate) >= 0 && ratDate.compareTo(endDate) <= 0) {
+                            searchResults.add(rat);
+                            displayRat(mMap, rat);
+                        }
+                    }
+                } catch(Exception e) {
+    //                System.out.println(e);
+                }
+            case "viewAllMap":
+//        } else if (callingActivity.equals("viewAllMap")) {
                 for (int i = 0; i < 300; i++) {
                     int j = (int) (Math.random() * 100000);
                     RatSighting rat = rats.get(j);
-                    String ratDateText = rat.getDateTime().substring(0, 11);
-                    Date ratDate = dateFormat.parse(ratDateText);
-                    if (ratDate.compareTo(startDate) >= 0 && ratDate.compareTo(endDate) <= 0) {
-                        searchResults.add(rat);
-                        displayRat(mMap, rat);
-                    }
-                }
-            } catch(Exception e) {
-                System.out.println(e);
-            }
-        } else if (callingActivity.equals("viewAllMap")) {
-            for (int i = 0; i < 300; i++) {
-                int j = (int) (Math.random() * 100000);
-                RatSighting rat = rats.get(j);
-                searchResults.add(rat);
-                displayRat(mMap, rat);
-            }
-        } else if (callingActivity.equals("borough")) {
-            for (int i = 0; i < 300; i++) {
-                int j = (int) (Math.random() * 100000);
-                RatSighting rat = rats.get(j);
-                String borough = getIntent().getStringExtra("borough");
-                if (rat.getBorough() != null) {
-                    if (borough.equals(rat.getBorough())) {
-                        searchResults.add(rat);
-                        displayRat(mMap, rat);
-                    }
-                }
-            }
-        } else if (callingActivity.equals("locationType")) {
-            for (int i = 0; i < 300; i++) {
-                int j = (int) (Math.random() * 100000);
-                RatSighting rat = rats.get(j);
-                String locationType = getIntent().getStringExtra("locationType");
-                if (locationType.equals(rat.getLocationType())) {
                     searchResults.add(rat);
                     displayRat(mMap, rat);
                 }
-            }
+            case "borough":
+//        } else if (callingActivity.equals("borough")) {
+                for (int i = 0; i < 300; i++) {
+                    int j = (int) (Math.random() * 100000);
+                    RatSighting rat = rats.get(j);
+                    String borough = getIntent().getStringExtra("borough");
+                    if (rat.getBorough() != null) {
+                        if (borough.equals(rat.getBorough())) {
+                            searchResults.add(rat);
+                            displayRat(mMap, rat);
+                        }
+                    }
+                }
+            case "locationType":
+//        } else if (callingActivity.equals("locationType")) {
+                for (int i = 0; i < 300; i++) {
+                    int j = (int) (Math.random() * 100000);
+                    RatSighting rat = rats.get(j);
+                    String locationType = getIntent().getStringExtra("locationType");
+                    if (locationType.equals(rat.getLocationType())) {
+                        searchResults.add(rat);
+                        displayRat(mMap, rat);
+                    }
+                }
         }
 //        mMap.setMinZoomPreference((float) 11);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -121,11 +126,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    public boolean displayRat(GoogleMap mMap, RatSighting rat) {
+    private void displayRat(GoogleMap mMap, RatSighting rat) {
         String id = rat.getUniqueKey();
         String latitude = rat.getLatitude();
         String longitude = rat.getLongitude();
-        boolean result = true;
         try {
             Double lat = Double.parseDouble(latitude);
             Double lng = Double.parseDouble(longitude);
@@ -136,8 +140,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             System.out.println("AFTER MAP");
         } catch(Exception e) {
             System.out.println("One of the rats can't be displayed");
-            result = false;
         }
-        return result;
     }
 }

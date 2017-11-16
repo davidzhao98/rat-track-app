@@ -4,26 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import static android.R.attr.accountType;
-import static android.R.attr.value;
 
 /**
  * Created by pulakazad on 9/24/17.
@@ -33,14 +25,15 @@ import static android.R.attr.value;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText emailET;
+    private EditText confirmEmailET;
     private EditText usernameET;
     private EditText passwordET;
     private EditText confirmPwET;
     private Spinner accountTypeSpinner;
     private Button registerAcct;
-    private ArrayList<Account> accountList;
-    private static final String TAG = "RegisterActivity";
-    private List<Account> realAccountList;
+//    private ArrayList<Account> accountList;
+//    private static final String TAG = "RegisterActivity";
+//    private List<Account> realAccountList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,13 +43,15 @@ public class RegisterActivity extends AppCompatActivity {
         //initialize all of the text fields, spinner, and button on the register page
         //note: Register button on register.xml has id "createAcctButton"
         emailET = (EditText) findViewById(R.id.emailEditText);
+        confirmEmailET = (EditText) findViewById(R.id.emailConfirmEditText);
         usernameET = (EditText) findViewById(R.id.usernameEditText);
         passwordET = (EditText) findViewById(R.id.passwordEditText);
         confirmPwET = (EditText) findViewById(R.id.confirmPasswordET);
         accountTypeSpinner = (Spinner) findViewById(R.id.accountTypeSpinner);
         registerAcct = (Button) findViewById(R.id.createAcctButton);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, Account.accountTypes);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item, Account.accountTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accountTypeSpinner.setAdapter(adapter);
 
@@ -76,13 +71,19 @@ public class RegisterActivity extends AppCompatActivity {
                 String pwString = passwordET.getText().toString();
                 String confirmString = confirmPwET.getText().toString();
                 String emailString = emailET.getText().toString();
+                String emailStringConfirm = confirmEmailET.getText().toString();
                 String usernameString = usernameET.getText().toString();
-                if (confirmPassword(pwString, confirmString) && fieldsNotEmpty(emailString, usernameString, pwString)) {
+                if (fieldsNotEmpty(emailString, usernameString, pwString) && confirmPassword(pwString, confirmString)
+                        && confirmEmail(emailString, emailStringConfirm)) {
                     //add account to "database"?????
                     //firebase?
                     //switch to new screen/application screen
 //                    accountList = new ArrayList<>();
-                    final Account newAccount = new Account(usernameET.getText().toString(), passwordET.getText().toString(), emailET.getText().toString(), accountTypeSpinner.getSelectedItem().equals("ADMIN"));
+                    final Account newAccount =
+                            new Account(usernameET.getText().toString(),
+                                    passwordET.getText().toString(),
+                                    emailET.getText().toString(),
+                                    accountTypeSpinner.getSelectedItem().equals("ADMIN"));
 //                    accountList.add(newAccount);
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("users");
@@ -158,16 +159,31 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    public boolean confirmEmail(String email1, String email2) {
+        try {
+            if (email1.equals(email2)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
+
     /**
      * method checks if user entered a valid email address
      *
      * @return true if email address is valid, false if not.
      */
     public boolean emailValidCheck(String email) {
-        if (!email.startsWith("@") && email.contains("@") && email.split("@")[1].contains(".")) {
-            return true;
+        if (!email.startsWith("@")) {
+            if (email.contains("@") && email.split("@", 2)[1].contains(".")) {
+                return true;
+            }
         } else {
             return false;
         }
+        return false;
     }
 }
