@@ -17,6 +17,8 @@ import java.text.ParseException;
 import java.util.Date;
 
 /**
+ * Activity that sorts rats by date
+ *
  * Created by Pulak Azad on 10/24/17.
  */
 public class DateRangeActivity extends AppCompatActivity {
@@ -105,7 +107,7 @@ public class DateRangeActivity extends AppCompatActivity {
                         Toast.makeText(DateRangeActivity.this, "Invalid Date Range", Toast.LENGTH_LONG).show();
                     }
                 } catch (ParseException e) {
-                    System.out.println(e);
+//                    System.out.println(e);
                 }
 
             }
@@ -128,7 +130,7 @@ public class DateRangeActivity extends AppCompatActivity {
                         Toast.makeText(DateRangeActivity.this, "Invalid Date Range", Toast.LENGTH_LONG).show();
                     }
                 } catch (ParseException e) {
-                    System.out.println(e);
+//                    System.out.println(e);
                 }
             }
         });

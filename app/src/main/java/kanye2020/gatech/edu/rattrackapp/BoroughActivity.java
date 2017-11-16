@@ -15,9 +15,9 @@ import java.util.Arrays;
 public class BoroughActivity extends AppCompatActivity {
 
     private Spinner boroughSpinner;
-    private Button searchBoroughButton;
-    private Button viewMapButton;
-    private Button viewGraphButton;
+//    private Button searchBoroughButton;
+//    private Button viewMapButton;
+//    private Button viewGraphButton;
 
     private String borough;
 
@@ -27,13 +27,13 @@ public class BoroughActivity extends AppCompatActivity {
         setContentView(R.layout.activity_borough);
 
         boroughSpinner = (Spinner) findViewById(R.id.boroughSearchSpinner);
-        searchBoroughButton = (Button) findViewById(R.id.searchBoroughButton);
-        viewMapButton = (Button) findViewById(R.id.viewMapButton);
-        viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
+        Button searchBoroughButton = (Button) findViewById(R.id.searchBoroughButton);
+        Button viewMapButton = (Button) findViewById(R.id.viewMapButton);
+        Button viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
 
         List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS", "BROOKLYN", "BRONX");
 
-        ArrayAdapter<String> boroughAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
+        ArrayAdapter<String> boroughAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, boroughs);
         boroughAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boroughSpinner.setAdapter(boroughAdapter);
 

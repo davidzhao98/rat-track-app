@@ -18,6 +18,20 @@
         android:inputType="textPersonName" />
 
     <TextView
+        android:id="@+id/confirmEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm email" />
+
+    <EditText
+        android:id="@+id/emailConfirmEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirm Email"
+        android:inputType="textPersonName" />
+
+    <TextView
         android:id="@+id/enterUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,11 +76,10 @@
         android:id="@+id/accountTypeSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" /><![CDATA[
-        android:id="@+id/confirmPassView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirm Password" />
-
+        android:id="@+id/confirmPassView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password" />
     ]]>
 
     <Button

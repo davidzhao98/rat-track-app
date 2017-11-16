@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Created by pulakazad on 9/24/17
+ */
 public class MainActivity extends AppCompatActivity {
 
-    Button login;
-    Button register;
+//    private Button login;
+//    private Button register;
     RatSightingList ratDB;
 
     @Override
@@ -23,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         ratDB = RatSightingList.getInstance();
 
         //Buttons for login screen
-        login = (Button) findViewById(R.id.loginButton);
-        register = (Button) findViewById(R.id.registerButton);
+        Button login = (Button) findViewById(R.id.loginButton);
+        Button register = (Button) findViewById(R.id.registerButton);
 
 
         //sets OnClickListeners for login so it will do things when clicked
