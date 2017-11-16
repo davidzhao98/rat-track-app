@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
+ * Handles the Display of Data on a Graph
  * Created by Nick B on 10/29/2017.
  */
 
