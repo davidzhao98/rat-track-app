@@ -16,12 +16,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
 //    private GoogleMap mMap;
-    List<RatSighting> searchResults;
+    private ArrayList<RatSighting> searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap mMap) {
 //        GoogleMap mMap = googleMap;
-        List<RatSighting> rats = RatSightingList.getInstance().getRats();
+        ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
         searchResults = new ArrayList<>();
         String callingActivity = getIntent().getStringExtra("from");
         switch (callingActivity) {
@@ -127,11 +126,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    public boolean displayRat(GoogleMap mMap, RatSighting rat) {
+    private void displayRat(GoogleMap mMap, RatSighting rat) {
         String id = rat.getUniqueKey();
         String latitude = rat.getLatitude();
         String longitude = rat.getLongitude();
-        boolean result = true;
         try {
             Double lat = Double.parseDouble(latitude);
             Double lng = Double.parseDouble(longitude);
@@ -142,8 +140,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             System.out.println("AFTER MAP");
         } catch(Exception e) {
             System.out.println("One of the rats can't be displayed");
-            result = false;
         }
-        return result;
     }
 }

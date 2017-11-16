@@ -3,42 +3,27 @@ package kanye2020.gatech.edu.rattrackapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+class RatSighting implements Parcelable {
+    private final String borough;
+    private final String city;
+    private final String address;
+    private final String locationType;
+    private final String uniqueKey;
+    private final String zipcode;
+    private final String dateTime;
+    private final String latitude;
+    private final String longitude;
 
-/**
- * Created by David Zhao on 10/6/2017.
- */
-
-public class RatSighting implements Parcelable {
-    private String borough, city, address, locationType, uniqueKey, zipcode, dateTime, latitude, longitude;
-//    Date date;
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
-
-    public RatSighting(String borough, String city, String address, String zipcode, String locationType, String dateTime, String strLatitude, String strLongitude, String strKey) {
+    RatSighting(String borough, String city, String address, String zipcode, String locationType, String dateTime, String strLatitude, String strLongitude, String strKey) {
         this.borough = borough;
         this.city = city;
         this.address = address;
         this.zipcode = zipcode;
         this.locationType = locationType;
         this.dateTime = dateTime;
-//        try {
-//            this.date = sdf.parse(strDate);
-//        } catch (ParseException e){
-//            try {
-//                this.date = sdf.parse("01/01/1900");
-//            } catch (ParseException f) {
-//                System.out.print("DATE PARSE ERROR");
-//            }
-//            System.out.print("DATE PARSE ERROR");
-//        }
         this.latitude = strLatitude;
         this.longitude = strLongitude;
         this.uniqueKey = strKey;
-//        sdf.applyPattern("MM/dd/yyyy");
-//        String asdf = sdf.format(date);
     }
 
     /**
@@ -52,7 +37,7 @@ public class RatSighting implements Parcelable {
     /**
      * @return the city
      */
-    public String getCity() {
+    String getCity() {
         return city;
     }
 
@@ -60,7 +45,7 @@ public class RatSighting implements Parcelable {
      *
      * @return the address
      */
-    public String getAddress() {
+    String getAddress() {
         return address;
     }
 
@@ -68,7 +53,7 @@ public class RatSighting implements Parcelable {
      *
      * @return locationType
      */
-    public String getLocationType() {
+    String getLocationType() {
         return locationType;
     }
 
@@ -76,7 +61,7 @@ public class RatSighting implements Parcelable {
      *
      * @return uniqueKey
      */
-    public String getUniqueKey() {
+    String getUniqueKey() {
         return uniqueKey;
     }
 
@@ -84,7 +69,7 @@ public class RatSighting implements Parcelable {
      *
      * @return the zipcode
      */
-    public String getZipcode() {
+    String getZipcode() {
         return zipcode;
     }
 
@@ -92,7 +77,7 @@ public class RatSighting implements Parcelable {
      *
      * @return the dateTime
      */
-    public String getDateTime() {
+    String getDateTime() {
         return dateTime;
     }
 
@@ -100,7 +85,7 @@ public class RatSighting implements Parcelable {
      *
      * @return latitude
      */
-    public String getLatitude() {
+    String getLatitude() {
         return latitude;
     }
 
@@ -108,7 +93,7 @@ public class RatSighting implements Parcelable {
      *
      * @return longitude
      */
-    public String getLongitude() {
+    String getLongitude() {
         return longitude;
     }
 
@@ -116,7 +101,7 @@ public class RatSighting implements Parcelable {
      * allows the marker to be viewable
      * @param in the parcel being passed in
      */
-    public RatSighting(Parcel in){
+    private RatSighting(Parcel in){
         String[] data = new String[9];
 
         in.readStringArray(data);

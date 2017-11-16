@@ -7,19 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * Created by juliachen on 9/24/17.
- */
 
 public class ApplicationActivity extends AppCompatActivity {
-
-    Button logout;
-    Button admin;
-    Button reportNewRat;
-    Button searchSightings;
-    Button viewMap;
-    Button viewGraph;
-
 
 
     @Override
@@ -27,12 +16,12 @@ public class ApplicationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.application_view);
 
-        logout = (Button) findViewById(R.id.logoutButton);
-        admin = (Button) findViewById(R.id.adminButton);
-        reportNewRat = (Button) findViewById(R.id.reportButton);
-        searchSightings = (Button) findViewById(R.id.searchButton);
-        viewMap = (Button) findViewById(R.id.viewMapButton);
-        viewGraph = (Button) findViewById(R.id.viewGraphButton);
+        Button logout = (Button) findViewById(R.id.logoutButton);
+        Button admin = (Button) findViewById(R.id.adminButton);
+        Button reportNewRat = (Button) findViewById(R.id.reportButton);
+        Button searchSightings = (Button) findViewById(R.id.searchButton);
+        Button viewMap = (Button) findViewById(R.id.viewMapButton);
+        Button viewGraph = (Button) findViewById(R.id.viewGraphButton);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
