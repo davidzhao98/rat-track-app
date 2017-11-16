@@ -27,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameField;
     private EditText passwordField;
-    private final ArrayList<Account> entries = new ArrayList<>();
+    private ArrayList<Account> entries = new ArrayList<>();
+    private int loginAttempts;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +47,10 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (loginAttempts >= 3) {
+                    lockoutUser();
+                }
+
                 String username = usernameField.getText().toString();
                 String password = passwordField.getText().toString();
 
@@ -73,6 +78,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
+     * locks user out after 3 failed attempts at login in
+     */
+    private void lockoutUser() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+
+    }
+
+    /**
      * verifies that user input the correct username and password
      * @return true if user and password correct
      */
@@ -87,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 return true;
             }
         }
+        loginAttempts++;
         return false;
     }
 

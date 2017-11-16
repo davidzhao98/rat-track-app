@@ -46,11 +46,10 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".DateRangeActivity"/>
-        <activity android:name=".GetGPSLocationActivity"/>
-        <activity android:name=".GraphActivity"/>
+        <activity android:name=".DateRangeActivity"></activity>
+        <activity android:name=".GraphActivity"></activity>
         <activity android:name=".BoroughActivity" />
-        <activity android:name=".LocationTypeActivity"/>
+        <activity android:name=".LocationTypeActivity"></activity>
     </application>
 
 </manifest>

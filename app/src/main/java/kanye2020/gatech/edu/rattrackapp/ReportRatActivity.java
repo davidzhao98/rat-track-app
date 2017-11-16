@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import android.widget.ArrayAdapter;
-
-
 import java.util.Arrays;
 
 /**
@@ -75,11 +73,6 @@ public class ReportRatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_rat);
-
-        //making new GPSGetter and getting long and lat
-        GetGPSLocationActivity GPS =  new GetGPSLocationActivity();
-        longitude = GPS.getLongitude();
-        latitude = GPS.getLatitude();
 
         //getting current time
         Calendar cal = Calendar.getInstance();
