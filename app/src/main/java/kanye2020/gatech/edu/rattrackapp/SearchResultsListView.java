@@ -49,14 +49,7 @@ public class SearchResultsListView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_results);
 
-        /**
-         * this shit is too much work so we can leave it for later
-        searchResultsRV = (RecyclerView) findViewById(R.id.searchResultsRecyclerView);
 
-        adapter = new RVAdapter(RatSightingList.getInstance().getRats());
-        //adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        searchResultsRV.setAdapter(adapter);
-        */
         //fragment stuff
 
 
