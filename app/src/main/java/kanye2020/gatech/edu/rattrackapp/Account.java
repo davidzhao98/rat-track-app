@@ -8,22 +8,24 @@ import java.util.List;
  */
 
 public class Account {
-    String username;
-    String password;
-    String email;
-    boolean admin;
+    public String username;
+    public String password;
+    public String email;
+    public boolean admin;
+    public boolean lockedout;
 
-    public static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
+    static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
 
 
     /**
      * default constructor for Account
      */
-    public Account() {
+    Account() {
         this.username = null;
         this.password = null;
         this.email = null;
         this.admin = false;
+        this.lockedout = false;
     }
 
     /**
@@ -33,18 +35,19 @@ public class Account {
      * @param email user's email address
      * @param admin user's admin status
      */
-    public Account (String username, String password, String email, boolean admin) {
+    Account (String username, String password, String email, boolean admin, boolean lockedout) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.admin = admin;
+        this.lockedout = lockedout;
     }
 
     /**
      * getter for username
      * @return username
      */
-    public String getUsername() {
+    String getUsername() {
         return username;
     }
 
@@ -52,7 +55,7 @@ public class Account {
      * getter for password
      * @return password
      */
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
@@ -60,7 +63,7 @@ public class Account {
      * getter for email
      * @return return email
      */
-    public String getEmail() {
+    String getEmail() {
         return email;
     }
 
@@ -68,7 +71,15 @@ public class Account {
      * getter for admin status
      * @return admin status
      */
-    public Boolean isAdmin() {
+    Boolean isAdmin() {
         return admin;
     }
+
+    /**
+     * getter for locked out status
+     * @return lockedout status
+     */
+    Boolean isLockedout() { return lockedout;}
+
+
 }

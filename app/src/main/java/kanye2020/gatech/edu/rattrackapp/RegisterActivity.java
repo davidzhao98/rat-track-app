@@ -13,10 +13,6 @@ import android.widget.Spinner;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
  * Created by pulakazad on 9/24/17.
  * Updated by Carissa 10/1/17
@@ -83,7 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
                             new Account(usernameET.getText().toString(),
                                     passwordET.getText().toString(),
                                     emailET.getText().toString(),
-                                    accountTypeSpinner.getSelectedItem().equals("ADMIN"));
+                                    accountTypeSpinner.getSelectedItem().equals("ADMIN"),
+                                    false);
 //                    accountList.add(newAccount);
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("users");
