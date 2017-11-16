@@ -20,7 +20,7 @@ import java.util.Date;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
 //    private GoogleMap mMap;
-    ArrayList<RatSighting> searchResults;
+    private ArrayList<RatSighting> searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
