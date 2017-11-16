@@ -7,42 +7,42 @@
         android:id="@+id/enterEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter an email" />
+        android:text="@string/enter_email" />
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter an Email"
+        android:hint="@string/enter_email"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/confirmEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm email" />
+        android:text="@string/confirm_email" />
 
     <EditText
         android:id="@+id/emailConfirmEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Confirm Email"
+        android:hint="@string/confirm_email"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/enterUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter a username" />
+        android:text="@string/enter_username" />
 
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter a Username"
+        android:hint="@string/enter_username"
         android:inputType="textPersonName" />
 
     <TextView
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter a Password"
+        android:hint="@string/enter_a_password"
         android:inputType="textPassword" />
 
     <EditText
@@ -64,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Confirm Password"
+        android:hint="@string/confirm_password"
         android:inputType="textPassword" />
 
     <TextView
@@ -86,11 +86,11 @@
         android:id="@+id/createAcctButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:text="@string/register_button_label" />
 
     <Button
         android:id="@+id/cancelAcctButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel" />
+        android:text="@string/cancel" />
 </LinearLayout>
