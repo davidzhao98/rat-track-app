@@ -165,7 +165,7 @@ public class ReportRatActivity extends AppCompatActivity {
                             new RatSighting(borough, city, address, zipcode, locationType,
                                     (month + "/" + day + "/" + year + " " + time),
                                     latitude, longitude, "key");
-                    ArrayList<RatSighting> ratList = RatSightingList.getInstance().getSample();
+                    List<RatSighting> ratList = RatSightingList.getInstance().getSample();
                     ratList.add(newEntry);
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();

@@ -8,6 +8,7 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -19,8 +20,8 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class EmailVerificationTest {
-    ArrayList<String> correct = new ArrayList<>();
-    ArrayList<String> incorrect = new ArrayList<>();
+    List<String> correct = new ArrayList<>();
+    List<String> incorrect = new ArrayList<>();
 
 
 
