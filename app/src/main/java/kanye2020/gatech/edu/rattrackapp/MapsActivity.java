@@ -126,11 +126,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    public boolean displayRat(GoogleMap mMap, RatSighting rat) {
+    private void displayRat(GoogleMap mMap, RatSighting rat) {
         String id = rat.getUniqueKey();
         String latitude = rat.getLatitude();
         String longitude = rat.getLongitude();
-        boolean result = true;
         try {
             Double lat = Double.parseDouble(latitude);
             Double lng = Double.parseDouble(longitude);
@@ -141,8 +140,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             System.out.println("AFTER MAP");
         } catch(Exception e) {
             System.out.println("One of the rats can't be displayed");
-            result = false;
         }
-        return result;
     }
 }
