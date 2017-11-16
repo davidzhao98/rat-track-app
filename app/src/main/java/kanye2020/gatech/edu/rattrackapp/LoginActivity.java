@@ -27,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameField;
     private EditText passwordField;
+    private String username;
+    private String password;
     private ArrayList<Account> entries = new ArrayList<>();
     private int loginAttempts;
 
@@ -47,12 +49,12 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                username = usernameField.getText().toString();
+                password = passwordField.getText().toString();
+
                 if (loginAttempts >= 3) {
                     lockoutUser();
                 }
-
-                String username = usernameField.getText().toString();
-                String password = passwordField.getText().toString();
 
                 if (username.isEmpty()) {
                     usernameField.setError("Enter username!");
@@ -83,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     private void lockoutUser() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
-
+        myRef.child(username).child("status").setValue(true);
     }
 
     /**
@@ -132,13 +134,15 @@ public class LoginActivity extends AppCompatActivity {
                     String username;
                     String password;
                     String email;
-
                     boolean admin;
+                    boolean lockedout;
+
                     username = item.child("username").getValue().toString();
                     password = item.child("password").getValue().toString();
                     email = item.child("email").getValue().toString();
                     admin = item.child("admin").getValue().toString().equals("true");
-                    Account entry = new Account(username, password, email, admin);
+                    lockedout = (boolean) item.child("lockedout").getValue();
+                    Account entry = new Account(username, password, email, admin, lockedout);
                     entries.add(entry);
                 }
             }
