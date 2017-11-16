@@ -84,8 +84,8 @@ class RatSightingList {
     /**
      * @return the arrayList of rats
      */
-    ArrayList<RatSighting> getRats() {
-        return rats;
+    static ArrayList<RatSighting> getRats() {
+        return getInstance().rats;
     }
 
     /**
