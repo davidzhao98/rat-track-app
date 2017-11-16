@@ -16,11 +16,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
 //    private GoogleMap mMap;
-    ArrayList<RatSighting> searchResults;
+    List<RatSighting> searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap mMap) {
 //        GoogleMap mMap = googleMap;
-        ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
+        List<RatSighting> rats = RatSightingList.getInstance().getRats();
         searchResults = new ArrayList<>();
         String callingActivity = getIntent().getStringExtra("from");
         switch (callingActivity) {

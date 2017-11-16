@@ -1,21 +1,17 @@
 package kanye2020.gatech.edu.rattrackapp;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 //import android.support.v7.app.AlertController;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Structures the search results for ALL RAT data
@@ -28,14 +24,7 @@ import java.util.ArrayList;
 
 public class SearchResultsListView extends AppCompatActivity {
 
-    //private RecyclerView searchResultsRV;
-    private ListView searchResultsLV;
-    private ArrayList<RatSighting> demoArrayList;
-    //different adapters for different search results
-    //private RecyclerView.Adapter adapter;
-    private ArrayAdapter demoAdapter;
-
-//    /**
+    //    /**
 //     * constructor that has an adapter passed in from subclass that tells us what type of list we
 //     * are getting
 //     * @param adapter
@@ -54,18 +43,23 @@ public class SearchResultsListView extends AppCompatActivity {
 
 
         //demo view
-        demoArrayList = RatSightingList.getInstance().getSample();
-        searchResultsLV = (ListView) findViewById(R.id.searchResultsListView);
-        demoAdapter = new ArrayAdapter(this,android.R.layout.simple_selectable_list_item, demoArrayList);
-        demoAdapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
-        searchResultsLV.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        //RatSightingList demoRatList = RatSightingList.getInstance();
+        ListView searchResultsLV = (ListView) findViewById(R.id.searchResultsListView);
+        ArrayAdapter<RatSighting> demoAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_selectable_list_item, RatSightingList.getSample());
+        demoAdapter.setDropDownViewResource(
+                android.R.layout.simple_selectable_list_item);
+        searchResultsLV.setChoiceMode(
+                AbsListView.CHOICE_MODE_SINGLE);
         searchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
 
+                final List<RatSighting> sample = RatSightingList.getSample();
                 Intent intent = new Intent(view.getContext(), SingleRatInfoActivity.class);
                 intent.putExtra("position", position);
+                intent.putExtra("sighting", sample.get(position));
                 intent.putExtra("caller", "SearchResultsListView");
                 startActivity(intent);
                 //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
@@ -74,8 +68,10 @@ public class SearchResultsListView extends AppCompatActivity {
         });
         searchResultsLV.setAdapter(demoAdapter);
         //use unique keys for rat list display
-        //i think we need a list view adapter that adapts the data from the database to the format that we need
-        //make sure that when we click on a rat it will take us to a new page that has more details about the rat
+        //i think we need a list view adapter that adapts the data
+        // from the database to the format that we need
+        //make sure that when we click on a rat it will
+        // take us to a new page that has more details about the rat
         //hitting back from that page will take us to the search results
         //https://www.youtube.com/watch?v=2pOCfKYO5Ao
 

@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
      * verifies that user input the correct username and password
      * @return true if user and password correct
      */
-    public boolean loginVerification(String username, String password, ArrayList<Account> entries) {
+    public boolean loginVerification(String username, String password, Iterable<Account> entries) {
         if (username == null || password == null || entries == null) {
             return false;
         }

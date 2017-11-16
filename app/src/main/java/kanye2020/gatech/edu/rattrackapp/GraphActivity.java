@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
@@ -36,23 +37,17 @@ public class GraphActivity extends AppCompatActivity {
         setContentView(R.layout.activity_graph);
 
         double x;
-        //double y;
-        //x = 0.0;
 
         GraphView graph = (GraphView) findViewById(R.id.graphView);
         HashMap<Double, Double> months = new HashMap<>();
         int startMonth = 0;
         int endMonth;
-        //startYear = 0;
         int endYear;
 
 
-        //
-        //List<RatSighting> rats = ratList.getRats();
         List<RatSighting> searchResults;
         Intent intent = getIntent();
         String callingActivity = intent.getStringExtra("from");
-        //final int startYear =
         if ("date".equals(callingActivity)) {
             try {
                 String startDateText = intent.getStringExtra("startDate");
@@ -69,7 +64,6 @@ public class GraphActivity extends AppCompatActivity {
                 endMonth = calendar.get(Calendar.MONTH);
                 endYear = calendar.get(Calendar.YEAR);
 
-                //ArrayList<Double> months = new ArrayList<>();
                 for (int i = startMonth; i <
                         ((endMonth) + ((endYear - startYear) * MONTHS_IN_YEAR)); i++) {
                     Double d = i + 0.0;
@@ -89,29 +83,10 @@ public class GraphActivity extends AppCompatActivity {
                     months.put(x, months.get(x) + 1.0);
                 }
             } catch(Exception e) {
-                System.out.println(e.getMessage());
+                Log.e("Exception", e.getMessage());
             }
 
-            } /*else if (callingActivity.equals("viewAllMap")) {
-            //should never be called as of M9
-            for (int i = 0; i < 300; i++) {
-                int j = (int) (Math.random() * 100000);
-                RatSighting rat = rats.get(j);
-                searchResults.add(rat);
-                String id = rat.getUniqueKey();
-                String latitude = rat.getLatitude();
-                String longitude = rat.getLongitude();
-                try {
-                    Double lat = Double.parseDouble(latitude);
-                    Double lng = Double.parseDouble(longitude);
-//                    LatLng ratLocation = new LatLng(lat, lng);
-//                    mMap.addMarker(new MarkerOptions().position(ratLocation).title("Marker of Rat " + id));
-//                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ratLocation, 11));
-                } catch(Exception e) {
-                    System.out.println("One of the rats can't be displayed");
-                }
             }
-        }*/
 
         DataPoint[] dp = new DataPoint[months.size()];
         for (int i = 0; i < months.size(); i++) {
@@ -135,7 +110,7 @@ public class GraphActivity extends AppCompatActivity {
                     try {
                         startDate = dateFormat.parse(startDateText);
                     } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                        Log.e("Exception", e.getMessage());
                     }
 
                     Calendar calendar = new GregorianCalendar();

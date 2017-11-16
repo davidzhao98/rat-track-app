@@ -11,6 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Singleton class to be used by the different search activities and the list view.
@@ -99,7 +100,7 @@ class RatSightingList {
      *
      * @return the sample arrayList
      */
-    ArrayList<RatSighting> getSample() { return sample;}
+    static ArrayList<RatSighting> getSample() { return getInstance().sample;}
 
     /**
      * method for searching rats by date given a starting date and ending date
@@ -108,7 +109,7 @@ class RatSightingList {
      * @param end the ending date for the query
      * @return an ArrayList of RatSightings that were reported between Date @start and Date @end
      */
-    ArrayList<RatSighting> sortByDate(Date start, Date end) throws IllegalArgumentException {
+    List<RatSighting> sortByDate(Date start, Date end) throws IllegalArgumentException {
         if (start.compareTo(end) > 0) {
             throw new IllegalArgumentException("Start date cannot exceed end date.");
         }
