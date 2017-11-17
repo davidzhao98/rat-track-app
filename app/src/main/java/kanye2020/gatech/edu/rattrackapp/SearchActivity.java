@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-
+/**
+ *
+ * Activity for the screen that allows user to input search criteria
+ */
 public class SearchActivity extends AppCompatActivity {
 
     @Override

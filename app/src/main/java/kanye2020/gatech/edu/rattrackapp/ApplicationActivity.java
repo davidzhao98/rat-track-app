@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-
+/**
+ *
+ * Main application screen with reporting, searching, map, graph
+ */
 public class ApplicationActivity extends AppCompatActivity {
 
 
