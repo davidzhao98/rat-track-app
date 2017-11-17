@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-
+/**
+ *
+ * main application activity, all user options located here
+ */
 public class ApplicationActivity extends AppCompatActivity {
 
 
