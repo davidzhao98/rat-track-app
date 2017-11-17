@@ -56,8 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginAttempts >= 3) {
                         lockoutUser();
                     }
-                } else {
-                    usernameField.setError("Please enter a valid username!");
                 }
 
                 if (username.isEmpty()) {

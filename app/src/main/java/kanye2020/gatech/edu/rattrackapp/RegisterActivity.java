@@ -127,9 +127,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
         return true;
-//        return !(emailET.getText().toString().isEmpty()
-//                || usernameET.getText().toString().isEmpty()
-//                || passwordET.getText().toString().isEmpty());
     }
 
     /**

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 /**
+ *
  * Created by pulakazad on 11/6/17.
  */
 public class LoginActivityTest {
@@ -23,9 +24,9 @@ public class LoginActivityTest {
 
     @Before
     public void setup() {
-        entries.add(new Account("bob", "abc", "bob@gmail.com", false));
-        entries.add(new Account("clout", "pulak", "pulak@gmail.com", false));
-        entries.add(new Account("notLit", "oy", "farhan@gmail.com", false));
+        entries.add(new Account("bob", "abc", "bob@gmail.com", false, false));
+        entries.add(new Account("clout", "pulak", "pulak@gmail.com", false, false));
+        entries.add(new Account("notLit", "oy", "farhan@gmail.com", false, false));
         entries.add(new Account());
 
         validUsername = "bob";
