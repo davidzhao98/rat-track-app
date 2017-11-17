@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * checks to see if username exists
-     * @return
+     * @return the existence of the username as a boolean
      */
     private boolean checkUsernameExistence() {
         for (Account entry : entries) {
