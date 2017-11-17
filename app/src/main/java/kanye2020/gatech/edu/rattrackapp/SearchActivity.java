@@ -8,7 +8,7 @@ import android.widget.Button;
 
 /**
  *
- * Activity for the screen that allows user to input search criteria
+ * Activity to manage searching options
  */
 public class SearchActivity extends AppCompatActivity {
 

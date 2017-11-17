@@ -14,9 +14,8 @@ class RatSighting implements Parcelable {
     private final String latitude;
     private final String longitude;
 
-    RatSighting(String borough, String city, String address, String zipcode,
-                String locationType, String dateTime, String strLatitude,
-                String strLongitude, String strKey) {
+    RatSighting(String borough, String city, String address, String zipcode, String locationType,
+                String dateTime, String strLatitude, String strLongitude, String strKey) {
         this.borough = borough;
         this.city = city;
         this.address = address;

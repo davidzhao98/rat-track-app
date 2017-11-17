@@ -13,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class PasswordConfirmTest {
 
     RegisterActivity activity = new RegisterActivity();
+    GraphActivity graphActivity = new GraphActivity();
 
     String string1;
     String string2;

@@ -9,7 +9,7 @@ import android.widget.Button;
 
 /**
  *
- * Main application screen with reporting, searching, map, graph
+ * main application activity, all user options located here
  */
 public class ApplicationActivity extends AppCompatActivity {
 

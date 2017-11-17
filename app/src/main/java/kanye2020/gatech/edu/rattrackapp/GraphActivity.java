@@ -14,6 +14,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.Series;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -36,17 +37,9 @@ public class GraphActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
-
-        double x;
-
         GraphView graph = (GraphView) findViewById(R.id.graphView);
-        HashMap<Double, Double> months = new HashMap<>();
-        int startMonth = 0;
-        int endMonth;
-        int endYear;
-
-
-        List<RatSighting> searchResults;
+        HashMap<Double, Double> months;
+        //int startMonth = 0;
         Intent intent = getIntent();
         String callingActivity = intent.getStringExtra("from");
         if ("date".equals(callingActivity)) {
@@ -56,8 +49,10 @@ public class GraphActivity extends AppCompatActivity {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 Date startDate = dateFormat.parse(startDateText);
                 Date endDate = dateFormat.parse(endDateText);
+                months = getMonths(startDate, endDate);
+                plotOnGraph(months, graph, startDate);
 
-                Calendar calendar = new GregorianCalendar();
+                /*Calendar calendar = new GregorianCalendar();
                 calendar.setTime(startDate);
                 startMonth = calendar.get(Calendar.MONTH);
                 int startYear = calendar.get(Calendar.YEAR);
@@ -82,21 +77,17 @@ public class GraphActivity extends AppCompatActivity {
                     int year = calendar.get(Calendar.YEAR);
                     x = (month) + ((year - startYear) * MONTHS_IN_YEAR);
                     months.put(x, months.get(x) + 1.0);
-                }
+                }*/
             } catch(Exception e) {
                 Log.e("Exception", e.getMessage());
             }
 
             }
 
-        DataPoint[] dp = new DataPoint[months.size()];
-        for (int i = 0; i < months.size(); i++) {
-            dp[i] = new DataPoint(i + startMonth + 0.0, months.get(i + startMonth + 0.0));
-//            series.appendData(dataPoint, false, months.size());
-        }
 
-        Series<DataPoint> series = new LineGraphSeries<>(dp);
-        graph.addSeries(series);
+
+
+
 
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
         gridLabel.setLabelFormatter(new DefaultLabelFormatter() {
@@ -136,5 +127,59 @@ public class GraphActivity extends AppCompatActivity {
         viewport.setScalableY(false);
 
 
+    }
+
+    /**
+     *
+     * @param startDate the start date for the query
+     * @param endDate the end date for the query
+     * @return a hash map containing the months from startDate to endDate
+     * and the number of Rat Sightings in each month.
+     */
+    private HashMap<Double, Double> getMonths(Date startDate, Date endDate) {
+        HashMap<Double, Double> months = new HashMap<>();
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(startDate);
+        int startMonth = calendar.get(Calendar.MONTH);
+        int startYear = calendar.get(Calendar.YEAR);
+        calendar.setTime(endDate);
+        int endMonth = calendar.get(Calendar.MONTH);
+        int endYear = calendar.get(Calendar.YEAR);
+
+        for (int i = startMonth; i <
+                ((endMonth) + ((endYear - startYear) * MONTHS_IN_YEAR)); i++) {
+            Double d = i + 0.0;
+            months.put(d, 0.0);
+        }
+        List<RatSighting> searchResults = ratList.sortByDate(startDate, endDate);
+        for (int i = 0; i < searchResults.size(); i++) {
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+            RatSighting result = searchResults.get(i);
+            try {
+                Date checker = sdf.parse(result.getDateTime());
+                calendar.setTime(checker);
+            } catch (ParseException e) {
+                Log.e("ParseException", e.getMessage());
+            }
+            //calendar = new GregorianCalendar();
+
+            double x;
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
+            x = (month) + ((year - startYear) * MONTHS_IN_YEAR);
+            months.put(x, months.get(x) + 1.0);
+        }
+        return months;
+    }
+    private void plotOnGraph(HashMap<Double, Double> data, GraphView graph, Date startDate) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(startDate);
+        int startMonth = calendar.get(Calendar.MONTH);
+        DataPoint[] dp = new DataPoint[data.size()];
+        for (int i = 0; i < data.size(); i++) {
+            dp[i] = new DataPoint(i + startMonth + 0.0, data.get(i + startMonth + 0.0));
+        }
+        Series<DataPoint> series = new LineGraphSeries<>(dp);
+        graph.addSeries(series);
     }
 }

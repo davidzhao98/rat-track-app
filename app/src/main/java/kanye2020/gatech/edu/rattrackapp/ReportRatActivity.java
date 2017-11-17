@@ -110,31 +110,31 @@ public class ReportRatActivity extends AppCompatActivity {
 
         //Adapter for borough Spinner
         ArrayAdapter<String> boroughAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, boroughs);
         boroughAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boroughSpinner.setAdapter(boroughAdapter);
 
         //Adapter for locationType spinner
         ArrayAdapter<String> locationTypeAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationTypes);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, locationTypes);
         locationTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationTypeSpinner.setAdapter(locationTypeAdapter);
 
         //Adapter for Month Spinner
         ArrayAdapter<String> monthAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, months);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, months);
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         monthSpinner.setAdapter(monthAdapter);
 
         //Adapter for day Spinner
         ArrayAdapter<String> dayAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, days);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, days);
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
 
         //Adapter for year Spinner
         ArrayAdapter<String> yearAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, years);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, years);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(yearAdapter);
 
@@ -164,7 +164,7 @@ public class ReportRatActivity extends AppCompatActivity {
                             new RatSighting(borough, city, address, zipcode, locationType,
                                     (month + "/" + day + "/" + year + " " + time),
                                     latitude, longitude, "key");
-                    List<RatSighting> ratList = RatSightingList.getInstance().getSample();
+                    List<RatSighting> ratList = RatSightingList.getSample();
                     ratList.add(newEntry);
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();

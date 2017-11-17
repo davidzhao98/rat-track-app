@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerAcct = (Button) findViewById(R.id.createAcctButton);
 
         ArrayAdapter<String> adapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, Account.accountTypes);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Account.accountTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accountTypeSpinner.setAdapter(adapter);
 
@@ -69,7 +69,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String emailString = emailET.getText().toString();
                 String emailStringConfirm = confirmEmailET.getText().toString();
                 String usernameString = usernameET.getText().toString();
-                if (fieldsNotEmpty(emailString, usernameString, pwString) && confirmPassword(pwString, confirmString)
+                if (fieldsNotEmpty(emailString, usernameString, pwString)
+                        && confirmPassword(pwString, confirmString)
                         && confirmEmail(emailString, emailStringConfirm)) {
                     //add account to "database"?????
                     //firebase?
@@ -114,6 +115,9 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * checks to see if user did not leave fields empty; we should make the spinner default "user"
      * so it'll either be user or admin
+     * @param email the entered email
+     * @param username the entered username
+     * @param password the entered password
      * @return true if all fields are filled
      */
     public boolean fieldsNotEmpty(String email, String username, String password) {
@@ -131,14 +135,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * method checks if user entered the same password both times
-     * @return true if passwords match
-     */
-    /*private boolean confirmPassword() {
-        return passwordET.getText().toString().equals(confirmPwET.getText().toString());
-    }*/
-
-    /**
-     * method checks if user entered the same password both times
+     * @param et1 first password entry
+     * @param et2 second password entry
      * @return true if passwords match
      */
     public boolean confirmPassword(String et1, String et2) {
@@ -153,6 +151,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * method to check that both email entry fields match
+     * @param email1 the first entered email
+     * @param email2 the second entered email
+     * @return whether or not the emails match as a boolean
+     */
     public boolean confirmEmail(String email1, String email2) {
         try {
             if (email1.equals(email2)) {
@@ -167,7 +171,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * method checks if user entered a valid email address
-     *
+     * @param email the entered email to check
      * @return true if email address is valid, false if not.
      */
     public boolean emailValidCheck(String email) {

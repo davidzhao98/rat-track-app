@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * checks to see if username exists
-     * @return
+     * @return the existence of the username as a boolean
      */
     private boolean checkUsernameExistence() {
         for (Account entry : entries) {
@@ -111,6 +111,9 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * verifies that user input the correct username and password
+     * @param username the entered username
+     * @param password the entered password
+     * @param entries the accounts to be checked
      * @return true if user and password correct
      */
     public boolean loginVerification(String username, String password, Iterable<Account> entries) {

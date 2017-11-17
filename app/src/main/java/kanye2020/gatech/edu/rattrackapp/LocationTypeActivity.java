@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.Arrays;
 
 /**
+<<<<<<< HEAD
  *
- * class for location type spinner
+ * Activity that handles searching by Location Type
+ * Created by Carissa Ghazalie
  */
 public class LocationTypeActivity extends AppCompatActivity {
 
