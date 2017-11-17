@@ -51,8 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                username = usernameField.getText().toString();
-                password = passwordField.getText().toString();
+                Editable nameUser = usernameField.getText();
+                username = nameUser.toString();
+                Editable fieldPass = passwordField.getText();
+                password = fieldPass.toString();
 
                 if (checkUsernameExistence()) {
                     if (loginAttempts >= 3) {
@@ -109,9 +111,11 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         try {
-            myRef.child(username).child("lockedout").setValue(true);
+            DatabaseReference chainLocked = myRef.child(username);
+            DatabaseReference chainLocked2 = chainLocked.child("lockedout");
+            chainLocked2.setValue(true);
         } catch (Exception e) {
-            System.out.println("user not found");
+//            System.out.println("user not found");
         }
     }
 
@@ -167,14 +171,11 @@ public class LoginActivity extends AppCompatActivity {
                     String password;
                     String email;
                     boolean admin;
-                    boolean lockedout;
 
-                    username = item.child("username").getValue().toString();
-                    password = item.child("password").getValue().toString();
-                    email = item.child("email").getValue().toString();
-                    admin = item.child("admin").getValue().toString().equals("true");
-                    lockedout = (boolean) item.child("lockedout").getValue();
-                    Account entry = new Account(username, password, email, admin, lockedout);
+
+                    DataSnapshot outLocked = item.child("lockedout");
+                    boolean lockedout = (boolean) outLocked.getValue();
+
                     DataSnapshot nameUser = item.child("username");
                     Object userWord = nameUser.getValue();
                     username = userWord.toString();
@@ -193,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     admin = "true".equals(administrator);
 
-                    Account entry = new Account(username, password, email, admin);
+                    Account entry = new Account(username, password, email, admin, lockedout);
                     entries.add(entry);
                 }
             }

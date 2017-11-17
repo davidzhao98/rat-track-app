@@ -13,7 +13,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.PropertyName;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import android.widget.ArrayAdapter;
@@ -190,8 +189,6 @@ public class ReportRatActivity extends AppCompatActivity {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("ratdata");
 
-                    int index = chainRatList.getRatsSize();
-//                    System.out.println(index);
                     String ind = "99100";
                     DatabaseReference chainChild = myRef.child(ind);
                     DatabaseReference chainChildBorough = chainChild.child("Borough");
