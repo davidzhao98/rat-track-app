@@ -95,8 +95,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private boolean checkUsernameExistence() {
         for (Account entry : entries) {
-            if (username.equals(entry.getUsername())
-                    && password.equals(entry.getPassword())) {
+            if (username.equals(entry.getUsername())) {
                 return true;
             }
         }

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Arrays;
 
 /**
-<<<<<<< HEAD
  *
  * Activity that handles searching by Location Type
  * Created by Carissa Ghazalie
