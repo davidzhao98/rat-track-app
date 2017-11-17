@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import android.widget.Spinner;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+
 
 /**
  * Created by pulakazad on 9/24/17.
@@ -26,7 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordET;
     private EditText confirmPwET;
     private Spinner accountTypeSpinner;
-    private Button registerAcct;
+//    private Button registerAcct;
+
 //    private ArrayList<Account> accountList;
 //    private static final String TAG = "RegisterActivity";
 //    private List<Account> realAccountList;
@@ -44,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordET = (EditText) findViewById(R.id.passwordEditText);
         confirmPwET = (EditText) findViewById(R.id.confirmPasswordET);
         accountTypeSpinner = (Spinner) findViewById(R.id.accountTypeSpinner);
-        registerAcct = (Button) findViewById(R.id.createAcctButton);
+        Button registerAcct = (Button) findViewById(R.id.createAcctButton);
 
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Account.accountTypes);
@@ -64,11 +68,33 @@ public class RegisterActivity extends AppCompatActivity {
         registerAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String pwString = passwordET.getText().toString();
-                String confirmString = confirmPwET.getText().toString();
-                String emailString = emailET.getText().toString();
-                String emailStringConfirm = confirmEmailET.getText().toString();
-                String usernameString = usernameET.getText().toString();
+                Editable chain = passwordET.getText();
+                String pwString = chain.toString();
+
+                Editable chain1 = confirmPwET.getText();
+                String confirmString = chain1.toString();
+
+                Editable chain2 = emailET.getText();
+                String emailString = chain2.toString();
+
+                Editable chain3 = confirmEmailET.getText();
+                String emailStringConfirm = chain3.toString();
+
+                Editable chain4 = usernameET.getText();
+                String usernameString = chain4.toString();
+
+                Object chainAccount = accountTypeSpinner.getSelectedItem();
+
+//                if (fieldsNotEmpty(emailString, usernameString, pwString)
+//                        && confirmPassword(pwString, confirmString)) {
+//
+//                }
+//                String pwString = passwordET.getText().toString();
+//                String confirmString = confirmPwET.getText().toString();
+//                String emailString = emailET.getText().toString();
+//                String emailStringConfirm = confirmEmailET.getText().toString();
+//                String usernameString = usernameET.getText().toString();
+
                 if (fieldsNotEmpty(emailString, usernameString, pwString)
                         && confirmPassword(pwString, confirmString)
                         && confirmEmail(emailString, emailStringConfirm)) {
@@ -77,15 +103,16 @@ public class RegisterActivity extends AppCompatActivity {
                     //switch to new screen/application screen
 //                    accountList = new ArrayList<>();
                     final Account newAccount =
-                            new Account(usernameET.getText().toString(),
-                                    passwordET.getText().toString(),
-                                    emailET.getText().toString(),
-                                    accountTypeSpinner.getSelectedItem().equals("ADMIN"),
-                                    false);
+                            new Account(chain4.toString(),
+                                    chain.toString(),
+                                    chain2.toString(),
+                                    "ADMIN".equals(chainAccount), false);
 //                    accountList.add(newAccount);
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("users");
-                    myRef.child(newAccount.getUsername()).setValue(newAccount);
+                    DatabaseReference chainAccount1 = myRef.child(newAccount.getUsername());
+                    chainAccount1.setValue(newAccount);
+
 //                    myRef.setValue(accountList);
                     /*myRef.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -115,28 +142,31 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * checks to see if user did not leave fields empty; we should make the spinner default "user"
      * so it'll either be user or admin
-     * @param email the entered email
-     * @param username the entered username
-     * @param password the entered password
+     * @param email the user's email
+     * @param username the user's username
+     * @param password the user's password
      * @return true if all fields are filled
      */
     public boolean fieldsNotEmpty(String email, String username, String password) {
-        if (email == null || email.isEmpty()) {
+        if ((email == null) || email.isEmpty()) {
             return false;
         }
-        if (username == null || username.isEmpty()) {
+        else if ((username == null) || username.isEmpty()) {
             return false;
         }
-        if (password == null || password.isEmpty()) {
-            return false;
+        else {
+            return !((password == null) || password.isEmpty());
         }
-        return true;
+//        return !(password == null || password.isEmpty());
+//        return !(emailET.getText().toString().isEmpty()
+//                || usernameET.getText().toString().isEmpty()
+//                || passwordET.getText().toString().isEmpty());
     }
 
     /**
      * method checks if user entered the same password both times
-     * @param et1 first password entry
-     * @param et2 second password entry
+     * @param et1 the first entered password
+     * @param et2 the second entered password
      * @return true if passwords match
      */
     public boolean confirmPassword(String et1, String et2) {
@@ -146,16 +176,16 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 return false;
             }
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
     /**
-     * method to check that both email entry fields match
-     * @param email1 the first entered email
-     * @param email2 the second entered email
-     * @return whether or not the emails match as a boolean
+     * method checks if email1 is the same as email2
+     * @param email1 the email entered first
+     * @param email2 the email entered second
+     * @return true if email's match
      */
     public boolean confirmEmail(String email1, String email2) {
         try {
@@ -164,14 +194,15 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 return false;
             }
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
     /**
      * method checks if user entered a valid email address
-     * @param email the entered email to check
+     *
+     * @param email the email of the user
      * @return true if email address is valid, false if not.
      */
     public boolean emailValidCheck(String email) {

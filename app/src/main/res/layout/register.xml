@@ -75,12 +75,7 @@
     <Spinner
         android:id="@+id/accountTypeSpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" /><![CDATA[
-        android:id="@+id/confirmPassView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirm Password" />
-    ]]>
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/createAcctButton"
