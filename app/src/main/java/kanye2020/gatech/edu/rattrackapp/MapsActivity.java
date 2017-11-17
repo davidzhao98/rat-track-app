@@ -85,7 +85,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 break;
             case "viewAllMap":
-//        } else if (callingActivity.equals("viewAllMap")) {
                 for (int i = 0; i < threshold; i++) {
                     int j = (int) (Math.random() * size);
                     RatSighting rat = rats.get(j);
@@ -94,7 +93,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 break;
             case "borough":
-//        } else if (callingActivity.equals("borough")) {
                 for (int i = 0; i < threshold; i++) {
                     int j = (int) (Math.random() * size);
                     RatSighting rat = rats.get(j);
@@ -108,7 +106,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 break;
             case "locationType":
-//        } else if (callingActivity.equals("locationType")) {
                 for (int i = 0; i < threshold; i++) {
                     int j = (int) (Math.random() * size);
                     RatSighting rat = rats.get(j);
@@ -119,7 +116,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
         }
-//        mMap.setMinZoomPreference((float) 11);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -134,7 +130,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         break;
                     }
                 }
-
                 intent.putExtra("rat", clicked);
                 intent.putExtra("caller", "MapsActivity");
                 startActivity(intent);
