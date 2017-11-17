@@ -11,9 +11,9 @@ import static org.junit.Assert.assertTrue;
  */
 public class LoginActivityTest {
 
-    private ArrayList<Account> entries = new ArrayList<>();
+    private final ArrayList<Account> entries = new ArrayList<>();
 
-    private LoginActivity activity = new LoginActivity();
+    private final LoginActivity activity = new LoginActivity();
 
     private String validUsername;
     private String validPass;

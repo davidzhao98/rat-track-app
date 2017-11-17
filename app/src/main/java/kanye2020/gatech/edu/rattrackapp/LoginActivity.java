@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -29,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordField;
     private String username;
     private String password;
-    private ArrayList<Account> entries = new ArrayList<>();
     private int loginAttempts;
+    private final Collection<Account> entries = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginAttempts >= 3) {
                     lockoutUser();
                 }
+                Editable temp = usernameField.getText();
+                String username = temp.toString();
+                Editable temp2 = passwordField.getText();
+                String password = temp2.toString();
 
                 if (username.isEmpty()) {
                     usernameField.setError("Enter username!");
@@ -64,12 +70,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (loginVerification(username, password, entries)) {
-                    System.out.println("Logging in");
+//                    System.out.println("Logging in");
                     resetLogin();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
                 } else {
-                    System.out.println("Fail");
+//                    System.out.println("Fail");
                     Toast toast = Toast.makeText(view.getContext(), "Incorrect login information!",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.BOTTOM, 0, 0);
@@ -90,10 +96,13 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * verifies that user input the correct username and password
+     * @param username the user's username
+     * @param password the user's password
+     * @param entries the accounts
      * @return true if user and password correct
      */
     public boolean loginVerification(String username, String password, Iterable<Account> entries) {
-        if (username == null || password == null || entries == null) {
+        if ((username == null) || (password == null) || (entries == null)) {
             return false;
         }
 
@@ -124,9 +133,11 @@ public class LoginActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
-                Toast.makeText(LoginActivity.this, "Total Users: "
-                        + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
+                Iterable<DataSnapshot> chain = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> items = chain.iterator();
+                Toast temp = Toast.makeText(LoginActivity.this, "Total Users: "
+                        + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT);
+                temp.show();
                 entries.clear();
                 while (items.hasNext()) {
                     DataSnapshot item = items.next();
@@ -143,6 +154,25 @@ public class LoginActivity extends AppCompatActivity {
                     admin = item.child("admin").getValue().toString().equals("true");
                     lockedout = (boolean) item.child("lockedout").getValue();
                     Account entry = new Account(username, password, email, admin, lockedout);
+                    DataSnapshot nameUser = item.child("username");
+                    Object userWord = nameUser.getValue();
+                    username = userWord.toString();
+
+                    DataSnapshot wordPass = item.child("password");
+                    Object word = wordPass.getValue();
+                    password = word.toString();
+
+                    DataSnapshot mail = item.child("email");
+                    Object snail = mail.getValue();
+                    email = snail.toString();
+
+                    DataSnapshot administration = item.child("admin");
+                    Object word2 = administration.getValue();
+                    String administrator = word2.toString();
+
+                    admin = "true".equals(administrator);
+
+                    Account entry = new Account(username, password, email, admin);
                     entries.add(entry);
                 }
             }

@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
 //    private Button login;
 //    private Button register;
-    RatSightingList ratDB;
+//    private RatSightingList ratDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         //Is this where we should get all the rat data as well?
         //getRats();
         //loading all the data into the model
-        ratDB = RatSightingList.getInstance();
+        RatSightingList ratDB = RatSightingList.getInstance();
 
         //Buttons for login screen
         Button login = (Button) findViewById(R.id.loginButton);

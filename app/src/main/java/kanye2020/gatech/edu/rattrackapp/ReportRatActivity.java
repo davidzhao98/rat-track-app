@@ -3,6 +3,7 @@ package kanye2020.gatech.edu.rattrackapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,8 +44,8 @@ public class ReportRatActivity extends AppCompatActivity {
     @PropertyName("Created Date")
     private String time;
 
-    private Button addRSButton;
-    private Button cancelRSButton;
+//    private Button addRSButton;
+//    private Button cancelRSButton;
 
     @PropertyName("Borough")
     private String borough;
@@ -61,7 +62,9 @@ public class ReportRatActivity extends AppCompatActivity {
     @PropertyName("Location Type")
     private String locationType;
 
-    private String month, day, year;
+    private String month;
+    private String day;
+    private String year;
 
     /**
      * empty constructor
@@ -91,8 +94,8 @@ public class ReportRatActivity extends AppCompatActivity {
         monthSpinner = (Spinner) findViewById(R.id.monthSpinner);
         daySpinner = (Spinner) findViewById(R.id.daySpinner);
         yearSpinner = (Spinner) findViewById(R.id.yearSpinner);
-        addRSButton = (Button) findViewById(R.id.addRSButton);
-        cancelRSButton = (Button) findViewById(R.id.cancelRSButton);
+        Button addRSButton = (Button) findViewById(R.id.addRSButton);
+        Button cancelRSButton = (Button) findViewById(R.id.cancelRSButton);
         longitudeText = (EditText) findViewById(R.id.longitudeText);
         latitudeText = (EditText) findViewById(R.id.latitudeText);
 
@@ -111,31 +114,31 @@ public class ReportRatActivity extends AppCompatActivity {
 
         //Adapter for borough Spinner
         ArrayAdapter<String> boroughAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, boroughs);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, boroughs);
         boroughAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boroughSpinner.setAdapter(boroughAdapter);
 
         //Adapter for locationType spinner
         ArrayAdapter<String> locationTypeAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationTypes);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, locationTypes);
         locationTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationTypeSpinner.setAdapter(locationTypeAdapter);
 
         //Adapter for Month Spinner
         ArrayAdapter<String> monthAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, months);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, months);
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         monthSpinner.setAdapter(monthAdapter);
 
         //Adapter for day Spinner
         ArrayAdapter<String> dayAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, days);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, days);
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
 
         //Adapter for year Spinner
         ArrayAdapter<String> yearAdapter =
-                new ArrayAdapter(this,android.R.layout.simple_spinner_item, years);
+                new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, years);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(yearAdapter);
 
@@ -151,50 +154,82 @@ public class ReportRatActivity extends AppCompatActivity {
                 month = (String) monthSpinner.getSelectedItem();
                 day = (String) daySpinner.getSelectedItem();
                 year = (String) yearSpinner.getSelectedItem();
-                zipcode = zipcodeText.getText().toString();
-                address = addressText.getText().toString();
-                city = cityText.getText().toString();
-                longitude = longitudeText.getText().toString();
-                latitude = latitudeText.getText().toString();
-                if (!(zipcodeText.getText().toString().equals(""))
-                        && !(addressText.getText().toString().equals(""))
-                        && !(cityText.getText().toString().equals(""))
-                        && !(longitudeText.getText().toString().equals(""))
-                        && !(latitudeText.getText().toString().equals(""))) {
+
+                Editable chainZip = zipcodeText.getText();
+                zipcode = chainZip.toString();
+                Editable chainAdd = addressText.getText();
+                address = chainAdd.toString();
+                Editable chainCity = cityText.getText();
+                city = chainCity.toString();
+                Editable chainLong = longitudeText.getText();
+                longitude = chainLong.toString();
+                Editable chainLat = latitudeText.getText();
+                latitude = chainLat.toString();
+
+                String stringZip = chainZip.toString();
+                String stringAdd = chainAdd.toString();
+                String stringCity = chainCity.toString();
+                String stringLong = chainLong.toString();
+                String stringLat = chainLat.toString();
+
+
+
+                if (!("".equals(stringZip))
+                        && !("".equals(stringAdd))
+                        && !("".equals(stringCity))
+                        && !("".equals(stringLong))
+                        && !("".equals(stringLat))) {
                     RatSighting newEntry =
                             new RatSighting(borough, city, address, zipcode, locationType,
                                     (month + "/" + day + "/" + year + " " + time),
                                     latitude, longitude, "key");
-                    List<RatSighting> ratList = RatSightingList.getInstance().getSample();
+                    RatSightingList chainRatList = RatSightingList.getInstance();
+                    List<RatSighting> ratList = chainRatList.getSample();
                     ratList.add(newEntry);
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("ratdata");
-                    int index = RatSightingList.getInstance().getRatsSize();
-                    System.out.println(index);
+
+                    int index = chainRatList.getRatsSize();
+//                    System.out.println(index);
                     String ind = "99100";
+                    DatabaseReference chainChild = myRef.child(ind);
+                    DatabaseReference chainChildBorough = chainChild.child("Borough");
+                    DatabaseReference chainChildCity = chainChild.child("City");
+                    DatabaseReference chainChildCreatedDate = chainChild.child("Created Date");
+                    DatabaseReference chainChildIncidentAdd = chainChild.child("Incident Address");
+                    DatabaseReference chainChildIncidentZip = chainChild.child("Incident Zip");
+                    DatabaseReference chainChildLat = chainChild.child("Latitude");
+                    DatabaseReference chainChildLocationType = chainChild.child("Location Type");
+                    DatabaseReference chainChildLong = chainChild.child("Longitude");
+                    DatabaseReference chainChildKey = chainChild.child("Unique Key");
 
-                    myRef.child(ind).setValue(null);
-                    myRef.child(ind).child("Borough").setValue(borough);
-                    myRef.child(ind).child("City").setValue(city);
-                    myRef.child(ind).child("Created Date").setValue(month + "/" + day + "/" + year
+
+                    chainChild.setValue(null);
+                    chainChildBorough.setValue(borough);
+                    chainChildCity.setValue(city);
+                    chainChildCreatedDate.setValue(month + "/" + day + "/" + year
                             + " " + time);
-                    myRef.child(ind).child("Incident Address").setValue(address);
-                    myRef.child(ind).child("Incident Zip").setValue(zipcode);
-                    myRef.child(ind).child("Latitude").setValue(latitude);
-                    myRef.child(ind).child("Location Type").setValue(locationType);
-                    myRef.child(ind).child("Longitude").setValue(longitude);
-                    myRef.child(ind).child("Unique Key").setValue("key");
+                    chainChildIncidentAdd.setValue(address);
+                    chainChildIncidentZip.setValue(zipcode);
+                    chainChildLat.setValue(latitude);
+                    chainChildLocationType.setValue(locationType);
+                    chainChildLong.setValue(longitude);
+                    chainChildKey.setValue("key");
 
-                    System.out.println("RAT ADDED");
-                    Toast.makeText(view.getContext(), "Your Rat Sighting was successfully entered!",
-                            Toast.LENGTH_SHORT).show();
+//                    System.out.println("RAT ADDED");
+                    Toast ratAddedToast = Toast.makeText(view.getContext(),
+                            "Your Rat Sighting was successfully entered!",
+                            Toast.LENGTH_SHORT);
+                    ratAddedToast.show();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
 
                 } else {
-                    Toast.makeText(view.getContext(), "One or more fields are empty",
-                            Toast.LENGTH_SHORT).show();
+                    Toast fieldEmpty = Toast.makeText(view.getContext(),
+                            "One or more fields are empty",
+                            Toast.LENGTH_SHORT);
+                    fieldEmpty.show();
                 }
             }
         });
