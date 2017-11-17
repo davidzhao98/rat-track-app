@@ -21,7 +21,7 @@ class Account {
     @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public boolean lockedout;
 
-    static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
+    final static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
 
 
     /**

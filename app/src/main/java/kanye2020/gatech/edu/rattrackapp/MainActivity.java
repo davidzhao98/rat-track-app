@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         //Is this where we should get all the rat data as well?
         //getRats();
         //loading all the data into the model
-        RatSightingList ratDB = RatSightingList.getInstance();
+//        RatSightingList ratDB = RatSightingList.getInstance();
 
         //Buttons for login screen
         Button login = (Button) findViewById(R.id.loginButton);

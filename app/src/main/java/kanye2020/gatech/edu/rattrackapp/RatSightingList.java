@@ -96,7 +96,7 @@ final class RatSightingList {
      *
      * @return returns the size of the arrayList
      */
-    int getRatsSize() {
+    private int getRatsSize() {
         return rats.size();
         }
 
