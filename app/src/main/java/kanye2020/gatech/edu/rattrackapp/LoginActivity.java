@@ -52,8 +52,12 @@ public class LoginActivity extends AppCompatActivity {
                 username = usernameField.getText().toString();
                 password = passwordField.getText().toString();
 
-                if (loginAttempts >= 3) {
-                    lockoutUser();
+                if (checkUsernameExistence()) {
+                    if (loginAttempts >= 3) {
+                        lockoutUser();
+                    }
+                } else {
+                    usernameField.setError("Please enter a valid username!");
                 }
 
                 if (username.isEmpty()) {
@@ -80,12 +84,31 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
+     * checks to see if username exists
+     * @return
+     */
+    private boolean checkUsernameExistence() {
+        for (Account entry : entries) {
+            if (username.equals(entry.getUsername())
+                    && password.equals(entry.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * locks user out after 3 failed attempts at login in
      */
     private void lockoutUser() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
-        myRef.child(username).child("status").setValue(true);
+        try {
+            myRef.child(username).child("lockedout").setValue(true);
+        } catch (Exception e) {
+            System.out.println("user not found");
+        }
     }
 
     /**

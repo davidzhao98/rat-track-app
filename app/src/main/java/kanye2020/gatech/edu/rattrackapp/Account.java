@@ -4,14 +4,21 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ *
  * Created by David Zhao on 10/1/2017.
  */
 
-public class Account {
+class Account {
+    //Firebase requires public modifier
+    @SuppressWarnings("WeakerAccess")
     public String username;
+    @SuppressWarnings("WeakerAccess")
     public String password;
+    @SuppressWarnings("WeakerAccess")
     public String email;
+    @SuppressWarnings("WeakerAccess")
     public boolean admin;
+    @SuppressWarnings("WeakerAccess")
     public boolean lockedout;
 
     static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
