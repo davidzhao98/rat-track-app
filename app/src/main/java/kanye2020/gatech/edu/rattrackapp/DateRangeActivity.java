@@ -102,7 +102,9 @@ public class DateRangeActivity extends AppCompatActivity {
                         intent.putExtra("from", "date");
                         startActivity(intent);
                     } else {
-                        Toast.makeText(DateRangeActivity.this, "Invalid Date Range", Toast.LENGTH_LONG).show();
+                        Toast newToast = Toast.makeText(DateRangeActivity.this,
+                                "Invalid Date Range", Toast.LENGTH_LONG);
+                        newToast.show();
                     }
                 } catch (ParseException e) {
 //                    System.out.println(e);
@@ -125,7 +127,9 @@ public class DateRangeActivity extends AppCompatActivity {
                         intent.putExtra("from", "date");
                         startActivity(intent);
                     } else {
-                        Toast.makeText(DateRangeActivity.this, "Invalid Date Range", Toast.LENGTH_LONG).show();
+                        Toast newToast = Toast.makeText(DateRangeActivity.this,
+                                "Invalid Date Range", Toast.LENGTH_LONG);
+                        newToast.show();
                     }
                 } catch (ParseException e) {
 //                    System.out.println(e);
@@ -159,7 +163,8 @@ public class DateRangeActivity extends AppCompatActivity {
             }
             startDateView.setText(month + "/" + day + "/" + yearStart);
 
-            Toast.makeText(DateRangeActivity.this, month + "/" + day + "/" + yearStart, Toast.LENGTH_LONG).show();
+            Toast.makeText(DateRangeActivity.this, month + "/" + day + "/" + yearStart,
+                    Toast.LENGTH_LONG).show();
         }
     };
 
@@ -188,7 +193,8 @@ public class DateRangeActivity extends AppCompatActivity {
             }
             endDateView.setText(month + "/" + day + "/" + yearEnd);
 
-            Toast.makeText(DateRangeActivity.this, month + "/" + day + "/" + yearEnd, Toast.LENGTH_LONG).show();
+            Toast.makeText(DateRangeActivity.this, month + "/" + day + "/" + yearEnd,
+                    Toast.LENGTH_LONG).show();
         }
     };
 

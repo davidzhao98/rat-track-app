@@ -11,6 +11,10 @@ import android.content.Intent;
 import java.util.List;
 import java.util.Arrays;
 
+/**
+ * Activity that handles searching by Location Type
+ * Created by Carissa Ghazalie
+ */
 public class LocationTypeActivity extends AppCompatActivity {
 
     private Spinner locationTypeSpinner;
@@ -28,10 +32,11 @@ public class LocationTypeActivity extends AppCompatActivity {
         Button viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
 
         List<String> locationTypes = Arrays.asList("1-2 Family Dwelling", "3+ Family Apt. Building",
-                "3+ Family Mixed Use Building", "Commercial Building", "Vacant Lot", "Construction Site",
-                "Hospital", "Catch Basin/Sewer");
+                "3+ Family Mixed Use Building", "Commercial Building", "Vacant Lot",
+                "Construction Site", "Hospital", "Catch Basin/Sewer");
 
-        ArrayAdapter<String> locationTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationTypes);
+        ArrayAdapter<String> locationTypeAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, locationTypes);
         locationTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationTypeSpinner.setAdapter(locationTypeAdapter);
 

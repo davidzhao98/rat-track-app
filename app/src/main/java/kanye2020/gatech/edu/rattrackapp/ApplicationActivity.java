@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-
+/**
+ *
+ * main application activity, all user options located here
+ */
 public class ApplicationActivity extends AppCompatActivity {
 
 
@@ -17,7 +20,7 @@ public class ApplicationActivity extends AppCompatActivity {
         setContentView(R.layout.application_view);
 
         Button logout = (Button) findViewById(R.id.logoutButton);
-        Button admin = (Button) findViewById(R.id.adminButton);
+        //Button admin = (Button) findViewById(R.id.adminButton);
         Button reportNewRat = (Button) findViewById(R.id.reportButton);
         Button searchSightings = (Button) findViewById(R.id.searchButton);
         Button viewMap = (Button) findViewById(R.id.viewMapButton);

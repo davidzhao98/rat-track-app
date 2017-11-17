@@ -14,7 +14,8 @@ class RatSighting implements Parcelable {
     private final String latitude;
     private final String longitude;
 
-    RatSighting(String borough, String city, String address, String zipcode, String locationType, String dateTime, String strLatitude, String strLongitude, String strKey) {
+    RatSighting(String borough, String city, String address, String zipcode, String locationType,
+                String dateTime, String strLatitude, String strLongitude, String strKey) {
         this.borough = borough;
         this.city = city;
         this.address = address;
@@ -129,10 +130,12 @@ class RatSighting implements Parcelable {
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        @Override
         public RatSighting createFromParcel(Parcel in) {
             return new RatSighting(in);
         }
 
+        @Override
         public RatSighting[] newArray(int size) {
             return new RatSighting[size];
         }

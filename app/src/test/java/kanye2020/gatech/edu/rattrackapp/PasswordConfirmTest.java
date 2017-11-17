@@ -6,12 +6,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
+ *
  * Created by Nick B on 11/13/2017.
  */
 
 public class PasswordConfirmTest {
 
     RegisterActivity activity = new RegisterActivity();
+    GraphActivity graphActivity = new GraphActivity();
 
     String string1;
     String string2;

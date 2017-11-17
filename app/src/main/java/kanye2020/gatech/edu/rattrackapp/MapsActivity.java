@@ -16,18 +16,25 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+/**
+Constructor for MapsActivity.
+Creates the GoogleMap, and makes it available to use.
+ **/
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
 //    private GoogleMap mMap;
-    private ArrayList<RatSighting> searchResults;
+    private List<RatSighting> searchResults;
+    private static final int zoomFactor = 11;
+    private static final int threshold = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_maps);
-    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        setContentView(R.layout.activity_maps);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
             .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 }
@@ -45,26 +52,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap mMap) {
 //        GoogleMap mMap = googleMap;
-        ArrayList<RatSighting> rats = RatSightingList.getInstance().getRats();
+        List<RatSighting> rats = RatSightingList.getRats();
+        int size = rats.size();
         searchResults = new ArrayList<>();
-        String callingActivity = getIntent().getStringExtra("from");
+        Intent intent = getIntent();
+        String callingActivity = intent.getStringExtra("from");
         switch (callingActivity) {
             case "date":
 //        if (callingActivity.equals("date")) {
                 try {
-                    String startDateText = getIntent().getStringExtra("startDate");
-                    String endDateText = getIntent().getStringExtra("endDate");
+                    String startDateText = intent.getStringExtra("startDate");
+                    String endDateText = intent.getStringExtra("endDate");
                     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                     Date startDate = dateFormat.parse(startDateText);
                     Date endDate = dateFormat.parse(endDateText);
     //                searchResults = RatSightingList.getInstance().sortByDate(startDate, endDate);
     //                displayMap(mMap, searchResults);
-                    for (int i = 0; i < 300; i++) {
-                        int j = (int) (Math.random() * 100000);
+                    for (int i = 0; i < threshold; i++) {
+                        int j = (int) (Math.random() * size);
                         RatSighting rat = rats.get(j);
-                        String ratDateText = rat.getDateTime().substring(0, 11);
+                        String ratDateTime = rat.getDateTime();
+                        String ratDateText = ratDateTime.substring(0, "MM/dd/yyyy".length() + 1);
                         Date ratDate = dateFormat.parse(ratDateText);
-                        if (ratDate.compareTo(startDate) >= 0 && ratDate.compareTo(endDate) <= 0) {
+                        if ((ratDate.compareTo(startDate) >= 0)
+                                && (ratDate.compareTo(endDate) <= 0)) {
                             searchResults.add(rat);
                             displayRat(mMap, rat);
                         }
@@ -72,20 +83,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } catch(Exception e) {
     //                System.out.println(e);
                 }
+                break;
             case "viewAllMap":
-//        } else if (callingActivity.equals("viewAllMap")) {
-                for (int i = 0; i < 300; i++) {
-                    int j = (int) (Math.random() * 100000);
+                for (int i = 0; i < threshold; i++) {
+                    int j = (int) (Math.random() * size);
                     RatSighting rat = rats.get(j);
                     searchResults.add(rat);
                     displayRat(mMap, rat);
                 }
+                break;
             case "borough":
-//        } else if (callingActivity.equals("borough")) {
-                for (int i = 0; i < 300; i++) {
-                    int j = (int) (Math.random() * 100000);
+                for (int i = 0; i < threshold; i++) {
+                    int j = (int) (Math.random() * size);
                     RatSighting rat = rats.get(j);
-                    String borough = getIntent().getStringExtra("borough");
+                    String borough = intent.getStringExtra("borough");
                     if (rat.getBorough() != null) {
                         if (borough.equals(rat.getBorough())) {
                             searchResults.add(rat);
@@ -93,32 +104,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                 }
+                break;
             case "locationType":
-//        } else if (callingActivity.equals("locationType")) {
-                for (int i = 0; i < 300; i++) {
-                    int j = (int) (Math.random() * 100000);
+                for (int i = 0; i < threshold; i++) {
+                    int j = (int) (Math.random() * size);
                     RatSighting rat = rats.get(j);
-                    String locationType = getIntent().getStringExtra("locationType");
+                    String locationType = intent.getStringExtra("locationType");
                     if (locationType.equals(rat.getLocationType())) {
                         searchResults.add(rat);
                         displayRat(mMap, rat);
                     }
                 }
         }
-//        mMap.setMinZoomPreference((float) 11);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(getApplicationContext(), SingleRatInfoActivity.class);
-                String id = marker.getTitle().substring(14);
+                String title = marker.getTitle();
+                String id = title.substring("Marker of Rat ".length());
                 RatSighting clicked = null;
                 for (RatSighting rat : searchResults) {
-                    if (rat.getUniqueKey().equals(id)) {
+                    String key = rat.getUniqueKey();
+                    if (key.equals(id)) {
                         clicked = rat;
                         break;
                     }
                 }
-
                 intent.putExtra("rat", clicked);
                 intent.putExtra("caller", "MapsActivity");
                 startActivity(intent);
@@ -134,12 +145,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Double lat = Double.parseDouble(latitude);
             Double lng = Double.parseDouble(longitude);
             LatLng ratLocation = new LatLng(lat, lng);
-            System.out.println("BEFORE MAP");
-            mMap.addMarker(new MarkerOptions().position(ratLocation).title("Marker of Rat " + id));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ratLocation, 11));
-            System.out.println("AFTER MAP");
+            MarkerOptions marker = new MarkerOptions();
+            marker = marker.position(ratLocation);
+            marker = marker.title("Marker of Rat " + id);
+            mMap.addMarker(marker);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ratLocation, zoomFactor));
         } catch(Exception e) {
-            System.out.println("One of the rats can't be displayed");
+//            System.out.println("One of the rats can't be displayed");
         }
     }
 }

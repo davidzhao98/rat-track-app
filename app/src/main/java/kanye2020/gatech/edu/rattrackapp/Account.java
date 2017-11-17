@@ -4,14 +4,21 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ *
  * Created by David Zhao on 10/1/2017.
  */
 
-public class Account {
+class Account {
+    //Firebase requires public modifier
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public String username;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public String password;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public String email;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public boolean admin;
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public boolean lockedout;
 
     static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
@@ -21,11 +28,7 @@ public class Account {
      * default constructor for Account
      */
     Account() {
-        this.username = null;
-        this.password = null;
-        this.email = null;
-        this.admin = false;
-        this.lockedout = false;
+        this(null, null, null, false, false);
     }
 
     /**
@@ -59,27 +62,33 @@ public class Account {
         return password;
     }
 
-    /**
-     * getter for email
-     * @return return email
-     */
-    String getEmail() {
-        return email;
-    }
+// --Commented out by Inspection START (11/16/17, 8:50 PM):
+//    /**
+//     * getter for email
+//     * @return return email
+//     */
+//    String getEmail() {
+//        return email;
+//    }
+// --Commented out by Inspection STOP (11/16/17, 8:50 PM)
 
-    /**
-     * getter for admin status
-     * @return admin status
-     */
-    Boolean isAdmin() {
-        return admin;
-    }
+// --Commented out by Inspection START (11/16/17, 8:50 PM):
+//    /**
+//     * getter for admin status
+//     * @return admin status
+//     */
+//    Boolean isAdmin() {
+//        return admin;
+//    }
+// --Commented out by Inspection STOP (11/16/17, 8:50 PM)
 
-    /**
-     * getter for locked out status
-     * @return lockedout status
-     */
-    Boolean isLockedout() { return lockedout;}
+// --Commented out by Inspection START (11/16/17, 8:50 PM):
+//    /**
+//     * getter for locked out status
+//     * @return lockedout status
+//     */
+//    Boolean isLockedout() { return lockedout;}
+// --Commented out by Inspection STOP (11/16/17, 8:50 PM)
 
 
 }

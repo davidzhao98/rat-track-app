@@ -1,17 +1,15 @@
 package kanye2020.gatech.edu.rattrackapp;
 
-import android.widget.EditText;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
+ *
  * Created by juliachen on 11/13/17.
  */
 

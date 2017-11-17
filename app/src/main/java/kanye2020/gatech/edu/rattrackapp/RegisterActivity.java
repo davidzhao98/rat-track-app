@@ -87,6 +87,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (fieldsNotEmpty(emailString, usernameString, pwString)
                         && confirmPassword(pwString, confirmString)
+                String pwString = passwordET.getText().toString();
+                String confirmString = confirmPwET.getText().toString();
+                String emailString = emailET.getText().toString();
+                String emailStringConfirm = confirmEmailET.getText().toString();
+                String usernameString = usernameET.getText().toString();
+                if (fieldsNotEmpty(emailString, usernameString, pwString)
+                        && confirmPassword(pwString, confirmString)
                         && confirmEmail(emailString, emailStringConfirm)) {
                     //add account to "database"?????
                     //firebase?

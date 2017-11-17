@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-
+/**
+ *
+ * Activity to manage searching options
+ */
 public class SearchActivity extends AppCompatActivity {
 
     @Override
