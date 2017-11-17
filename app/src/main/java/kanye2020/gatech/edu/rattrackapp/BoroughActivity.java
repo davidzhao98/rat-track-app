@@ -11,7 +11,10 @@ import android.widget.ArrayAdapter;
 import java.util.List;
 import java.util.Arrays;
 
-
+/**
+ *
+ * Class for selecting and searching Boroughs.
+ */
 public class BoroughActivity extends AppCompatActivity {
 
     private Spinner boroughSpinner;
@@ -31,9 +34,11 @@ public class BoroughActivity extends AppCompatActivity {
         Button viewMapButton = (Button) findViewById(R.id.viewMapButton);
         Button viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
 
-        List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS", "BROOKLYN", "BRONX");
+        List<String> boroughs = Arrays.asList("MANHATTAN", "STATEN ISLAND", "QUEENS", "BROOKLYN",
+                "BRONX");
 
-        ArrayAdapter<String> boroughAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, boroughs);
+        ArrayAdapter<String> boroughAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, boroughs);
         boroughAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boroughSpinner.setAdapter(boroughAdapter);
 
