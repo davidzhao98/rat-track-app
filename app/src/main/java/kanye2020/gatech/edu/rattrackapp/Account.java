@@ -10,15 +10,15 @@ import java.util.List;
 
 class Account {
     //Firebase requires public modifier
-    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public String username;
-    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public String password;
-    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public String email;
-    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public boolean admin;
-    @SuppressWarnings({"WeakerAccess", "CanBeFinal"})
+    @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public boolean lockedout;
 
     static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
