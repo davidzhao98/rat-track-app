@@ -20,7 +20,7 @@ import java.util.List;
  * Created by David Zhao on 10/6/2017.
  */
 
-final class RatSightingList {
+public class RatSightingList {
     private List<RatSighting> rats;
     private ArrayList<RatSighting> sample;
     private static RatSightingList instance;
@@ -89,7 +89,7 @@ final class RatSightingList {
      * @return the arrayList of rats
      */
     static List<RatSighting> getRats() {
-        return getInstance().rats;
+        return RatSightingList.getInstance().rats;
     }
 
     /**
@@ -104,7 +104,7 @@ final class RatSightingList {
      *
      * @return the sample arrayList
      */
-    static ArrayList<RatSighting> getSample() { return getInstance().sample;}
+    static ArrayList<RatSighting> getSample() { return RatSightingList.getInstance().sample;}
 
     /**
      * method for searching rats by date given a starting date and ending date
