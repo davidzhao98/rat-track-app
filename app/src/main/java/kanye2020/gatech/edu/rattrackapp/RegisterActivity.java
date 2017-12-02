@@ -114,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
                             new Account(chain4.toString(),
                                     chain.toString(),
                                     chain2.toString(),
-                                    "ADMIN".equals(chainAccount), false);
+                                    "ADMIN".equals(chainAccount), false, 0);
 //                    accountList.add(newAccount);
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("users");

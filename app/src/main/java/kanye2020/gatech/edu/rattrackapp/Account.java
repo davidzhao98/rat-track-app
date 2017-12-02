@@ -29,7 +29,7 @@ class Account {
      * default constructor for Account
      */
     Account() {
-        this(null, null, null, false, false);
+        this(null, null, null, false, false, 0);
     }
 
     /**
@@ -39,13 +39,14 @@ class Account {
      * @param email user's email address
      * @param admin user's admin status
      */
-    Account (String username, String password, String email, boolean admin, boolean lockedout) {
+    Account (String username, String password, String email, boolean admin, boolean lockedout,
+             int attempts) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.admin = admin;
         this.lockedout = lockedout;
-        this.attempts = 0;
+        this.attempts = attempts;
     }
 
     /**

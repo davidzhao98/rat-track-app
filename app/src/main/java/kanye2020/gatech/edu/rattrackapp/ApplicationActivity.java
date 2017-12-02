@@ -26,6 +26,8 @@ public class ApplicationActivity extends AppCompatActivity {
         Button viewMap = (Button) findViewById(R.id.viewMapButton);
         Button viewGraph = (Button) findViewById(R.id.viewGraphButton);
 
+        Button admin = (Button) findViewById(R.id.adminButton);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

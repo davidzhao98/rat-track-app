@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private String username;
     private String password;
     private int loginAttempts;
+    private boolean lockd;
     private final Collection<Account> entries = new ArrayList<>();
 
     @Override
@@ -60,11 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 password = fieldPass.toString();
                 //boolean lockedOut = firebaseGetLockedOut();
 
-                if (checkUsernameExistence()) {
-                    if (loginAttempts >= 2) {
-                        lockoutUser();
-                    }
-                }
+
                 Editable temp = usernameField.getText();
                 String username = temp.toString();
                 Editable temp2 = passwordField.getText();
@@ -78,18 +75,39 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (loginVerification(username, password, entries)) {
-//                    System.out.println("Logging in");
-                    resetLogin();
+                    //login successful
+                    resetLogin(username);
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
+                } else if (lockd == true) {
+                    //locked out
+                    Toast toast = Toast.makeText(view.getContext(), "You are locked out!",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 0);
+                    toast.show();
                 } else {
-//                    System.out.println("Fail");
-
+                    //login failed
                     Toast toast = Toast.makeText(view.getContext(), "Incorrect login information!",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.BOTTOM, 0, 0);
                     toast.show();
                 }
+
+                if (checkUsernameExistence()) {
+                    if (loginAttempts == 1) {
+                        Toast toast = Toast.makeText(view.getContext(), "You have ome more" +
+                                        " attempt left!",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.BOTTOM, 0, 0);
+                        toast.show();
+                    }
+                    if (loginAttempts >= 3) {
+                        lockoutUser();
+                        lockd = true;
+                    }
+                }
+                System.out.println(loginAttempts);
+
             }
         });
     }
@@ -157,18 +175,22 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users").child(entry.getUsername());
         int currentLoginAttempts = entry.getAttempts();
-        System.out.println(currentLoginAttempts);
-        myRef.child("attempts").setValue(currentLoginAttempts + 1);
-        entry.setAttempts(currentLoginAttempts + 1);
         loginAttempts = entry.getAttempts();
+        myRef.child("attempts").setValue(currentLoginAttempts + 1);
+        loginAttempts++;
     }
 
     /**
      * resets login information so user has to re-login every time, for safety
+     * @param username
      */
-    private void resetLogin() {
+    private void resetLogin(String username) {
         usernameField.setText("");
         passwordField.setText("");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("user").child(username);
+        myRef.child("attempts").setValue(0);
+        myRef.child("lockedout").setValue(false);
     }
 
     /**
@@ -214,9 +236,12 @@ public class LoginActivity extends AppCompatActivity {
                     Object word2 = administration.getValue();
                     String administrator = word2.toString();
 
+                    DataSnapshot att = item.child("attempts");
+                    int attem = (int) (long) att.getValue();
+
                     admin = "true".equals(administrator);
 
-                    Account entry = new Account(username, password, email, admin, lockedout);
+                    Account entry = new Account(username, password, email, admin, lockedout, attem);
                     entries.add(entry);
                 }
             }
