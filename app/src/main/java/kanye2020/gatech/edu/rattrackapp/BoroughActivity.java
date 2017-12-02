@@ -71,8 +71,11 @@ public class BoroughActivity extends AppCompatActivity {
         viewGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(), GraphActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(view.getContext(), GraphActivity.class);
+                borough = (String) boroughSpinner.getSelectedItem();
+                intent.putExtra("borough", borough);
+                intent.putExtra("from", "borough");
+                startActivity(intent);
             }
         });
 

@@ -12,6 +12,7 @@
     <string name="date_range">Date Range</string>
     <string name="starting_date_range">01/01/2001</string>
     <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
     <string name="search_location_type">Search Location Type</string>
     <string name="location_type">Location Type</string>
     <string name="borough">Borough</string>

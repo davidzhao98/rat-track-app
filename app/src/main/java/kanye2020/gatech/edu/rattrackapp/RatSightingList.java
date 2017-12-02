@@ -9,6 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -72,7 +73,7 @@ public class RatSightingList {
 //                        rats.add(entry);
                     }
                     sample = new ArrayList<>();
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < 100; i++) {
                         sample.add(rats.get(i));
                     }
                 }
@@ -163,5 +164,9 @@ public class RatSightingList {
             }
         }
         return searchResults;
+    }
+
+    static void sortByDate(List<RatSighting> list) {
+        Collections.sort(list);
     }
 }
