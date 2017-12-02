@@ -1,9 +1,12 @@
 package kanye2020.gatech.edu.rattrackapp;
 
+import android.icu.text.SimpleDateFormat;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-class RatSighting implements Parcelable {
+import java.util.Date;
+
+class RatSighting implements Parcelable, Comparable<RatSighting> {
     private final String borough;
     private final String city;
     private final String address;
@@ -140,4 +143,22 @@ class RatSighting implements Parcelable {
             return new RatSighting[size];
         }
     };
+
+    @Override
+    public int compareTo(RatSighting other) {
+        String thisDateTime = this.getDateTime();
+        String otherDateTime = "";
+            try {
+                otherDateTime = other.getDateTime();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                String thisDateText = thisDateTime.substring(0, "MM/dd/yyyy".length() + 1);
+                Date thisDate = dateFormat.parse(thisDateText);
+                String otherDateText = otherDateTime.substring(0, "MM/dd/yyyy".length() + 1);
+                Date otherDate = dateFormat.parse(otherDateText);
+                return thisDate.compareTo(otherDate);
+            } catch (Exception e) {
+
+            }
+        return thisDateTime.compareTo(otherDateTime);
+    }
 }

@@ -1,6 +1,7 @@
 package kanye2020.gatech.edu.rattrackapp;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 //import android.support.v7.app.AlertController;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -127,6 +129,41 @@ public class SearchResultsListView extends AppCompatActivity {
 
                 });
                 searchResultsLV.setAdapter(locationAdapter);
+                break;
+            case "date":
+                String startDateText = intent.getStringExtra("startDate");
+                String endDateText = intent.getStringExtra("endDate");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                try {
+                    Date startDate = dateFormat.parse(startDateText);
+                    Date endDate = dateFormat.parse(endDateText);
+                    final List<RatSighting> dateList = RatSightingList.sortByDate(startDate, endDate);
+                    ArrayAdapter<RatSighting> dateAdapter = new ArrayAdapter<>(
+                            this, android.R.layout.simple_selectable_list_item, dateList);
+                    dateAdapter.setDropDownViewResource(
+                            android.R.layout.simple_selectable_list_item);
+                    searchResultsLV.setChoiceMode(
+                            AbsListView.CHOICE_MODE_SINGLE);
+                    searchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                                long id) {
+
+                            //final List<RatSighting> sample = RatSightingList.getSample();
+                            Intent intent = new Intent(view.getContext(), SingleRatInfoActivity.class);
+                            intent.putExtra("clicked", dateList.get(position));
+                            intent.putExtra("position", position);
+                            //intent.putExtra("sighting", sample.get(position));
+                            intent.putExtra("caller", "SearchResultsListView");
+                            startActivity(intent);
+                            //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    searchResultsLV.setAdapter(dateAdapter);
+                }catch (Exception e) {
+
+                }
+
                 break;
         }
         //use unique keys for rat list display

@@ -68,8 +68,11 @@ public class LocationTypeActivity extends AppCompatActivity {
         viewGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(), GraphActivity.class);
-//                startActivity(intent);
+                location = (String) locationTypeSpinner.getSelectedItem();
+                Intent intent = new Intent(view.getContext(), GraphActivity.class);
+                intent.putExtra("locationType", location);
+                intent.putExtra("from", "locationType");
+                startActivity(intent);
             }
         });
     }

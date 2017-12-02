@@ -64,7 +64,9 @@ public class ApplicationActivity extends AppCompatActivity {
         viewGraph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(view.getContext(), GraphActivity.class);
+                intent.putExtra("from", "all");
+                startActivity(intent);
             }
         });
 
