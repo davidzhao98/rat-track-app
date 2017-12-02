@@ -161,4 +161,9 @@ class RatSighting implements Parcelable, Comparable<RatSighting> {
             }
         return thisDateTime.compareTo(otherDateTime);
     }
+
+    @Override
+    public String toString() {
+        return "Sighting no. " +this.getUniqueKey()+ " on " +this.getDateTime();
+    }
 }
