@@ -10,10 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -29,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordET;
     private EditText confirmPwET;
     private Spinner accountTypeSpinner;
+    private ArrayList<String> usernames;
 //    private Button registerAcct;
 
 //    private ArrayList<Account> accountList;
@@ -97,7 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (fieldsNotEmpty(emailString, usernameString, pwString)
                         && confirmPassword(pwString, confirmString)
-                        && confirmEmail(emailString, emailStringConfirm)) {
+                        && confirmEmail(emailString, emailStringConfirm)
+                        && usernameNotTaken(usernameString)) {
                     //add account to "database"?????
                     //firebase?
                     //switch to new screen/application screen
@@ -134,6 +142,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(view.getContext(), LoginActivity.class);
                     startActivity(intent);
+                } else {
+                    Toast temp = Toast.makeText(RegisterActivity.this, "Account could " +
+                                    "not be registered. Please ensure your information is " +
+                                    "entered correctly", Toast.LENGTH_LONG);
+                    temp.show();
                 }
             }
         });
@@ -214,5 +227,41 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
         return false;
+    }
+
+    public boolean usernameNotTaken(String username) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> chain = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> items = chain.iterator();
+                Toast temp = Toast.makeText(RegisterActivity.this, "Total Users: "
+                        + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT);
+                temp.show();
+                usernames.clear();
+                while (items.hasNext()) {
+                    DataSnapshot item = items.next();
+
+                    String accountUsername;
+                    DataSnapshot nameUser = item.child("username");
+                    Object userWord = nameUser.getValue();
+                    accountUsername = userWord.toString();
+                    usernames.add(accountUsername);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        for (String check : usernames) {
+            if (check.equals(username)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
