@@ -44,7 +44,11 @@ public class LocationTypeActivity extends AppCompatActivity {
         searchLocationTypeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                location = (String) locationTypeSpinner.getSelectedItem();
+                location = (String) locationTypeSpinner.getSelectedItem();
+                Intent intent = new Intent(view.getContext(), SearchResultsListView.class);
+                intent.putExtra("locationType", location);
+                intent.putExtra("from", "locationType");
+                startActivity(intent);
             }
         });
 

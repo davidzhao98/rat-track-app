@@ -34,6 +34,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), BoroughActivity.class);
+                intent.putExtra("from", "borough");
                 startActivity(intent);
             }
         });
@@ -50,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), SearchResultsListView.class);
+                intent.putExtra("from", "all");
                 startActivity(intent);
             }
         });

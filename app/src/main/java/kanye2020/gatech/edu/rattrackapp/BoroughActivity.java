@@ -46,8 +46,12 @@ public class BoroughActivity extends AppCompatActivity {
         searchBoroughButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                borough = (String) boroughSpinner.getSelectedItem();
+                borough = (String) boroughSpinner.getSelectedItem();
                 // how do you filter search results
+                Intent intent = new Intent(view.getContext(), SearchResultsListView.class);
+                intent.putExtra("from", "borough");
+                intent.putExtra("borough", borough);
+                startActivity(intent);
             }
         });
 

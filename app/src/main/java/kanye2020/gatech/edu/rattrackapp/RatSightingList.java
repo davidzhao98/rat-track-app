@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 public class RatSightingList {
-    private List<RatSighting> rats;
+    private static List<RatSighting> rats;
     private ArrayList<RatSighting> sample;
     private static RatSightingList instance;
     private static final int threshold = 300;
@@ -96,7 +96,7 @@ public class RatSightingList {
      *
      * @return returns the size of the arrayList
      */
-    private int getRatsSize() {
+    private static int getRatsSize() {
         return rats.size();
         }
 
@@ -113,7 +113,7 @@ public class RatSightingList {
      * @param end the ending date for the query
      * @return an ArrayList of RatSightings that were reported between Date @start and Date @end
      */
-    List<RatSighting> sortByDate(Date start, Date end) throws IllegalArgumentException {
+    static List<RatSighting> sortByDate(Date start, Date end) throws IllegalArgumentException {
         if (start.compareTo(end) > 0) {
             throw new IllegalArgumentException("Start date cannot exceed end date.");
         }
@@ -133,6 +133,34 @@ public class RatSightingList {
             }
         } catch(Exception e) {
 //            System.out.println(e);
+        }
+        return searchResults;
+    }
+
+    static List<RatSighting> sortByBorough(String boroughName) {
+        List<RatSighting> searchResults = new ArrayList<>();
+        int size = getRatsSize();
+        for (int i = 0; i < threshold; i++) {
+            int j = (int) (Math.random() * size);
+            RatSighting rat = rats.get(j);
+            CharSequence borough = rat.getBorough();
+            if (borough.equals(boroughName)) {
+                searchResults.add(rat);
+            }
+        }
+        return searchResults;
+    }
+
+   static List<RatSighting> sortByLocationType(String locationType) {
+        List<RatSighting> searchResults = new ArrayList<>();
+        int size = getRatsSize();
+        for (int i = 0; i < threshold; i++) {
+            int j = (int) (Math.random() * size);
+            RatSighting rat = rats.get(j);
+            CharSequence ratLocationType = rat.getLocationType();
+            if (locationType.equals(ratLocationType)) {
+                searchResults.add(rat);
+            }
         }
         return searchResults;
     }
