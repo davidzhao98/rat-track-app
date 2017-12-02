@@ -48,7 +48,7 @@ public class SingleRatInfoActivity extends AppCompatActivity {
         String caller = intent.getStringExtra("caller");
         if ("SearchResultsListView".equals(caller)) {
             try {
-                sighting = intent.getParcelableExtra("sighting");
+                sighting = intent.getParcelableExtra("clicked");
             } catch(Exception e) {
                 Log.e("Exception", e.getMessage());
             }

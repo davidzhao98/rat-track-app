@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,33 +41,94 @@ public class SearchResultsListView extends AppCompatActivity {
 
 
         //fragment stuff
-
-
-        //demo view
-        //RatSightingList demoRatList = RatSightingList.getInstance();
+        Intent intent = getIntent();
+        String callingActivity = intent.getStringExtra("from");
         ListView searchResultsLV = (ListView) findViewById(R.id.searchResultsListView);
-        ArrayAdapter<RatSighting> demoAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_selectable_list_item, RatSightingList.getSample());
-        demoAdapter.setDropDownViewResource(
-                android.R.layout.simple_selectable_list_item);
-        searchResultsLV.setChoiceMode(
-                AbsListView.CHOICE_MODE_SINGLE);
-        searchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
+        RatSightingList ratSightingList = RatSightingList.getInstance();
+        switch(callingActivity) {
+            case "all":
+                //demo view
+                //RatSightingList demoRatList = RatSightingList.getInstance();
 
-                final List<RatSighting> sample = RatSightingList.getSample();
-                Intent intent = new Intent(view.getContext(), SingleRatInfoActivity.class);
-                intent.putExtra("position", position);
-                intent.putExtra("sighting", sample.get(position));
-                intent.putExtra("caller", "SearchResultsListView");
-                startActivity(intent);
-                //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
-            }
+                ArrayAdapter<RatSighting> demoAdapter = new ArrayAdapter<>(
+                        this, android.R.layout.simple_selectable_list_item, RatSightingList.getSample());
+                demoAdapter.setDropDownViewResource(
+                        android.R.layout.simple_selectable_list_item);
+                searchResultsLV.setChoiceMode(
+                        AbsListView.CHOICE_MODE_SINGLE);
+                searchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
 
-        });
-        searchResultsLV.setAdapter(demoAdapter);
+                        final List<RatSighting> sample = RatSightingList.getSample();
+                        Intent intent = new Intent(view.getContext(), SingleRatInfoActivity.class);
+                        intent.putExtra("clicked", sample.get(position));
+                        intent.putExtra("position", position);
+                        intent.putExtra("sighting", sample.get(position));
+                        intent.putExtra("caller", "SearchResultsListView");
+                        startActivity(intent);
+                        //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+                searchResultsLV.setAdapter(demoAdapter);
+                break;
+            case "borough":
+                String borough = intent.getStringExtra("borough");
+                final List<RatSighting> boroughList = RatSightingList.sortByBorough(borough);
+                ArrayAdapter<RatSighting> boroughAdapter = new ArrayAdapter<>(
+                        this, android.R.layout.simple_selectable_list_item, boroughList);
+                boroughAdapter.setDropDownViewResource(
+                        android.R.layout.simple_selectable_list_item);
+                searchResultsLV.setChoiceMode(
+                        AbsListView.CHOICE_MODE_SINGLE);
+                searchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+
+                        //final List<RatSighting> sample = RatSightingList.getSample();
+                        Intent intent = new Intent(view.getContext(), SingleRatInfoActivity.class);
+                        intent.putExtra("clicked", boroughList.get(position));
+                        intent.putExtra("position", position);
+                        //intent.putExtra("sighting", sample.get(position));
+                        intent.putExtra("caller", "SearchResultsListView");
+                        startActivity(intent);
+                        //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+                searchResultsLV.setAdapter(boroughAdapter);
+                break;
+            case "locationType":
+                String location = intent.getStringExtra("locationType");
+                final List<RatSighting> locationList = RatSightingList.sortByLocationType(location);
+                ArrayAdapter<RatSighting> locationAdapter = new ArrayAdapter<>(
+                        this, android.R.layout.simple_selectable_list_item, locationList);
+                locationAdapter.setDropDownViewResource(
+                        android.R.layout.simple_selectable_list_item);
+                searchResultsLV.setChoiceMode(
+                        AbsListView.CHOICE_MODE_SINGLE);
+                searchResultsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                                            long id) {
+
+                        final List<RatSighting> sample = RatSightingList.getSample();
+                        Intent intent = new Intent(view.getContext(), SingleRatInfoActivity.class);
+                        intent.putExtra("clicked", locationList.get(position));
+                        intent.putExtra("position", position);
+                        intent.putExtra("sighting", sample.get(position));
+                        intent.putExtra("caller", "SearchResultsListView");
+                        startActivity(intent);
+                        //Toast.makeText(getBaseContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+                searchResultsLV.setAdapter(locationAdapter);
+                break;
+        }
         //use unique keys for rat list display
         //i think we need a list view adapter that adapts the data
         // from the database to the format that we need
