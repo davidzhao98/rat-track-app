@@ -240,16 +240,19 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast temp = Toast.makeText(RegisterActivity.this, "Total Users: "
                         + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT);
                 temp.show();
-                usernames.clear();
-                while (items.hasNext()) {
-                    DataSnapshot item = items.next();
+                if (usernames != null) {
+                    usernames.clear();
+                    while (items.hasNext()) {
+                        DataSnapshot item = items.next();
 
-                    String accountUsername;
-                    DataSnapshot nameUser = item.child("username");
-                    Object userWord = nameUser.getValue();
-                    accountUsername = userWord.toString();
-                    usernames.add(accountUsername);
+                        String accountUsername;
+                        DataSnapshot nameUser = item.child("username");
+                        Object userWord = nameUser.getValue();
+                        accountUsername = userWord.toString();
+                        usernames.add(accountUsername);
+                    }
                 }
+
             }
 
             @Override
@@ -257,9 +260,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-        for (String check : usernames) {
-            if (check.equals(username)) {
-                return false;
+        if (usernames != null) {
+            for (String check : usernames) {
+                if (check.equals(username)) {
+                    return false;
+                }
             }
         }
         return true;

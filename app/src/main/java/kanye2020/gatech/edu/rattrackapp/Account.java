@@ -20,6 +20,7 @@ class Account {
     public boolean admin;
     @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public boolean lockedout;
+    public int attempts;
 
     final static List<String> accountTypes = Arrays.asList("USER", "ADMIN");
 
@@ -44,6 +45,7 @@ class Account {
         this.email = email;
         this.admin = admin;
         this.lockedout = lockedout;
+        this.attempts = 0;
     }
 
     /**
@@ -60,6 +62,22 @@ class Account {
      */
     String getPassword() {
         return password;
+    }
+
+    /**
+     * getter for login attempts
+     * @return login attempts
+     */
+    int getAttempts() {
+        return attempts;
+    }
+
+    /**
+     * setter for login attempts
+     * @param attempts current number of attempts
+     */
+    public void setAttempts(int attempts) {
+        this.attempts = attempts + 1;
     }
 
 // --Commented out by Inspection START (11/16/17, 8:50 PM):

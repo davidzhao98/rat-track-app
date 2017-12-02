@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -55,9 +58,10 @@ public class LoginActivity extends AppCompatActivity {
                 username = nameUser.toString();
                 Editable fieldPass = passwordField.getText();
                 password = fieldPass.toString();
+                //boolean lockedOut = firebaseGetLockedOut();
 
                 if (checkUsernameExistence()) {
-                    if (loginAttempts >= 3) {
+                    if (loginAttempts >= 2) {
                         lockoutUser();
                     }
                 }
@@ -80,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
 //                    System.out.println("Fail");
+
                     Toast toast = Toast.makeText(view.getContext(), "Incorrect login information!",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.BOTTOM, 0, 0);
@@ -132,12 +137,30 @@ public class LoginActivity extends AppCompatActivity {
 
         for (Account entry : entries) {
             if (username.equals(entry.getUsername())
-                    && password.equals(entry.getPassword())) {
+                    && password.equals(entry.getPassword())
+                    && !entry.lockedout) {
                 return true;
+            } else if (username.equals(entry.getUsername())
+                    && !password.equals(entry.getPassword())
+                    && !entry.lockedout) {
+                increaseLoginAttempts(entry);
             }
         }
-        loginAttempts++;
         return false;
+    }
+
+    /**
+     * increase the number of failed login attempts that the user has
+     * @param entry the current username
+     */
+    private void increaseLoginAttempts(Account entry) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users").child(entry.getUsername());
+        int currentLoginAttempts = entry.getAttempts();
+        System.out.println(currentLoginAttempts);
+        myRef.child("attempts").setValue(currentLoginAttempts + 1);
+        entry.setAttempts(currentLoginAttempts + 1);
+        loginAttempts = entry.getAttempts();
     }
 
     /**
