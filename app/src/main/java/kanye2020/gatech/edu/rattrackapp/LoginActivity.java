@@ -76,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (loginVerification(username, password, entries)) {
                     //login successful
-                    resetLogin(username);
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     startActivity(intent);
                 } else if (lockd == true) {
@@ -94,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (checkUsernameExistence()) {
-                    if (loginAttempts == 1) {
-                        Toast toast = Toast.makeText(view.getContext(), "You have ome more" +
+                    if (loginAttempts == 2 ) {
+                        Toast toast = Toast.makeText(view.getContext(), "You have one more" +
                                         " attempt left!",
                                 Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.BOTTOM, 0, 0);
@@ -157,6 +156,7 @@ public class LoginActivity extends AppCompatActivity {
             if (username.equals(entry.getUsername())
                     && password.equals(entry.getPassword())
                     && !entry.lockedout) {
+                resetLogin();
                 return true;
             } else if (username.equals(entry.getUsername())
                     && !password.equals(entry.getPassword())
@@ -182,15 +182,18 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * resets login information so user has to re-login every time, for safety
-     * @param username
      */
-    private void resetLogin(String username) {
+    private void resetLogin() {
         usernameField.setText("");
         passwordField.setText("");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("user").child(username);
+        DatabaseReference myRef = database.getReference("users").child(username);
         myRef.child("attempts").setValue(0);
-        myRef.child("lockedout").setValue(false);
+        System.out.println("hi");
+//        int zero = 0;
+//        boolean res = false;
+//        myRef.child("attempts").setValue(zero);
+//        myRef.child("lockedout").setValue(res);
     }
 
     /**
