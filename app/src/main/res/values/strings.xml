@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RatTrackApp</string>
+    <string name="app_name">Track the Rats App</string>
     <string name="login_button_label">LOGIN</string>
     <string name="register_button_label">REGISTER</string>
     <string name="welcome_button_label">WELCOME TO OUR APP</string>
@@ -10,9 +10,9 @@
     <string name="view_graph">View Graph</string>
     <string name="search_borough">Search Borough</string>
     <string name="date_range">Date Range</string>
+    <string name="end_date">End Date</string>
     <string name="starting_date_range">01/01/2001</string>
     <string name="start_date">Start Date</string>
-    <string name="end_date">End Date</string>
     <string name="search_location_type">Search Location Type</string>
     <string name="location_type">Location Type</string>
     <string name="borough">Borough</string>
@@ -38,4 +38,6 @@
     <string name="enter_username">Enter Username</string>
     <string name="enter_a_password">Enter a password</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="borough_spinner">Select Borough</string>
+    <string name="location_type_textview">Select Location Type</string>
 </resources>

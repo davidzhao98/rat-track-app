@@ -8,13 +8,10 @@
 
     <Button
         android:id="@+id/endDateButton"
-        android:layout_width="109dp"
-        android:layout_height="45dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="274dp"
+        android:layout_width="124dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="111dp"
         android:text="@string/end_date"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,9 +20,7 @@
         android:id="@+id/endDateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="247dp"
+        android:layout_marginTop="94dp"
         android:text="@string/starting_date_range"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -33,24 +28,19 @@
 
     <Button
         android:id="@+id/startDateButton"
-        android:layout_width="110dp"
-        android:layout_height="44dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="151dp"
+        android:layout_width="124dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="33dp"
         android:text="@string/start_date"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.503" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/startDateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="16dp"
         android:text="@string/starting_date_range"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -58,37 +48,47 @@
 
     <Button
         android:id="@+id/viewMapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="147dp"
+        android:layout_height="148dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="385dp"
+        android:layout_marginTop="347dp"
         android:text="@string/view_map"
+        android:background="@drawable/map"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.158"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/viewGraphButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="147dp"
+        android:layout_height="148dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="337dp"
+        android:layout_marginTop="347dp"
         android:text="@string/view_graph"
+        android:background="@drawable/graph"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.868"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/viewListButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_width="124dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="278dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="View Results"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 </android.support.constraint.ConstraintLayout>
