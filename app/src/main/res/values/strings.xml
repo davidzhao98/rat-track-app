@@ -10,7 +10,6 @@
     <string name="view_graph">View Graph</string>
     <string name="search_borough">Search Borough</string>
     <string name="date_range">Date Range</string>
-    <string name="end_date">End Date</string>
     <string name="starting_date_range">01/01/2001</string>
     <string name="start_date">Start Date</string>
     <string name="search_location_type">Search Location Type</string>
@@ -40,4 +39,5 @@
     <string name="confirm_password">Confirm password</string>
     <string name="borough_spinner">Select Borough</string>
     <string name="location_type_textview">Select Location Type</string>
+    <string name="end_date">End Date</string>
 </resources>
