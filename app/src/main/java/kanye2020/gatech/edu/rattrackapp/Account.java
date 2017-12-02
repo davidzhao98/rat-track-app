@@ -8,7 +8,7 @@ import java.util.List;
  * Created by David Zhao on 10/1/2017.
  */
 
-class Account {
+public class Account {
     //Firebase requires public modifier
     @SuppressWarnings({"WeakerAccess", "CanBeFinal", "PublicField"})
     public String username;
