@@ -1,9 +1,14 @@
 package kanye2020.gatech.edu.rattrackapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +22,8 @@ import java.util.Calendar;
 import java.util.List;
 import android.widget.ArrayAdapter;
 import java.util.Arrays;
+
+import static android.widget.TextView.BufferType.EDITABLE;
 
 /**
  * Created by pulakazad on 11/12/17
@@ -95,6 +102,7 @@ public class ReportRatActivity extends AppCompatActivity {
         yearSpinner = (Spinner) findViewById(R.id.yearSpinner);
         Button addRSButton = (Button) findViewById(R.id.addRSButton);
         Button cancelRSButton = (Button) findViewById(R.id.cancelRSButton);
+        Button updateLocation = (Button) findViewById(R.id.locationUpdateButton);
         longitudeText = (EditText) findViewById(R.id.longitudeText);
         latitudeText = (EditText) findViewById(R.id.latitudeText);
 
@@ -141,6 +149,19 @@ public class ReportRatActivity extends AppCompatActivity {
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(yearAdapter);
 
+        try {
+            getCoordinates();
+        } catch (Exception e) {
+            Toast error = Toast.makeText(ReportRatActivity.this, "HELPO", Toast.LENGTH_SHORT);
+            Log.e("KILL ME NOW", e.getMessage());
+            error.show();
+        }
+
+        updateLocation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                getCoordinates();
+            }
+        });
 
         //add rat sighting button and makes sure entire form is complete
         addRSButton.setOnClickListener(new View.OnClickListener() {
@@ -241,4 +262,45 @@ public class ReportRatActivity extends AppCompatActivity {
         });
     }
 
+    public void getCoordinates() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+                // TODO Auto-generated method stub
+
+            }
+            @Override
+            public void onProviderEnabled(String provider) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void onProviderDisabled(String provider) {
+                // TODO Auto-generated method stub
+
+            }
+            @Override
+            public void onLocationChanged(Location location) {
+                // TODO Auto-generated method stub
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                longitudeText.setText(String.valueOf(longitude));
+                latitudeText.setText(String.valueOf(latitude));
+            }
+        };
+        try {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        } catch (SecurityException e) {
+            Toast GPSFail = Toast.makeText(ReportRatActivity.this,
+                    "GPS Location Failed",
+                    Toast.LENGTH_SHORT);
+            GPSFail.show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCoordinates();
+    }
 }
