@@ -19,10 +19,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DatabaseReference.CompletionListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -36,7 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     private int loginAttempts;
     private boolean lockd;
-    private final Collection<Account> entries = new ArrayList<>();
+    private boolean adminStatus;
+    private final Map<String, Account> entries = new HashMap<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,8 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 username = nameUser.toString();
                 Editable fieldPass = passwordField.getText();
                 password = fieldPass.toString();
-                //boolean lockedOut = firebaseGetLockedOut();
-
+                adminStatus = entries.get(username).getAdminStatus();
 
                 Editable temp = usernameField.getText();
                 String username = temp.toString();
@@ -76,7 +80,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (loginVerification(username, password, entries)) {
                     //login successful
+                    resetLogin();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
+                    intent.putExtra("ADMIN_STATUS", adminStatus);
                     startActivity(intent);
                 } else if (lockd == true) {
                     //locked out
@@ -116,12 +122,7 @@ public class LoginActivity extends AppCompatActivity {
      * @return the existence of the username as a boolean
      */
     private boolean checkUsernameExistence() {
-        for (Account entry : entries) {
-            if (username.equals(entry.getUsername())) {
-                return true;
-            }
-        }
-        return false;
+        return entries.containsKey(username);
     }
 
 
@@ -147,24 +148,23 @@ public class LoginActivity extends AppCompatActivity {
      * @param entries the accounts
      * @return true if user and password correct
      */
-    public boolean loginVerification(String username, String password, Iterable<Account> entries) {
+    public boolean loginVerification(String username, String password, Map<String, Account> entries) {
         if ((username == null) || (password == null) || (entries == null)) {
             return false;
-        }
-
-        for (Account entry : entries) {
-            if (username.equals(entry.getUsername())
-                    && password.equals(entry.getPassword())
-                    && !entry.lockedout) {
-                resetLogin();
-                return true;
-            } else if (username.equals(entry.getUsername())
-                    && !password.equals(entry.getPassword())
-                    && !entry.lockedout) {
-                increaseLoginAttempts(entry);
+        } else {
+            Account account = entries.get(username);
+            if (entries.containsKey(username)) {
+                if (password.equals(account.getPassword())) {
+                    return !(account.lockedout);
+                } else {
+                    increaseLoginAttempts(account);
+                    return false;
+                }
+            } else {
+                return false;
             }
         }
-        return false;
+
     }
 
     /**
@@ -188,12 +188,17 @@ public class LoginActivity extends AppCompatActivity {
         passwordField.setText("");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users").child(username);
-        myRef.child("attempts").setValue(0);
-        System.out.println("hi");
-//        int zero = 0;
-//        boolean res = false;
-//        myRef.child("attempts").setValue(zero);
-//        myRef.child("lockedout").setValue(res);
+        myRef.child("attempts").setValue(0, new CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError firebaseError, DatabaseReference reference) {
+                if (firebaseError != null) {
+                    System.out.println("Data could not be saved. " + firebaseError.getMessage());
+                } else {
+                    System.out.println("Data saved successfully.");
+                }
+            }
+        });
+        myRef.child("lockedout").setValue(false);
     }
 
     /**
@@ -245,7 +250,7 @@ public class LoginActivity extends AppCompatActivity {
                     admin = "true".equals(administrator);
 
                     Account entry = new Account(username, password, email, admin, lockedout, attem);
-                    entries.add(entry);
+                    entries.put(username, entry);
                 }
             }
 

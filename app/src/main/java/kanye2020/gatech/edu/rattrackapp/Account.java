@@ -81,6 +81,14 @@ public class Account {
         this.attempts = attempts + 1;
     }
 
+    /**
+     * getter for admin status
+     * @return true if is admin, false if not
+     */
+    public boolean getAdminStatus() {
+        return admin;
+    }
+
 // --Commented out by Inspection START (11/16/17, 8:50 PM):
 //    /**
 //     * getter for email

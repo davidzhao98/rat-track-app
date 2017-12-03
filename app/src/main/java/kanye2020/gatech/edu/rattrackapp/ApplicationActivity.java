@@ -27,6 +27,18 @@ public class ApplicationActivity extends AppCompatActivity {
         Button viewGraph = (Button) findViewById(R.id.viewGraphButton);
 
         Button admin = (Button) findViewById(R.id.adminButton);
+        boolean s = getIntent().getBooleanExtra("ADMIN_STATUS", true);
+        if (!s) {
+            admin.setVisibility(View.INVISIBLE);
+        }
+
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), AdminOptionsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
