@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DatabaseReference.CompletionListener;
@@ -54,6 +55,9 @@ public class LoginActivity extends AppCompatActivity {
 
         //Populates the array of Accounts
         getUsers();
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("SecurityLog");
+//        myRef.child("size").setValue(0);
 
         //Buttons for login, set OnClickListener
         Button login = (Button) findViewById(R.id.loginButton2);
@@ -77,6 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (password.isEmpty()) {
                     passwordField.setError("Enter password!");
                 }
+
+                int index = getLogSize();
+                updateSecurityLog(username, password, index);
 
                 if (loginVerification(username, password, entries)) {
                     //login successful
@@ -261,4 +268,32 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public void updateSecurityLog(String username, String password, int index) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("SecurityLog");
+        String log = "Login Attempt with username: " + username + ", password: " + password;
+        myRef.child(String.valueOf(index)).setValue(log);
+        myRef.child("size").setValue(index + 1);
+    }
+
+    public int getLogSize() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference("SecurityLog");
+        final ArrayList<Integer> FUCKYOUFIREBASE = new ArrayList<>();
+        FUCKYOUFIREBASE.add(420);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int index = dataSnapshot.child("size").getValue(Integer.class);
+//                int index = (int) dataSnapshot.getChildrenCount();
+                FUCKYOUFIREBASE.set(0, index);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting index failed, log a message
+            }
+        });
+        return FUCKYOUFIREBASE.get(0);
+    }
 }
