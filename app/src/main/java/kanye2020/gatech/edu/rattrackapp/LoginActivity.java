@@ -23,11 +23,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DatabaseReference.CompletionListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
 
 /**
  *
@@ -68,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                 username = nameUser.toString();
                 Editable fieldPass = passwordField.getText();
                 password = fieldPass.toString();
-                adminStatus = entries.get(username).getAdminStatus();
 
                 Editable temp = usernameField.getText();
                 String username = temp.toString();
@@ -82,11 +84,11 @@ public class LoginActivity extends AppCompatActivity {
                     passwordField.setError("Enter password!");
                 }
 
-                int index = getLogSize();
-                updateSecurityLog(username, password, index);
+                updateSecurityLog(username, password);
 
                 if (loginVerification(username, password, entries)) {
                     //login successful
+                    adminStatus = entries.get(username).getAdminStatus();
                     resetLogin();
                     Intent intent = new Intent(view.getContext(), ApplicationActivity.class);
                     intent.putExtra("ADMIN_STATUS", adminStatus);
@@ -219,9 +221,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> chain = dataSnapshot.getChildren();
                 Iterator<DataSnapshot> items = chain.iterator();
-                Toast temp = Toast.makeText(LoginActivity.this, "Total Users: "
-                        + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT);
-                temp.show();
+//                Toast temp = Toast.makeText(LoginActivity.this, "Total Users: "
+//                        + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT);
+//                temp.show();
                 entries.clear();
                 while (items.hasNext()) {
                     DataSnapshot item = items.next();
@@ -268,32 +270,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void updateSecurityLog(String username, String password, int index) {
+    public void updateSecurityLog(String username, String password) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("SecurityLog");
         String log = "Login Attempt with username: " + username + ", password: " + password;
+        Date currentTime = Calendar.getInstance().getTime();
+        int index = (int) currentTime.getTime();
         myRef.child(String.valueOf(index)).setValue(log);
-        myRef.child("size").setValue(index + 1);
-    }
-
-    public int getLogSize() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("SecurityLog");
-        final ArrayList<Integer> FUCKYOUFIREBASE = new ArrayList<>();
-        FUCKYOUFIREBASE.add(420);
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int index = dataSnapshot.child("size").getValue(Integer.class);
-//                int index = (int) dataSnapshot.getChildrenCount();
-                FUCKYOUFIREBASE.set(0, index);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting index failed, log a message
-            }
-        });
-        return FUCKYOUFIREBASE.get(0);
+//        myRef.child("size").setValue(index + 1);
     }
 }
